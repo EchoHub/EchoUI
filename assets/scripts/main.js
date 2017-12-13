@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { render } from 'react-dom';
-import TextBox from './../../components/ui/textBox/textBox.jsx';
-
+import PropTypes from 'prop-types';
+import TextBox from './../../components/ui/textBox/textBox.jsx'
+import TextArea from './../../components/ui/textArea/textArea.jsx'
 class Container extends Component {
     constructor(props) {
         super(props)
@@ -12,7 +13,7 @@ class Container extends Component {
     }
     componentDidMount() {
         console.log("this is componentDidMount");
-        this.timerId = setInterval(() => this.tick(), 1000)
+        console.log(this.props.children);
     }
 
     componentWillUnmount() {
@@ -32,16 +33,36 @@ class Container extends Component {
     handleClick(e) {
         e.preventDefault();
     }
+    changeHandle(event) {
+        console.log("this is change")
+    }
+    clickHandle(event) {
+        console.log("this is click")
+    }
+    focusHandle(event) {
+        console.log("this is focus")
+    }
+    blurHandle(event) {
+        console.log("this is blur")
+    }
     render() {
         return (
             <div className="e-container">
-                <TextBox />
+                <TextBox name="textBox" onChange={this.changeHandle} onClick={this.clickHandle}
+                onFocus={this.focusHandle} onBlur={this.blurHandle}/>
                 <br />
-                {this.state.date.toLocaleTimeString()}
-                <a href="#" onClick={e => this.handleClick(e)}>点击测试</a>
+                <TextArea name="textarea" onChange={this.changeHandle} onClick={this.clickHandle}
+                onFocus={this.focusHandle} onBlur={this.blurHandle}></TextArea>
+                <br />
+                {this.props.name}
             </div>
         )
     }
 }
-
-render(<Container name="container" />, document.getElementById('root'));
+Container.propTypes = {
+    name: PropTypes.oneOf(["myContainer", "2"])
+}
+Container.defaultProps = {
+    name: "myContainer"
+}
+render(<Container></Container>, document.getElementById('root'));
