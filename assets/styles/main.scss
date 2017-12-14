@@ -1,0 +1,22 @@
+.e-container{
+    &-title{
+        border-left: 10px solid #2196f3;
+        padding-left: 10px;
+        color: #2196f3;
+        border-bottom: 2px solid #2196f3;
+    }
+    &-subtitle{
+        padding-left: 10px;
+        color: #2196f3;
+        margin-left: 10px;
+    }
+    &-subsubtitle{
+        padding-left: 10px;
+        color: #2196f3;
+        margin-left: 20px;
+    }
+    .e-section-container{
+        margin: 0 20px;
+        padding: 0 10px;
+    }
+}

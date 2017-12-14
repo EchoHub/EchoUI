@@ -1,0 +1,266 @@
+界面组件:
+    表单：
+      - ui/input 输入框基类
+      - ui/textBox 文本框
+      - ui/textArea 文本域
+      - ui/select 下拉菜单
+      - ui/listBox 列表
+      - ui/multiListBox 多选列表
+      - ui/listItem 列表项
+      - ui/checkBox 多选框
+      - ui/checkBoxGroup 多选框组
+      - ui/radioBox 单选框
+      - ui/radioBoxGroup 单选框组
+      - ui/form
+
+# 设计排版:
+#   通用:
+#     - typo/reset
+#     - typo/print
+#     - typo/accessibility
+#     - typo/util
+#   布局:
+#     - typo/grid
+#     - typo/media
+#     - typo/column
+#   元素:
+#     - typo/list
+#     - typo/table
+#     - typo/article
+#     - typo/blockquote
+#     - typo/fieldset
+#   内容:
+#     - typo/nav
+#     - typo/breadcrumb
+#     - typo/toolBar
+#     - typo/articleList
+#     - typo/summary
+#     - typo/thumbnail
+#     - typo/videoPlaceholder
+#     - typo/avatar
+#     - typo/tip
+#     - typo/money
+#     - typo/tag
+#   效果:
+#     - typo/hover
+#     - typo/spin
+#   部件:
+#     - typo/icon
+#     - typo/badge
+#     - typo/close
+#     - typo/arrow
+#     - typo/mask
+# UI 组件: 
+#   核心:
+#     - ui/control
+#   导航:
+#     - ui/navTab
+#     - ui/navMenu
+#     - ui/pagination
+#   容器:
+#     - ui/panel
+#     - ui/accordion
+#   表单:
+#     - ui/input
+#     - ui/textBox
+#     - ui/textArea
+#     - ui/picker
+#     - ui/comboBox
+#     - ui/select
+#     - ui/multiSelect
+#     - ui/suggest
+#     - ui/listBox
+#     - ui/multiListBox
+#     - ui/form
+#     - ui/checkBox
+#     - ui/checkBoxGroup
+#     - ui/radioButton
+#     - ui/radioButtonGroup
+#   按钮和菜单:
+#     - ui/button
+#     - typo/linkButton
+#   浮层:
+#     - ui/popup
+#     - ui/toolTip
+#     - ui/dialog
+#     - ui/messageBox
+#   数据视图:
+
+#   杂项:
+#     - #ui/tipBox
+#     - admin/steps
+#     - admin/upload  
+#     - #ui/navMenu
+# 网页交互:
+#   DOM:
+#     - web/shim
+#     - web/dom
+#     - web/domList
+#     - web/scroll
+#     - web/pin
+#     - web/within
+#     - web/status
+#     - web/active
+#     - web/outerHTML
+#   事件:
+#     - web/keyPress
+#     - web/ctrlEnter
+#     - web/disableTab
+#     - web/hover
+#     - web/active
+#     - web/hashChange
+
+#   交互:
+#     - web/movable
+#     - web/draggable
+#     - web/droppable
+#     - web/popup
+#   效果:
+#     - web/countDown
+#     - web/pagination
+#     - web/autoResizeTextArea
+#   布局:
+#   浏览器:
+#     - web/cookie
+#     - web/toggleFullScreen
+#     - web/addFavorite
+#     - web/forceOpen
+#     - web/crashBrowser
+#     - web/killIE
+#   网络:
+#     - web/ajax
+#     - web/ajaxSubmit
+#     - web/preload
+#     - web/lazyLoad
+#   杂项:
+#     - web/nextTick
+#     - web/noContextMenu
+#     - web/noIFrame
+#     - web/url
+#     - web/xml
+# 工具函数:
+#   对象扩展:
+#     - util/shim
+#     - util/object
+#     - util/array
+#     - util/string
+#     - util/number
+#     - util/boolean
+#     - util/function
+#     - util/date
+#     - util/regexp
+#   语言扩展:
+#     - util/class
+#     - util/namespace
+#     - util/enum
+#     - util/events
+#     - util/delegate
+#     - util/xRegExp
+#   数字处理:
+#     - util/bigInteger
+#     - util/bigNumber
+#     - util/currency
+#     - util/formatCurrencyToChinese
+#   文本处理:
+#     - util/query
+#     - util/url
+#     - util/path
+#     - util/tpl
+#     - util/uuid
+#     - util/uid
+#   数据检验:
+#     - util/check
+#     - util/checkPassword
+#     - util/regexp/regexp-lib
+#     - util/chineseId
+#     - util/chineseMNO
+#   编码:
+#     - util/html
+#     - util/base64
+#     - util/utf8
+#     - util/gb2312
+#   加密:
+#     - util/encryptString
+#     - util/md5
+#     - util/sha1
+#     - util/des
+#   数据结构和算法:
+#     - util/queue
+#     - util/asyncQueue
+#     - util/tween
+#     - util/sort
+#     - util/sqlike
+#   日期处理:
+#     - util/formatDateToChinese
+#     - util/cron
+#   图像处理:
+#     - util/color
+#     - util/color/knownColors
+#     - util/rect
+#     - util/bresenham
+#     - util/qrCode
+#   中文处理:
+#     - util/pinyin
+#     - util/searchPinYin
+#     - util/tradionalChinese
+#   代码处理:
+#     - util/javascriptObfuscator
+#     - util/jjencode
+#     - util/uglifyjs
+#     - util/typescript
+#     - util/markdown
+# 混合开发:
+#   通用:
+#     - hybrid/common
+#     - hybrid/route
+#     - hybrid/share
+#   硬件:
+#     - hybrid/user
+#     - hybrid/sandBox
+#     - hybrid/broadcast
+#     - hybrid/keyboard
+#     - hybrid/boardText
+#     - hybrid/battery
+#     - hybrid/network
+#     - hybrid/camera
+#   UI:
+#     - hybrid/navBar
+#     - hybrid/toolBar
+# 业务组件: 
+#   脚手架:
+#     - admin/common
+#   活动页:
+#     - activity/common
+# 其它:
+#   第三方库:
+#     - #lib/jquery
+#   第三方服务:
+#     - #service/forkMeOnGithub
+#     - #service/googleMap
+#     - #service/weather
+#   未分类:
+#     - activity/common
+#     - web/selected
+#     - ui/adminApp
+#     - activity/activityControl
+#     - activity/activityPopup
+#     - admin/datePicker
+#     - admin/formDialog
+#     - admin/formInputs
+#     - admin/pcApp
+#     - admin/queryTable
+#     - admin/tabControl
+#     - admin/table
+#     - admin/tree
+#     - admin/upload
+#     - admin/zTable
+#     - lib/dropzone
+#     - lib/echarts
+#     - lib/layui
+#     - lib/My97DatePicker
+#     - lib/vue
+#     - lib/webuploader
+#     - lib/zepto
+#     - service/stat
+#     - ui/tabBar
+#     - admin/richTextBox

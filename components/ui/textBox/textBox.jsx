@@ -10,7 +10,7 @@ export default class TextBox extends Input {
     }
 }
 TextBox.defaultProps = {
-    nodeType: "input",
+    domType: "input",
     type: "text",
-    className: "x-textbox"
+    className: "e-textbox"
 }

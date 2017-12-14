@@ -1,3 +1,4 @@
+
 // 主题色
 $color-ddd: #ddd;
 $color-warning: #ff4949;
@@ -12,3 +13,26 @@ $border-color-primary: $color-primary;
 $input-width: 12rem;
 $input-padding: .4rem;
 $input-radius: .1rem;
+
+
+.e-textbox{
+    box-sizing: border-box;
+    width: $input-width;
+    padding: $input-padding;
+    border-radius: $input-radius;
+    border: 1px solid $color-ddd;
+    transition: border-color ease-in-out .3s;
+    outline: 0;
+    &:focus {
+        border: 1px solid $border-color-primary;
+    }
+    &-warning {
+        border: 1px solid $border-color-warning
+    }
+    &-success {
+        border: 1px solid $border-color-success
+    }
+    &-primary {
+        border: 1px solid $border-color-primary
+    }
+}
