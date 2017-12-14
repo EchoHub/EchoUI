@@ -42,7 +42,9 @@ module.exports = {
                 }, {
                     loader: "sass-loader"
                 }]
-            }
+            },
+            // {test: /\.(eot|woff|ttf)$/, loader: "file-loader" }
+            {test: /\.(eot|woff|ttf)$/, loader: "url-loader?limit=100000" }
         ]
     },
     plugins: [
