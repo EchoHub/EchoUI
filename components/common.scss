@@ -1,39 +1,22 @@
 // 字体图标
-// @import "./util/font/iconfont";
+@import "./util/font/iconfont.scss";
 // 主题色
-$color-ddd: #ddd;
 $color-warning: #ff4949;
 $color-success: #5FB878;
 $color-primary: #2196f3;
+$color-light-blue: #66b1ff;
+$color-fff: #fff;
 $color-ddd: #ddd;
+$color-bbb: #bbb;
+$color-666: #666;
 // 边框色
 $border-color-warning: $color-warning;
 $border-color-success: $color-success;
 $border-color-primary: $color-primary;
 // 输入框配置
 $input-width: 12rem;
-$input-padding: .4rem;
+$input-padding: .5rem .4rem;
 $input-radius: .1rem;
 
 
-.e-textbox{
-    box-sizing: border-box;
-    width: $input-width;
-    padding: $input-padding;
-    border-radius: $input-radius;
-    border: 1px solid $color-ddd;
-    transition: border-color ease-in-out .3s;
-    outline: 0;
-    &:focus {
-        border: 1px solid $border-color-primary;
-    }
-    &-warning {
-        border: 1px solid $border-color-warning
-    }
-    &-success {
-        border: 1px solid $border-color-success
-    }
-    &-primary {
-        border: 1px solid $border-color-primary
-    }
-}
+// public css

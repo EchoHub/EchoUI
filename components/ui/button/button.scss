@@ -1,0 +1,41 @@
+@import "./../../common";
+.e-button{
+    width: 4.5rem;
+    height: 2rem;
+    background: none;
+    outline: 0;
+    transition: all ease-in-out .3s;
+    -moz-transition: all ease-in-out .3s;
+    -ms-transition: all ease-in-out .3s;
+    -o-transition: all ease-in-out .3s;
+    -webkit-transition: all ease-in-out .3s;
+    border: 1px solid $color-ddd;
+    border-radius: 4px;
+    &-small {
+        width: 3rem;
+        height: 1.6rem;
+    }
+    &-large {
+        width: 6rem;
+        height: 2.4rem;
+    }
+    &-default{
+        color: $color-666;
+        border: 1px solid $color-ddd;
+        &:hover{
+            background: rgba(240,240, 240, .3);
+        }
+    }
+    &-primary{
+        color: $color-fff;
+        background: $color-primary;
+        border: 1px solid $color-primary;
+        &:hover{
+            background: $color-light-blue;
+        }
+    }
+    &-light{
+        color: $color-primary;
+        border: 1px solid $color-primary;
+    }
+}

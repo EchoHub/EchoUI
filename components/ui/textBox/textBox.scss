@@ -1,1 +1,22 @@
 @import "./../../common";
+.e-textbox{
+    box-sizing: border-box;
+    width: $input-width;
+    padding: $input-padding;
+    border-radius: $input-radius;
+    border: 1px solid $color-ddd;
+    transition: border-color ease-in-out .3s;
+    outline: 0;
+    &:focus {
+        border: 1px solid $border-color-primary;
+    }
+    &-warning {
+        border: 1px solid $border-color-warning
+    }
+    &-success {
+        border: 1px solid $border-color-success
+    }
+    &-primary {
+        border: 1px solid $border-color-primary
+    }
+}

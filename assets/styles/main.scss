@@ -15,8 +15,22 @@
         color: #2196f3;
         margin-left: 20px;
     }
+    .e-section-demo{
+        display: flex;
+    }
     .e-section-container{
         margin: 0 20px;
         padding: 0 10px;
     }
+}
+
+// publlic css
+.e-mr-1rem{
+    margin-right: 1rem;
+}
+.e-ml-1rem{
+    margin-left: 1rem;
+}
+.e-ph-1rem{
+    padding: 0 1rem;
 }

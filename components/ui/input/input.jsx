@@ -14,11 +14,16 @@ export default class Input extends Control {
      */
     filterPropsHandle(props) {
         const node = document.createElement(props.domType)
-        let params = {}
+        let params = {
+            className:"e-textbox"
+        }
         for (const key in props) {
             const filterKey = /on[A-Z][a-z]*$/.test(key) ? key.toLocaleLowerCase() : key;
             node[filterKey] !== undefined && (params[key] = props[key] instanceof Function ? event => props[key](event) : 
             filterKey === "className" ? `e-textbox ${props[key]}` : props[key]);
+
+            // 如果有eRef 则进行绑定
+            key === "inputRef" && (params["ref"] = props["inputRef"])
         }
         this.state = {
             nodeOwnProperty: params
@@ -40,6 +45,7 @@ export default class Input extends Control {
 }
 /**
  * @desc 设置input基类默认类型
+ * @param inputRef 指代react中ref功能，用于为Input绑定ref值
  * @param domType 节点类型
  * @param type 输入框的类型
  * @param name 名称
