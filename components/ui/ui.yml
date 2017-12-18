@@ -1,12 +1,13 @@
 界面组件:
     表单：
-      - ui/input 输入框基类
-      - ui/textBox 文本框
-      - ui/textArea 文本域
-      - ui/select 下拉菜单
-      - ui/listBox 列表
+      - ui/input 输入框基类  完成
+      - ui/textBox 文本框  完成
+      - ui/textArea 文本域  完成
+      - ui/select 下拉菜单  完成
+      - ui/suggest 支持模糊查询的下拉
+      - ui/comboxBox 组合框 完成
       - ui/multiListBox 多选列表
-      - ui/listItem 列表项
+      - ui/listItem 列表项 完成
       - ui/checkBox 多选框
       - ui/checkBoxGroup 多选框组
       - ui/radioBox 单选框

@@ -7,7 +7,14 @@ import Control from "./../control/control.jsx"
 export default class Input extends Control {
     constructor(props) {
         super(props)
-        this.filterPropsHandle(props)
+        this.state = {
+            nodeOwnProperty: this.filterPropsHandle(props)
+        }
+    }
+    componentWillReceiveProps(nextProps) {
+        nextProps && this.setState({
+            nodeOwnProperty: this.filterPropsHandle(nextProps)
+        })
     }
     /**
      * @desc 过滤属性 对创建节点进行属性、事件等绑定
@@ -15,19 +22,17 @@ export default class Input extends Control {
     filterPropsHandle(props) {
         const node = document.createElement(props.domType)
         let params = {
-            className:"e-textbox"
+            className: "e-textbox"
         }
         for (const key in props) {
             const filterKey = /on[A-Z][a-z]*$/.test(key) ? key.toLocaleLowerCase() : key;
-            node[filterKey] !== undefined && (params[key] = props[key] instanceof Function ? event => props[key](event) : 
-            filterKey === "className" ? `e-textbox ${props[key]}` : props[key]);
+            node[filterKey] !== undefined && (params[key] = props[key] instanceof Function ? event => props[key](event) :
+                filterKey === "className" ? `e-textbox ${props[key].replace(/e-textbox/g, "")}` : props[key]);
 
             // 如果有eRef 则进行绑定
             key === "inputRef" && (params["ref"] = props["inputRef"])
         }
-        this.state = {
-            nodeOwnProperty: params
-        };
+        return params
     }
     render() {
         let node = null
@@ -35,7 +40,7 @@ export default class Input extends Control {
             case "TEXTAREA":
                 node = <textarea {...this.state.nodeOwnProperty} ></textarea>
                 break;
-            case "input":
+            case "INPUT":
             default:
                 node = <input {...this.state.nodeOwnProperty} />
                 break;

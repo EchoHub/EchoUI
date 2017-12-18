@@ -9,6 +9,9 @@ export default class TextArea extends Component {
         super(props)
     }
 
+    /**
+     * @desc 获取节点value
+     */
     value() {
         const val = this.refs[this.props["name"]].refs[this.props["name"]].value
         return val

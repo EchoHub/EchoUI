@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import { render } from "react-dom";
 import PropTypes from "prop-types";
 import "./../styles/main.scss";
+import CheckBox from "./../../components/ui/checkBox/checkBox.jsx";
+import CheckBoxGroup from "./../../components/ui/checkBoxGroup/checkBoxGroup.jsx";
 import TextBox from "./../../components/ui/textBox/textBox.jsx";
 import TextArea from "./../../components/ui/textArea/textArea.jsx";
 import Select from "./../../components/ui/select/select.jsx";
@@ -24,6 +26,12 @@ class Container extends Component {
         console.log("this is componentWillUnmount");
         clearInterval(this.timerId)
     }
+    /**
+     * @desc 多选框 选择
+     */
+    cbSelectHandle(event) {
+
+    }
     changeHandle(event) {
         // console.log("%c this is change" + event.target.value, "color: #2196f3")
     }
@@ -40,12 +48,18 @@ class Container extends Component {
         // console.log("this is blur", event)
     }
     /**
+     * @desc 多选框
+     */
+    checkBoxHandleSubmit() {
+
+    }
+    /**
      * @desc 文本框提交
      */
     textBoxHandleSubmit() {
         const val = this.refs.textBoxRef.value()
         this.setState({
-            textBoxRef: val
+            textBoxRefValue: val
         })
     }
     /**
@@ -54,14 +68,18 @@ class Container extends Component {
     textAreaHandleSubmit() {
         const val = this.refs.textAreaRef.value()
         this.setState({
-            textAreaRef: val
+            textAreaRefValue: val
         })
     }
     /**
      * @desc 下拉菜单选项
      */
     selectHandleSubmit() {
-
+        const val = this.refs.selectRef.value()
+        const text = this.refs.selectRef.text()
+        this.setState({
+            selectRefValue: `${text}: ${val}`
+        })
     }
     render() {
         return (
@@ -91,13 +109,25 @@ class Container extends Component {
                 </section>
                 <h4 className="e-container-subsubtitle">2. 表单组件 form</h4>
                 <section className="e-section-container">
+                    <h4>多选框</h4>
+                    <div className="e-section-demo">
+                        <CheckBoxGroup ref="checkBoxRef">
+                            <CheckBox name="checkBoxRef" value="apple" onSelect={this.cbSelectHandle}>苹果</CheckBox>
+                            <CheckBox name="checkBoxRef" value="banana"  onSelect={this.cbSelectHandle}>香蕉</CheckBox>
+                            <CheckBox name="checkBoxRef" value="pear"  onSelect={this.cbSelectHandle}>梨子</CheckBox>
+                            <CheckBox name="checkBoxRef" value="grape"  onSelect={this.cbSelectHandle}>葡萄</CheckBox>
+                        </CheckBoxGroup>
+                        <Button className="e-ml-1rem" onClick={this.checkBoxHandleSubmit.bind(this)}>提交</Button>
+                        <span className="e-ph-1rem">{this.state.checkBoxRefValue}</span>
+                        <br />
+                    </div>
                     <h4>文本框</h4>
                     <div className="e-section-demo">
                         <TextBox ref="textBoxRef" name="textBoxRef" onChange={this.changeHandle} onClick={this.clickHandle}
                             placeholder="请输入"
                             onFocus={this.focusHandle} onBlur={this.blurHandle} onInput={this.inputHandle} />
                         <Button className="e-ml-1rem" onClick={this.textBoxHandleSubmit.bind(this)}>提交</Button>
-                        <span className="e-ph-1rem">{this.state.textBoxRef}</span>
+                        <span className="e-ph-1rem">{this.state.textBoxRefValue}</span>
                         <br />
                     </div>
                     <h4>文本域</h4>
@@ -106,17 +136,17 @@ class Container extends Component {
                             defaultValue="默认文本"
                             onFocus={this.focusHandle} onBlur={this.blurHandle}></TextArea>
                         <Button className="e-ml-1rem" onClick={this.textAreaHandleSubmit.bind(this)}>提交</Button>
-                        <span className="e-ph-1rem">{this.state.textAreaRef}</span>
+                        <span className="e-ph-1rem">{this.state.textAreaRefValue}</span>
                     </div>
                     <h4>下拉框</h4>
                     <div className="e-section-demo">
-                        <Select ref="selectRef" name="selectRef"className="123">
+                        <Select ref="selectRef" name="selectRef" className="123">
                             <ListItem value={1}>下拉项 一</ListItem>
                             <ListItem value={2}>下拉项 二</ListItem>
                             <ListItem value={3}>下拉项 三</ListItem>
                         </Select>
                         <Button className="e-ml-1rem" onClick={this.selectHandleSubmit.bind(this)}>提交</Button>
-                        <span className="e-ph-1rem">{this.state.selectRef}</span>
+                        <span className="e-ph-1rem">{this.state.selectRefValue}</span>
                     </div>
                 </section>
             </div>

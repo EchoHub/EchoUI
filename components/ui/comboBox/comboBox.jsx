@@ -11,22 +11,32 @@ export default class ComboBox extends Component {
         this.state = {
             listItemDefaultClassName: "e-listitem",
             rootNodeClassName: "e-combobox",
-            curListItemKey: -1  //当前ListItem的key
+            curListItemKey: -1,  //当前ListItem的key
+            currentValue: "",
+            currentNodeContent: ""
         }
     }
     /**
-     * @desc 初始化下拉项默认样式
+     * @desc 更新ComBox状态
+     * @param curListItemKey 当前选中的下拉项 key
+     * @param currentValue 当前选中的下拉项 值
+     * @param currentNodeContent 当前选中的下拉项 节点内容
+     * @param rootNodeClassName ListItem容器的className
      */
-    updateListItemStatusHandle(curListItemKey) {
+    updateComboxBoxStatusHandle(curListItemKey, currentValue, currentNodeContent, rootNodeClassName) {
         this.setState({
             listItemDefaultClassName: "e-listitem",
-            curListItemKey: curListItemKey
+            curListItemKey: curListItemKey,
+            currentValue: currentValue,
+            currentNodeContent: currentNodeContent,
+            rootNodeClassName: rootNodeClassName
         })
     }
-
     render() {
         // 过滤children特殊字段
-        let newProps = {}
+        let newProps = {
+            value: this.state.currentNodeContent
+        }
         for (const key in this.props) {
             key !== "children" && (newProps[key] = this.props[key])
         }
@@ -42,7 +52,8 @@ export default class ComboBox extends Component {
                         this.props.children && this.props.children.length ? this.props.children.map((d, i) => {
                             return <ListItem key={i} nodeIndex={i}
                             isSelected={i === this.state.curListItemKey ? true : false}
-                            updateListItemStatusHandle={this.updateListItemStatusHandle.bind(this)} 
+                            updateComboxBoxStatusHandle={this.updateComboxBoxStatusHandle.bind(this)} 
+                            value = {d.props.value}
                              {...d.state}>{d.props.children}</ListItem>
                         }) : null
                     }
@@ -51,6 +62,20 @@ export default class ComboBox extends Component {
         </div>
     }
 
+    /**
+     * @desc 获取节点ListItem的value
+     */
+    value() {
+        // const val = this.refs[this.props["name"]].refs[this.props["name"]].value
+        // return value
+        return this.state.currentValue
+    }
+    /**
+     * @desc 获取节点nodeContent 节点内容 即ComboBox中input内容
+     */
+    text() {
+        return this.state.currentNodeContent
+    }
     /**
      * @desc 下拉框开关
      */
@@ -81,13 +106,15 @@ export class ListItem extends Component {
         })
     }
     render() {
-        return <li className={this.state.className} value={this.props.value} onClick={event => this.selectHandle(event)}>{this.props.children}</li>
+        return <li className={this.state.className} value={this.props.value} onClick={event => this.selectHandle(event, this.props.value)}>{this.props.children}</li>
     }
 
     /**
      * @desc 下拉点击事件
+     * @param event
+     * @param value ListItem 的 value值
      */
-    selectHandle(event) {
-        this.props.updateListItemStatusHandle(this.props.nodeIndex)
+    selectHandle(event, value) {
+        this.props.updateComboxBoxStatusHandle(this.props.nodeIndex, value, event.target.textContent, "e-combobox")
     }
 }
