@@ -8,8 +8,7 @@ export default class RadioBox extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            nodeOwnProperty: this.filterPropsHandle(props),
-            isCheck: false
+            nodeOwnProperty: this.filterPropsHandle(props)
         };
     }
     filterPropsHandle(props) {
@@ -30,23 +29,16 @@ export default class RadioBox extends Component {
      * @param event event
      */
     changeRadioBoxHandle(event) {
-        // 一个radioBoxGroup VDOM
-        const radioBoxes = this.props.parentVNode.refs["radioBoxGroup"].querySelectorAll("div.e-radiobox");
-        for (const item of radioBoxes) {
-            item.className = item.className.replace(/active/g, "");
-            item.querySelector("input[type=radio]").checked = false;
-        }
+        this.props.parentVNode.setCurrentNodeNumber(this.props.nodeNumber)
         const nodeRef = this.refs[this.props["name"]].refs[this.props["name"]]
         this.setState({
-            isCheck: true,
             checkValue: nodeRef.value
         })
     }
     render() {
-        console.log(this.state)
-        return <div className={`e-radiobox ${this.props.className.replace(/e-radiobox/g, "")} ${this.state.isCheck ? "active" : ""}`}>
+        return <div className={`e-radiobox ${this.props.className.replace(/e-radiobox/g, "")} ${this.props.isCheck ? "active" : ""}`}>
             <span className="e-radiobox-inner" onClick={this.changeRadioBoxHandle.bind(this)}></span>
-            <Input ref={this.props["name"]} {...this.state.nodeOwnProperty} checked={this.state.isCheck} inputRef={this.props["name"]} />
+            <Input ref={this.props["name"]} {...this.state.nodeOwnProperty} checked={this.props.isCheck} inputRef={this.props["name"]} />
             <span className="e-radiobox-content">{this.props.children}</span>
         </div>
     }

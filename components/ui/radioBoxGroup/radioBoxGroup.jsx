@@ -7,6 +7,9 @@ import "./radioBoxGroup.scss"
 export default class RadioBoxGroup extends Component {
     constructor(props) {
         super(props)
+        this.state = {
+            currentNodeNumber: -1
+        }
     }
 
     value() {
@@ -19,13 +22,22 @@ export default class RadioBoxGroup extends Component {
         return resultArr
     }
 
+    /**
+     * @desc 设置当前选中的第几个
+     */
+    setCurrentNodeNumber(currentNodeNumber) {
+        this.setState({
+            currentNodeNumber: currentNodeNumber
+        })
+    }
+
     render() {
         return <div ref="radioBoxGroup" className="radioBoxGroup">
             {
                 this.props.children && this.props.children.length ? this.props.children.map((d, i) => {
                     const className = d.props["className"] + " e-mh-4";
-                    return <RadioBox key={i} {...d.props} className={className} parentVNode={this}
-                    >{d.props.children}</RadioBox>
+                    return <RadioBox key={i} {...d.props} className={className} parentVNode={this} nodeNumber={i}
+                    isCheck={this.state.currentNodeNumber === i ? true: false}>{d.props.children}</RadioBox>
                 }): null
             }
         </div>
