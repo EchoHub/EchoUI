@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import { render } from "react-dom";
 import PropTypes from "prop-types";
 import "./../styles/main.scss";
+import RadioBox from "./../../components/ui/radioBox/radioBox.jsx";
+import RadioBoxGroup from "./../../components/ui/radioBoxGroup/radioBoxGroup.jsx";
 import CheckBox from "./../../components/ui/checkBox/checkBox.jsx";
 import CheckBoxGroup from "./../../components/ui/checkBoxGroup/checkBoxGroup.jsx";
 import TextBox from "./../../components/ui/textBox/textBox.jsx";
@@ -48,10 +50,22 @@ class Container extends Component {
         // console.log("this is blur", event)
     }
     /**
+     * @desc 单选框
+     */
+    radioBoxHandleSubmit() {
+        const val = this.refs.radioBoxRef.value()
+        this.setState({
+            radioBoxGroupRefValue: val
+        })
+    }
+    /**
      * @desc 多选框
      */
     checkBoxHandleSubmit() {
-
+        const val = this.refs.checkBoxRef.value()
+        this.setState({
+            checkBoxGroupRefValue: val ? val.join(",") : ""
+        })
     }
     /**
      * @desc 文本框提交
@@ -109,16 +123,28 @@ class Container extends Component {
                 </section>
                 <h4 className="e-container-subsubtitle">2. 表单组件 form</h4>
                 <section className="e-section-container">
+                    <h4>单选框</h4>
+                    <div className="e-section-demo">
+                        <RadioBoxGroup ref="radioBoxRef">
+                            <RadioBox name="radioBoxRef" value="apple">苹果</RadioBox>
+                            <RadioBox name="radioBoxRef" value="banana">香蕉</RadioBox>
+                            <RadioBox name="radioBoxRef" value="pear">梨子</RadioBox>
+                            <RadioBox name="radioBoxRef" value="grape">葡萄</RadioBox>
+                        </RadioBoxGroup>
+                        <Button className="e-ml-1rem" onClick={this.radioBoxHandleSubmit.bind(this)}>提交</Button>
+                        <span className="e-ph-1rem">{this.state.radioBoxGroupRefValue}</span>
+                        <br />
+                    </div>
                     <h4>多选框</h4>
                     <div className="e-section-demo">
                         <CheckBoxGroup ref="checkBoxRef">
-                            <CheckBox name="checkBoxRef" value="apple" onSelect={this.cbSelectHandle}>苹果</CheckBox>
-                            <CheckBox name="checkBoxRef" value="banana"  onSelect={this.cbSelectHandle}>香蕉</CheckBox>
-                            <CheckBox name="checkBoxRef" value="pear"  onSelect={this.cbSelectHandle}>梨子</CheckBox>
-                            <CheckBox name="checkBoxRef" value="grape"  onSelect={this.cbSelectHandle}>葡萄</CheckBox>
+                            <CheckBox name="checkBoxRef" value="apple">苹果</CheckBox>
+                            <CheckBox name="checkBoxRef" value="banana">香蕉</CheckBox>
+                            <CheckBox name="checkBoxRef" value="pear">梨子</CheckBox>
+                            <CheckBox name="checkBoxRef" value="grape">葡萄</CheckBox>
                         </CheckBoxGroup>
                         <Button className="e-ml-1rem" onClick={this.checkBoxHandleSubmit.bind(this)}>提交</Button>
-                        <span className="e-ph-1rem">{this.state.checkBoxRefValue}</span>
+                        <span className="e-ph-1rem">{this.state.checkBoxGroupRefValue}</span>
                         <br />
                     </div>
                     <h4>文本框</h4>

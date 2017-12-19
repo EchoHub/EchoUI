@@ -29,16 +29,18 @@ export default class CheckBox extends Component {
      * @desc checkbox change事件
      * @param event event
      */
-    changeHandle(event) {
+    changeCheckBoxHandle(event) {
+        const nodeRef = this.refs[this.props["name"]].refs[this.props["name"]]
+        const checked = nodeRef.checked
         this.setState({
-            isCheck: event.target.checked
+            isCheck: !checked,
+            checkValue: !checked? nodeRef.value : ""
         })
     }
     render() {
         return <div className={`e-checkbox ${this.props.className.replace(/e-checkbox/g, "")} ${this.state.isCheck ? "active": ""}`}>
-            <span className="e-checkbox-inner"></span>
-            <Input ref={this.props["name"]} {...this.state.nodeOwnProperty} inputRef={this.props["name"]} 
-            onChange={this.changeHandle.bind(this)}/>
+            <span className="e-checkbox-inner" onClick={this.changeCheckBoxHandle.bind(this)}></span>
+            <Input ref={this.props["name"]} {...this.state.nodeOwnProperty} checked={this.state.isCheck} inputRef={this.props["name"]}/>
             <span className="e-checkbox-content">{this.props.children}</span>
         </div>
     }
@@ -47,8 +49,7 @@ export default class CheckBox extends Component {
      * @desc 获取checkbox值
      */
     value() {
-        const val = this.refs[this.props["name"]].refs[this.props["name"]].value
-        return val
+        return this.state.checkValue
     }
 }
 CheckBox.defaultProps = {

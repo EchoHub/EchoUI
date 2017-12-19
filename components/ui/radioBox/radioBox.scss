@@ -1,5 +1,5 @@
 @import "./../../common";
-.e-checkbox {
+.e-radiobox{
     color: #606266;
     font-size: 14px;
     position: relative;
@@ -8,11 +8,11 @@
     white-space: nowrap;
     user-select: none;
     &.active{
-        .e-checkbox-inner {
+        .e-radiobox-inner {
             background-color: $color-primary;
             color: $color-fff;
             &:after{
-                transform: rotate(45deg) scaleY(1);
+                transform: scale(1);
             }
         }
     }
@@ -27,6 +27,7 @@
         height: 14px;
         background-color: #fff;
         z-index: 1;
+        border-radius: 50%;
         transition: border-color .25s cubic-bezier(.71,-.46,.29,1.46),background-color .25s cubic-bezier(.71,-.46,.29,1.46);
         &:after{
             box-sizing: content-box;
@@ -34,17 +35,16 @@
             border: 1px solid #fff;
             border-left: 0;
             border-top: 0;
-            height: 7px;
+            height: 3px;
             left: 4px;
             position: absolute;
-            top: 1px;
-            transform: rotate(45deg) scaleY(0);
+            top: 4px;
+            transform: scale(0);
             width: 3px;
-            transition: transform .15s cubic-bezier(.71,-.46,.88,.6) .05s;
+            border-radius: 50%;
             transform-origin: center;
-        }
-        &:hover{
-            border: 1px solid $color-primary;
+            transition: transform .25s cubic-bezier(.71,-.46,.29,1.46);
+            background: #fff;
         }
     }
     &-content{

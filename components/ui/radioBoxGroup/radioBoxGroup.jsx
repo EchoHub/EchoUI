@@ -1,16 +1,16 @@
 import React, { Component } from "react"
-import CheckBox from "./../checkBox/checkBox.jsx"
-import "./checkBoxGroup.scss"
+import RadioBox from "./../radioBox/radioBox.jsx"
+import "./radioBoxGroup.scss"
 /**
  * @desc 表示一个多选框
  */
-export default class CheckBoxGroup extends Component {
+export default class RadioBoxGroup extends Component {
     constructor(props) {
         super(props)
     }
 
     value() {
-        const nodes = this.refs["checkBoxGroup"].querySelectorAll("input[type=checkbox]:checked")
+        const nodes = this.refs["radioBoxGroup"].querySelectorAll("input[type=radio]:checked")
         if(!nodes.length) return ""
         let resultArr = []
         for(const item of nodes) {
@@ -20,18 +20,18 @@ export default class CheckBoxGroup extends Component {
     }
 
     render() {
-        return <div ref="checkBoxGroup" className="checkBoxGroup">
+        return <div ref="radioBoxGroup" className="radioBoxGroup">
             {
                 this.props.children && this.props.children.length ? this.props.children.map((d, i) => {
                     const className = d.props["className"] + " e-mh-4";
-                    return <CheckBox key={i} {...d.props} className={className}
-                    >{d.props.children}</CheckBox>
+                    return <RadioBox key={i} {...d.props} className={className} parentVNode={this}
+                    >{d.props.children}</RadioBox>
                 }): null
             }
         </div>
     }
 }
-CheckBoxGroup.defaultProps = {
+RadioBoxGroup.defaultProps = {
     domType: "input",
-    type: "checkbox"
+    type: "radio"
 }
