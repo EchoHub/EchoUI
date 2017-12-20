@@ -10,6 +10,7 @@ import TextBox from "./../../components/ui/textBox/textBox.jsx";
 import TextArea from "./../../components/ui/textArea/textArea.jsx";
 import Select from "./../../components/ui/select/select.jsx";
 import { ListItem } from "./../../components/ui/comboBox/comboBox.jsx";
+import Form from "./../../components/ui/form/form.jsx";
 import Button from "./../../components/ui/button/button.jsx";
 class Container extends Component {
     constructor(props) {
@@ -95,6 +96,15 @@ class Container extends Component {
             selectRefValue: `${text}: ${val}`
         })
     }
+    /**
+     * @desc 表单提交
+     */
+    formHandleSubmit() {
+        const val = this.refs.formRef.value()
+        this.setState({
+            formRefValue: val
+        })
+    }
     render() {
         return (
             <div className="e-container">
@@ -173,6 +183,45 @@ class Container extends Component {
                         </Select>
                         <Button className="e-ml-1rem" onClick={this.selectHandleSubmit.bind(this)}>提交</Button>
                         <span className="e-ph-1rem">{this.state.selectRefValue}</span>
+                    </div>
+                    <h4>表单</h4>
+                    <div className="e-section-demo">
+                        <Form ref="formRef">
+                            <h6>1.你经常吃水果吗？</h6>
+                            <div>
+                                <Select name="selectRef" placeholder="请选择">
+                                    <ListItem value={1}>是</ListItem>
+                                    <ListItem value={0}>否</ListItem>
+                                </Select>
+                            </div>
+                            <h6>2.哪个水果更好吃？</h6>
+                            <div>
+                                <RadioBoxGroup>
+                                    <RadioBox name="radioBoxRef" value="apple">苹果</RadioBox>
+                                    <RadioBox name="radioBoxRef" value="banana">香蕉</RadioBox>
+                                </RadioBoxGroup>
+                            </div>
+                            <h6>3.你喜欢哪些水果？</h6>
+                            <div>
+                                <CheckBoxGroup ref="checkBoxRef">
+                                    <CheckBox name="checkBoxRef" value="apple">苹果</CheckBox>
+                                    <CheckBox name="checkBoxRef" value="banana">香蕉</CheckBox>
+                                    <CheckBox name="checkBoxRef" value="pear">梨子</CheckBox>
+                                    <CheckBox name="checkBoxRef" value="grape">葡萄</CheckBox>
+                                </CheckBoxGroup>
+                            </div>
+                            <h6>4.你最喜欢吃的水果是什么？</h6>
+                            <div>
+                                <TextBox name="textBoxRef" placeholder="请输入" />
+                            </div>
+                            <h6>5.你为什么最喜欢吃？</h6>
+                            <div>
+                                <TextArea ref="textAreaRef" defaultValue="因为好吃啊!!!"></TextArea>
+                            </div>
+
+                        </Form>
+                        <Button className="e-ml-1rem" onClick={this.formHandleSubmit.bind(this)}>提交</Button>
+                        <span className="e-ph-1rem">{this.state.formRefValue}</span>
                     </div>
                 </section>
             </div>

@@ -2,7 +2,7 @@ import React, { Component } from "react"
 import RadioBox from "./../radioBox/radioBox.jsx"
 import "./radioBoxGroup.scss"
 /**
- * @desc 表示一个多选框
+ * @desc 表示一个单选框组
  */
 export default class RadioBoxGroup extends Component {
     constructor(props) {

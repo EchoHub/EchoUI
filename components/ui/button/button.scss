@@ -11,6 +11,9 @@
     -webkit-transition: all ease-in-out .3s;
     border: 1px solid $color-ddd;
     border-radius: 4px;
+    &:hover{
+        cursor: pointer;
+    }
     &-small {
         width: 3rem;
         height: 1.6rem;
@@ -37,5 +40,8 @@
     &-light{
         color: $color-primary;
         border: 1px solid $color-primary;
+        &:hover{
+            color: $color-light-blue;
+        }
     }
 }
