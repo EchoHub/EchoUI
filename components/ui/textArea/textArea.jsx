@@ -18,7 +18,10 @@ export default class TextArea extends Component {
     }
 
     render() {
-        return <Input ref={this.props["name"]} {...this.props} inputRef={this.props["name"]} />
+        return <Input
+            ref={this.props["name"]}
+            {...this.props}
+            inputRef={this.props["name"]} />
     }
 }
 TextArea.defaultProps = {

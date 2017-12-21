@@ -12,7 +12,7 @@
       - ui/checkBoxGroup 多选框组 ✅
       - ui/radioBox 单选框 ✅
       - ui/radioBoxGroup 单选框组 ✅
-      - ui/form
+      - ui/form ✅
     浮层：
       - ui/popup
       - ui/toolTip

@@ -190,7 +190,7 @@ class Container extends Component {
                         <Form ref="formRef">
                             <h6>1.你经常吃水果吗？</h6>
                             <div>
-                                <Select name="selectRef" placeholder="请选择">
+                                <Select name="selectRef" placeholder="请选择" required>
                                     <ListItem value={1}>是</ListItem>
                                     <ListItem value={0}>否</ListItem>
                                 </Select>
@@ -213,11 +213,11 @@ class Container extends Component {
                             </div>
                             <h6>4.你最喜欢吃的水果是什么？</h6>
                             <div>
-                                <TextBox name="textBoxRef" placeholder="请输入" />
+                                <TextBox name="textBoxRef" pattern={/\S*/g} patternMessage="请输入非空字符" placeholder="请输入" required/>
                             </div>
                             <h6>5.你为什么最喜欢吃？</h6>
                             <div>
-                                <TextArea name="textAreaRef" defaultValue="因为好吃啊!!!"></TextArea>
+                                <TextArea name="textAreaRef" defaultValue="因为好吃啊!!!" required></TextArea>
                             </div>
                         </Form>
                         <Button className="e-ml-1rem" onClick={this.formHandleSubmit.bind(this)}>提交</Button>

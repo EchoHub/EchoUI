@@ -15,7 +15,10 @@ export default class TextBox extends Component {
     }
 
     render() {
-        return <Input ref={this.props["name"]} {...this.props} inputRef={this.props["name"]}/>
+        return <Input
+            ref={this.props["name"]}
+            {...this.props}
+            inputRef={this.props["name"]} />
     }
 }
 TextBox.defaultProps = {

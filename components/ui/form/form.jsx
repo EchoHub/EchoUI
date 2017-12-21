@@ -22,7 +22,6 @@ export default class Form extends Component {
     }
 
     value() {
-        const inputs = this.getInputs(this.props.children, [])
         const rootNode = findDOMNode(this)
         let result = {}
         for (const item of rootNode.elements) {
@@ -30,12 +29,18 @@ export default class Form extends Component {
                 case "select":
                 case "radio":
                 case "checkbox":
-                    result[item.name] = item.getAttribute("data-value")
-                    break;
+                    const val = item.getAttribute("data-value")
+                    if (this.checkValidity(item, val)) {
+                        result[item.name] = val
+                    }else {
+                        return false
+                    }
                 case "textarea":
                 case "input":
-                    result[item.name] = item.value
-                    break;
+                    if (this.checkValidity(item)) {
+                        result[item.name] = item.value
+                    }
+                    return false
                 default:
                     break;
             }
@@ -44,25 +49,45 @@ export default class Form extends Component {
     }
 
     /**
+     * @desc 验证表单
+     */
+    checkValidity(elem, val) {
+        if (elem.hasAttribute("required")) {
+            if (val !== "") {
+                return true
+            }
+            return false
+        }
+        return true
+    }
+
+    /**
+     * @desc 通知验证报告
+     */
+    reportValidity() {
+
+    }
+
+    /**
      * @desc 获取所有的输入域
      */
-    getInputs(children, inputs) {
-        for (const item of (children instanceof Array ? children : [children])) {
-            if (item.props && item.props.children) {
-                if (item.props.domType && item.props.domType === "input") {
-                    inputs.push(item)
-                    return;
-                }
-                inputs.concat(this.getInputs(item.props.children, inputs))
-            } else {
-                if (item.props && item.props.domType && (item.props.domType === "input" || item.props.domType === "textarea")) {
-                    inputs.push(item)
-                    return;
-                }
-            }
-        }
-        return inputs
-    }
+    // getInputs(children, inputs) {
+    //     for (const item of (children instanceof Array ? children : [children])) {
+    //         if (item.props && item.props.children) {
+    //             if (item.props.domType && item.props.domType === "input") {
+    //                 inputs.push(item)
+    //                 return;
+    //             }
+    //             inputs.concat(this.getInputs(item.props.children, inputs))
+    //         } else {
+    //             if (item.props && item.props.domType && (item.props.domType === "input" || item.props.domType === "textarea")) {
+    //                 inputs.push(item)
+    //                 return;
+    //             }
+    //         }
+    //     }
+    //     return inputs
+    // }
 }
 
 Form.defaultProps = {

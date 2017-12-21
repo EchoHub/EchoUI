@@ -38,11 +38,17 @@ export default class ComboBox extends Component {
             value: this.state.currentNodeContent
         }
         for (const key in this.props) {
-            key !== "children" && (newProps[key] = key ==="className"? this.props[key]+ " e-combobox-input" :this.props[key])
+            key !== "children" && (newProps[key] = key === "className" ? this.props[key] + " e-combobox-input" : this.props[key])
         }
-        return <div ref="comboBox" className={this.state.rootNodeClassName}>
-            <Input {...newProps} type="text" dataType={this.props.dataType} dataValue={this.state.currentValue}/>
-            <span className="e-combobox-button" onClick={event => this.toggleListHandle(event)}>
+        return <div ref="comboBox"
+            className={this.state.rootNodeClassName}>
+            <Input
+                {...newProps}
+                type="text"
+                dataType={this.props.dataType}
+                dataValue={this.state.currentValue} />
+            <span className="e-combobox-button"
+                onClick={event => this.toggleListHandle(event)}>
                 <i className="icon iconfont icon-shurukuangxialajiantou"></i>
             </span>
             <span className="e-combobox-list">
@@ -51,10 +57,10 @@ export default class ComboBox extends Component {
                     {
                         this.props.children && this.props.children.length ? this.props.children.map((d, i) => {
                             return <ListItem key={i} nodeIndex={i}
-                            isSelected={i === this.state.curListItemKey ? true : false}
-                            updateComboxBoxStatusHandle={this.updateComboxBoxStatusHandle.bind(this)} 
-                            value = {d.props.value}
-                             {...d.state}>{d.props.children}</ListItem>
+                                isSelected={i === this.state.curListItemKey ? true : false}
+                                updateComboxBoxStatusHandle={this.updateComboxBoxStatusHandle.bind(this)}
+                                value={d.props.value}
+                                {...d.state}>{d.props.children}</ListItem>
                         }) : null
                     }
                 </ul>
