@@ -34,13 +34,23 @@ export default class CheckBox extends Component {
         const checked = nodeRef.checked
         this.setState({
             isCheck: !checked,
-            checkValue: !checked? nodeRef.value : ""
         })
+        this.props.setCheckBoxValueHandle(!checked, nodeRef.value)
     }
     render() {
-        return <div className={`e-checkbox ${this.props.className.replace(/e-checkbox/g, "")} ${this.state.isCheck ? "active": ""}`}>
-            <span className="e-checkbox-inner" onClick={this.changeCheckBoxHandle.bind(this)}></span>
-            <Input ref={this.props["name"]} {...this.state.nodeOwnProperty} checked={this.state.isCheck} inputRef={this.props["name"]}/>
+        return <div className={`e-checkbox ${this.props.className.replace(/e-checkbox/g, "")} 
+            ${this.state.isCheck ? "active" : ""}`}>
+            <span
+                className="e-checkbox-inner"
+                onClick={this.changeCheckBoxHandle.bind(this)}></span>
+            <Input
+                ref={this.props["name"]}
+                {...this.state.nodeOwnProperty}
+                checked={this.state.isCheck}
+                inputRef={this.props["name"]}
+                dataType={this.props.dataType}
+                dataValue={this.props.dataValue}
+            />
             <span className="e-checkbox-content">{this.props.children}</span>
         </div>
     }
@@ -49,11 +59,12 @@ export default class CheckBox extends Component {
      * @desc 获取checkbox值
      */
     value() {
-        return this.state.checkValue
+        return this.props.dataValue
     }
 }
 CheckBox.defaultProps = {
     domType: "input",
     type: "checkbox",
-    className: "e-checkbox"
+    className: "e-checkbox",
+    dataType: "checkbox"
 }

@@ -31,15 +31,27 @@ export default class RadioBox extends Component {
     changeRadioBoxHandle(event) {
         this.props.parentVNode.setCurrentNodeNumber(this.props.nodeNumber)
         const nodeRef = this.refs[this.props["name"]].refs[this.props["name"]]
-        this.setState({
-            checkValue: nodeRef.value
-        })
+        // this.setState({
+        //     checkValue: nodeRef.value
+        // })
+        this.props.setRadioBoxValueHandle(nodeRef.value)
     }
     render() {
-        return <div className={`e-radiobox ${this.props.className.replace(/e-radiobox/g, "")} ${this.props.isCheck ? "active" : ""}`}>
-            <span className="e-radiobox-inner" onClick={this.changeRadioBoxHandle.bind(this)}></span>
-            <Input ref={this.props["name"]} {...this.state.nodeOwnProperty} checked={this.props.isCheck} inputRef={this.props["name"]} />
-            <span className="e-radiobox-content">{this.props.children}</span>
+        return <div className={`e-radiobox 
+            ${this.props.className.replace(/e-radiobox/g, "")}
+            ${this.props.isCheck ? "active" : ""}`}>
+            <span className="e-radiobox-inner"
+                onClick={this.changeRadioBoxHandle.bind(this)}></span>
+                <Input
+                    ref={this.props["name"]}
+                    {...this.state.nodeOwnProperty}
+                    checked={this.props.isCheck}
+                    inputRef={this.props["name"]}
+                    dataType={this.props.dataType}
+                    dataValue={this.props.dataValue}
+                />
+                <span className="e-radiobox-content">{this.props.children}
+            </span>
         </div>
     }
 
@@ -47,11 +59,12 @@ export default class RadioBox extends Component {
      * @desc 获取radiobox值
      */
     value() {
-        return this.state.checkValue
+        return this.props.dataValue
     }
 }
 RadioBox.defaultProps = {
     domType: "input",
     type: "radio",
-    className: "e-radiobox"
+    className: "e-radiobox",
+    dataType: "radio"
 }

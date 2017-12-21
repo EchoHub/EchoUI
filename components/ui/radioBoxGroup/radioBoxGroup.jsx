@@ -14,9 +14,9 @@ export default class RadioBoxGroup extends Component {
 
     value() {
         const nodes = this.refs["radioBoxGroup"].querySelectorAll("input[type=radio]:checked")
-        if(!nodes.length) return ""
+        if (!nodes.length) return ""
         let resultArr = []
-        for(const item of nodes) {
+        for (const item of nodes) {
             resultArr.push(item.value)
         }
         return resultArr
@@ -31,19 +31,37 @@ export default class RadioBoxGroup extends Component {
         })
     }
 
+    /**
+     * @desc 设置radiobox dataValue
+     */
+    setRadioBoxValueHandle(value) {
+        this.setState({
+            currentValue: value
+        })
+    }
+
     render() {
         return <div ref="radioBoxGroup" className="radioBoxGroup">
             {
                 this.props.children && this.props.children.length ? this.props.children.map((d, i) => {
                     const className = d.props["className"] + " e-mh-4";
-                    return <RadioBox key={i} {...d.props} className={className} parentVNode={this} nodeNumber={i}
-                    isCheck={this.state.currentNodeNumber === i ? true: false}>{d.props.children}</RadioBox>
-                }): null
+                    return <RadioBox
+                        key={i}
+                        {...d.props}
+                        className={className}
+                        parentVNode={this}
+                        nodeNumber={i}
+                        isCheck={this.state.currentNodeNumber === i ? true : false}
+                        setRadioBoxValueHandle={this.setRadioBoxValueHandle.bind(this)}
+                        dataValue={this.state.currentValue}
+                    >{d.props.children}</RadioBox>
+                }) : null
             }
         </div>
     }
 }
 RadioBoxGroup.defaultProps = {
     domType: "input",
-    type: "radio"
+    type: "radio",
+    dataType: "radioBoxGroup"
 }

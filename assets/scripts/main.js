@@ -101,9 +101,10 @@ class Container extends Component {
      */
     formHandleSubmit() {
         const val = this.refs.formRef.value()
-        this.setState({
-            formRefValue: val
-        })
+        console.log(val)
+        // this.setState({
+        //     formRefValue: val
+        // })
     }
     render() {
         return (
@@ -203,7 +204,7 @@ class Container extends Component {
                             </div>
                             <h6>3.你喜欢哪些水果？</h6>
                             <div>
-                                <CheckBoxGroup ref="checkBoxRef">
+                                <CheckBoxGroup>
                                     <CheckBox name="checkBoxRef" value="apple">苹果</CheckBox>
                                     <CheckBox name="checkBoxRef" value="banana">香蕉</CheckBox>
                                     <CheckBox name="checkBoxRef" value="pear">梨子</CheckBox>
@@ -216,9 +217,8 @@ class Container extends Component {
                             </div>
                             <h6>5.你为什么最喜欢吃？</h6>
                             <div>
-                                <TextArea ref="textAreaRef" defaultValue="因为好吃啊!!!"></TextArea>
+                                <TextArea name="textAreaRef" defaultValue="因为好吃啊!!!"></TextArea>
                             </div>
-
                         </Form>
                         <Button className="e-ml-1rem" onClick={this.formHandleSubmit.bind(this)}>提交</Button>
                         <span className="e-ph-1rem">{this.state.formRefValue}</span>

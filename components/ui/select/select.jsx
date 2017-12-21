@@ -9,3 +9,6 @@ export default class Select extends ComboBox {
         super(props)
     }
 }
+Select.defaultProps = {
+    dataType: "select"
+}

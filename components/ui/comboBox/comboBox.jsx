@@ -38,13 +38,13 @@ export default class ComboBox extends Component {
             value: this.state.currentNodeContent
         }
         for (const key in this.props) {
-            key !== "children" && (newProps[key] = this.props[key])
+            key !== "children" && (newProps[key] = key ==="className"? this.props[key]+ " e-combobox-input" :this.props[key])
         }
         return <div ref="comboBox" className={this.state.rootNodeClassName}>
-            <Input {...newProps} type="text"/>
-            <button className="e-combobox-button" onClick={event => this.toggleListHandle(event)}>
+            <Input {...newProps} type="text" dataType={this.props.dataType} dataValue={this.state.currentValue}/>
+            <span className="e-combobox-button" onClick={event => this.toggleListHandle(event)}>
                 <i className="icon iconfont icon-shurukuangxialajiantou"></i>
-            </button>
+            </span>
             <span className="e-combobox-list">
                 <i className="e-combobox-arrow"></i>
                 <ul className="e-combobox-ul">
@@ -80,6 +80,7 @@ export default class ComboBox extends Component {
      * @desc 下拉框开关
      */
     toggleListHandle(event) {
+        event.preventDefault()
         const className = this.refs.comboBox.className
         this.setState({
             rootNodeClassName: className.indexOf("active") > -1 ? "e-combobox" : "e-combobox active"

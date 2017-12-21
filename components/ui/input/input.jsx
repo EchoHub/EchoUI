@@ -11,6 +11,8 @@ export default class Input extends Control {
             nodeOwnProperty: this.filterPropsHandle(props)
         }
     }
+    componentDidMount() {
+    }
     componentWillReceiveProps(nextProps) {
         nextProps && this.setState({
             nodeOwnProperty: this.filterPropsHandle(nextProps)
@@ -38,11 +40,16 @@ export default class Input extends Control {
         let node = null
         switch (this.props.domType.toUpperCase()) {
             case "TEXTAREA":
-                node = <textarea {...this.state.nodeOwnProperty} ></textarea>
+                node = <textarea
+                    {...this.state.nodeOwnProperty}
+                    data-type="textarea"></textarea>
                 break;
             case "INPUT":
             default:
-                node = <input {...this.state.nodeOwnProperty} />
+                node = <input
+                    {...this.state.nodeOwnProperty}
+                    data-type={this.props.dataType || "input"}
+                    data-value={this.props.dataValue} />
                 break;
         }
         return node;
