@@ -12,6 +12,9 @@ import "./form.scss"
 export default class Form extends Component {
     constructor(props) {
         super(props)
+        this.state = {
+            current: 1
+        }
     }
 
     componentDidMount() {
@@ -32,13 +35,14 @@ export default class Form extends Component {
                     const val = item.getAttribute("data-value")
                     if (this.checkValidity(item, val)) {
                         result[item.name] = val
-                    }else {
-                        return false
+                        break;
                     }
+                    return false
                 case "textarea":
                 case "input":
                     if (this.checkValidity(item)) {
                         result[item.name] = item.value
+                        break
                     }
                     return false
                 default:
@@ -52,11 +56,15 @@ export default class Form extends Component {
      * @desc 验证表单
      */
     checkValidity(elem, val) {
-        if (elem.hasAttribute("required")) {
-            if (val !== "") {
-                return true
-            }
+        if (elem.hasAttribute("required") && val === "") {
             return false
+        } else if (elem.hasAttribute("pattern")) {
+            const pattern = elem.getAttribute("pattern")
+            debugger
+            if (pattern && !new RegExp(pattern).test(val)) {
+                console.log(elem.getAttribute("patternmsg"))
+                return false
+            }
         }
         return true
     }

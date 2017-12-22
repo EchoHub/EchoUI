@@ -45,7 +45,7 @@ export default class Input extends Control {
                     data-type="textarea"
                     required={this.props.hasOwnProperty("required") ? true: false}
                     pattern={this.props.pattern || null}
-                    patternMessage={this.props.patternMessage || null}
+                    patternmsg={this.props.patternMessage || null}
                     ></textarea>
                 break;
             case "INPUT":
@@ -56,7 +56,7 @@ export default class Input extends Control {
                     data-value={this.props.dataValue} 
                     required={this.props.hasOwnProperty("required") ? true: false}
                     pattern={this.props.pattern || null}
-                    patternMessage={this.props.patternMessage || null}
+                    patternmsg={this.props.patternMessage || null}
                     />
                 break;
         }

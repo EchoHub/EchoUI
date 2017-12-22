@@ -42,3 +42,11 @@
 .e-ph-1rem{
     padding: 0 1rem;
 }
+
+::-webkit-scrollbar, ::-webkit-scrollbar-track {
+    width: 10px;
+    background: #e0e0e0;
+}
+::-webkit-scrollbar-thumb {
+    background: #999;
+}
