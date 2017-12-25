@@ -5,6 +5,7 @@ import TextBox from "./../textBox/textBox.jsx"
 import TextArea from "./../textArea/textArea.jsx"
 import RadioBoxGroup from "./../radioBoxGroup/radioBoxGroup.jsx"
 import CheckBoxGroup from "./../checkBoxGroup/checkBoxGroup.jsx"
+import { param } from "./../../util/regexp/regexp.ts"
 import "./form.scss"
 /**
  * @desc 表单
@@ -18,6 +19,9 @@ export default class Form extends Component {
     }
 
     componentDidMount() {
+        this.setState({
+            rootNode: findDOMNode(this)
+        })
     }
 
     render() {
@@ -25,55 +29,72 @@ export default class Form extends Component {
     }
 
     value() {
-        const rootNode = findDOMNode(this)
-        let result = {}
-        for (const item of rootNode.elements) {
-            switch (item.getAttribute("data-type")) {
-                case "select":
-                case "radio":
-                case "checkbox":
-                    const val = item.getAttribute("data-value")
-                    if (this.checkValidity(item, val)) {
-                        result[item.name] = val
-                        break;
-                    }
-                    return false
-                case "textarea":
-                case "input":
-                    if (this.checkValidity(item)) {
-                        result[item.name] = item.value
-                        break
-                    }
-                    return false
-                default:
-                    break;
-            }
-        }
-        return result;
+        return this.reportValidity().result;
     }
 
     /**
      * @desc 验证表单
+     * @param 节点
+     * @param 值
+     * @return boolean 是否通过验证
      */
     checkValidity(elem, val) {
-        if (elem.hasAttribute("required") && val === "") {
-            return false
+        if (elem.hasAttribute("required") && (val === "" || val === null)) {
+            return {
+                result: val,
+                report: "验证不通过, 此项为必填项",
+                valid: false
+            }
         } else if (elem.hasAttribute("pattern")) {
-            const pattern = elem.getAttribute("pattern")
-            debugger
+            const pattern = param(elem.getAttribute("pattern"))
             if (pattern && !new RegExp(pattern).test(val)) {
-                console.log(elem.getAttribute("patternmsg"))
-                return false
+                return {
+                    result: val,
+                    report: `验证不通过, ${elem.getAttribute("patternMessage") || "输入值非法" }`,
+                    valid: false
+                }
             }
         }
-        return true
+        return {
+            result: val,
+            report: "验证通过",
+            valid: true
+        }
     }
 
     /**
      * @desc 通知验证报告
+     * @return {report: 验证报告, valid 是否通过验证}
      */
     reportValidity() {
-
+        let reports = [], result = {}
+        for (const item of this.state.rootNode.elements) {
+            switch (item.getAttribute("data-type")) {
+                case "select":
+                case "radio":
+                case "checkbox":
+                case "textarea":
+                case "input":
+                    const val = item.getAttribute("data-value") !== undefined ?item.getAttribute("data-value") : item.value
+                    reports.push(this.checkValidity(item, val))
+                    result[item.name] = val
+                    break
+                default:
+                    break;
+            }
+        }
+        let passOrUnpass = true
+        for (const report of reports) {
+            if (!report.valid) {
+                passOrUnpass = false;
+                break;
+            }
+        }
+        return {
+            result: result,
+            reports: reports,
+            valid: passOrUnpass
+        }
     }
 
     /**

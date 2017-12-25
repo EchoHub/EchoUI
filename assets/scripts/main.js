@@ -197,14 +197,14 @@ class Container extends Component {
                             </div>
                             <h6>2.哪个水果更好吃？</h6>
                             <div>
-                                <RadioBoxGroup>
+                                <RadioBoxGroup required>
                                     <RadioBox name="radioBoxRef" value="apple">苹果</RadioBox>
                                     <RadioBox name="radioBoxRef" value="banana">香蕉</RadioBox>
                                 </RadioBoxGroup>
                             </div>
                             <h6>3.你喜欢哪些水果？</h6>
                             <div>
-                                <CheckBoxGroup>
+                                <CheckBoxGroup required>
                                     <CheckBox name="checkBoxRef" value="apple">苹果</CheckBox>
                                     <CheckBox name="checkBoxRef" value="banana">香蕉</CheckBox>
                                     <CheckBox name="checkBoxRef" value="pear">梨子</CheckBox>
@@ -217,7 +217,7 @@ class Container extends Component {
                             </div>
                             <h6>5.你为什么最喜欢吃？</h6>
                             <div>
-                                <TextArea name="textAreaRef" defaultValue="因为好吃啊!!!" required></TextArea>
+                                <TextArea name="textAreaRef" pattern={/^[A-Za-z0-9\u4e00-\u9fa5]{1,10}$/g} patternMessage="字符数不可大于10个" defaultValue="因为好吃啊!!!" required></TextArea>
                             </div>
                         </Form>
                         <Button className="e-ml-1rem" onClick={this.formHandleSubmit.bind(this)}>提交</Button>
