@@ -12,6 +12,8 @@ export default class Input extends Control {
         }
     }
     componentDidMount() {
+        console.log(this.props["formOwner"])
+        this.props["setInputs"] && this.props["setInputs"](this, this.props["formOwner"])
     }
     componentWillReceiveProps(nextProps) {
         nextProps && this.setState({
@@ -28,8 +30,13 @@ export default class Input extends Control {
         }
         for (const key in props) {
             const filterKey = /on[A-Z][a-z]*$/.test(key) ? key.toLocaleLowerCase() : key;
-            node[filterKey] !== undefined && (params[key] = props[key] instanceof Function ? event => props[key](event) :
-                filterKey === "className" ? `e-textbox ${props[key].replace(/e-textbox/g, "")}` : props[key]);
+            if (filterKey === "setInputs" || filterKey === "formOwner") {
+                continue;
+            }
+            node[filterKey] !== undefined && (params[key] = props[key] instanceof Function ?
+                event =>  props[key](event) :
+                    filterKey === "className" ?
+                        `e-textbox ${props[key].replace(/e-textbox/g, "")}` : props[key]);
 
             // 如果有eRef 则进行绑定
             key === "inputRef" && (params["ref"] = props["inputRef"])
@@ -43,24 +50,38 @@ export default class Input extends Control {
                 node = <textarea
                     {...this.state.nodeOwnProperty}
                     data-type="textarea"
-                    required={this.props.hasOwnProperty("required") ? true: false}
+                    required={this.props.hasOwnProperty("required") ? true : false}
                     pattern={this.props.pattern || null}
                     patternmsg={this.props.patternMessage || null}
-                    ></textarea>
+                ></textarea>
                 break;
             case "INPUT":
             default:
                 node = <input
                     {...this.state.nodeOwnProperty}
                     data-type={this.props.dataType || "input"}
-                    data-value={this.props.dataValue} 
-                    required={this.props.hasOwnProperty("required") ? true: false}
+                    data-value={this.props.dataValue}
+                    required={this.props.hasOwnProperty("required") ? true : false}
                     pattern={this.props.pattern || null}
                     patternmsg={this.props.patternMessage || null}
-                    />
+                />
                 break;
         }
         return node;
+    }
+
+    /**
+     * @desc 输入验证
+     */
+    checkValidity() {
+
+    }
+
+    /**
+     * @desc 报告错误
+     */
+    reportValidity() {
+
     }
 }
 /**

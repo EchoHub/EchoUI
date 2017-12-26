@@ -36,7 +36,7 @@ class Container extends Component {
 
     }
     changeHandle(event) {
-        // console.log("%c this is change" + event.target.value, "color: #2196f3")
+        console.log("%c this is change" + event.target.value, "color: #2196f3")
     }
     inputHandle(event) {
         // console.log("%c This is inputHandle event:" + event.target.value, "color: #ff4949")

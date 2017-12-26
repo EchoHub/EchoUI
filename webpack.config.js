@@ -3,7 +3,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require("clean-webpack-plugin");
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
 module.exports = {
-    // devtool: 'eval-source-map',
+    devtool: 'eval-source-map',
     entry: __dirname + "/assets/scripts/main.js",
     output: {
         path: __dirname + "/_build",

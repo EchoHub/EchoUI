@@ -14,18 +14,18 @@ export default class Form extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            current: 1
+            current: 1,
+            inputs: [],
+            children: this.props.children
         }
     }
 
     componentDidMount() {
-        this.setState({
-            rootNode: findDOMNode(this)
-        })
     }
 
     render() {
-        return <form className="e-form">{this.props.children}</form>
+        this.filterInputs(this.state.children)
+        return <form className="e-form">{this.state.children}</form>
     }
 
     value() {
@@ -33,90 +33,43 @@ export default class Form extends Component {
     }
 
     /**
-     * @desc 验证表单
-     * @param 节点
-     * @param 值
-     * @return boolean 是否通过验证
+     * @desc 设置form表单子集
+     * @param 子输入框
+     * @param 所属form组件
      */
-    checkValidity(elem, val) {
-        if (elem.hasAttribute("required") && (val === "" || val === null)) {
-            return {
-                result: val,
-                report: "验证不通过, 此项为必填项",
-                valid: false
-            }
-        } else if (elem.hasAttribute("pattern")) {
-            const pattern = param(elem.getAttribute("pattern"))
-            if (pattern && !new RegExp(pattern).test(val)) {
-                return {
-                    result: val,
-                    report: `验证不通过, ${elem.getAttribute("patternMessage") || "输入值非法" }`,
-                    valid: false
+    setInputs(child, formOwner) {
+        console.log(formOwner)
+        let inputs = this.state.inputs
+        inputs.push(child)
+        this.setState({
+            inputs: inputs
+        })
+        // console.log(this.state.inputs)
+    }
+
+    /**
+     * @desc 关联输入项和form的关联
+     */
+    filterInputs(children) {
+        debugger
+        const items = children instanceof Array ? children : [children];
+        for (const key in items) {
+            if (items[key].props && items[key].props.children) {
+                if (items[key].props.domType && items[key].props.domType === "input") {
+                    items[key].__proto__["setInputs"] = this.setInputs.bind(this)
+                    items[key].__proto__["formOwner"] = this
+                    return;
+                }
+                this.filterInputs(items[key].props.children)
+            } else {
+                if (items[key].props && items[key].props.domType && (items[key].props.domType === "input" || items[key].props.domType === "textarea")) {
+                    items[key].__proto__["setInputs"] = this.setInputs.bind(this)
+                    items[key].__proto__["formOwner"] = this
+                    return;
                 }
             }
         }
-        return {
-            result: val,
-            report: "验证通过",
-            valid: true
-        }
     }
-
-    /**
-     * @desc 通知验证报告
-     * @return {report: 验证报告, valid 是否通过验证}
-     */
-    reportValidity() {
-        let reports = [], result = {}
-        for (const item of this.state.rootNode.elements) {
-            switch (item.getAttribute("data-type")) {
-                case "select":
-                case "radio":
-                case "checkbox":
-                case "textarea":
-                case "input":
-                    const val = item.getAttribute("data-value") !== undefined ?item.getAttribute("data-value") : item.value
-                    reports.push(this.checkValidity(item, val))
-                    result[item.name] = val
-                    break
-                default:
-                    break;
-            }
-        }
-        let passOrUnpass = true
-        for (const report of reports) {
-            if (!report.valid) {
-                passOrUnpass = false;
-                break;
-            }
-        }
-        return {
-            result: result,
-            reports: reports,
-            valid: passOrUnpass
-        }
-    }
-
-    /**
-     * @desc 获取所有的输入域
-     */
-    // getInputs(children, inputs) {
-    //     for (const item of (children instanceof Array ? children : [children])) {
-    //         if (item.props && item.props.children) {
-    //             if (item.props.domType && item.props.domType === "input") {
-    //                 inputs.push(item)
-    //                 return;
-    //             }
-    //             inputs.concat(this.getInputs(item.props.children, inputs))
-    //         } else {
-    //             if (item.props && item.props.domType && (item.props.domType === "input" || item.props.domType === "textarea")) {
-    //                 inputs.push(item)
-    //                 return;
-    //             }
-    //         }
-    //     }
-    //     return inputs
-    // }
 }
 
 Form.defaultProps = {
