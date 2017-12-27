@@ -44,6 +44,7 @@ export default class CheckBoxGroup extends Component {
                     const className = d.props["className"] + " e-mh-4";
                     return <CheckBox
                         key={i}
+                        name={this.props.name}
                         {...d.props}
                         className={className}
                         setCheckBoxValueHandle={this.setCheckBoxValueHandle.bind(this)}

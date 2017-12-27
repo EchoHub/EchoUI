@@ -12,7 +12,6 @@ export default class Input extends Control {
         }
     }
     componentDidMount() {
-        console.log(this.props["formOwner"])
         this.props["setInputs"] && this.props["setInputs"](this, this.props["formOwner"])
     }
     componentWillReceiveProps(nextProps) {

@@ -47,6 +47,7 @@ export default class RadioBoxGroup extends Component {
                     const className = d.props["className"] + " e-mh-4";
                     return <RadioBox
                         key={i}
+                        name={this.props.name}
                         {...d.props}
                         className={className}
                         parentVNode={this}

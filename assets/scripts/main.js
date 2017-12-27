@@ -10,7 +10,7 @@ import TextBox from "./../../components/ui/textBox/textBox.jsx";
 import TextArea from "./../../components/ui/textArea/textArea.jsx";
 import Select from "./../../components/ui/select/select.jsx";
 import { ListItem } from "./../../components/ui/comboBox/comboBox.jsx";
-import Form from "./../../components/ui/form/form.jsx";
+import Form, { FormItem } from "./../../components/ui/form/form.jsx";
 import Button from "./../../components/ui/button/button.jsx";
 class Container extends Component {
     constructor(props) {
@@ -136,11 +136,11 @@ class Container extends Component {
                 <section className="e-section-container">
                     <h4>单选框</h4>
                     <div className="e-section-demo">
-                        <RadioBoxGroup ref="radioBoxRef">
-                            <RadioBox name="radioBoxRef" value="apple">苹果</RadioBox>
-                            <RadioBox name="radioBoxRef" value="banana">香蕉</RadioBox>
-                            <RadioBox name="radioBoxRef" value="pear">梨子</RadioBox>
-                            <RadioBox name="radioBoxRef" value="grape">葡萄</RadioBox>
+                        <RadioBoxGroup name="radioBoxRef" ref="radioBoxRef">
+                            <RadioBox value="apple">苹果</RadioBox>
+                            <RadioBox value="banana">香蕉</RadioBox>
+                            <RadioBox value="pear">梨子</RadioBox>
+                            <RadioBox value="grape">葡萄</RadioBox>
                         </RadioBoxGroup>
                         <Button className="e-ml-1rem" onClick={this.radioBoxHandleSubmit.bind(this)}>提交</Button>
                         <span className="e-ph-1rem">{this.state.radioBoxGroupRefValue}</span>
@@ -148,11 +148,11 @@ class Container extends Component {
                     </div>
                     <h4>多选框</h4>
                     <div className="e-section-demo">
-                        <CheckBoxGroup ref="checkBoxRef">
-                            <CheckBox name="checkBoxRef" value="apple">苹果</CheckBox>
-                            <CheckBox name="checkBoxRef" value="banana">香蕉</CheckBox>
-                            <CheckBox name="checkBoxRef" value="pear">梨子</CheckBox>
-                            <CheckBox name="checkBoxRef" value="grape">葡萄</CheckBox>
+                        <CheckBoxGroup name="checkBoxRef" ref="checkBoxRef">
+                            <CheckBox value="apple">苹果</CheckBox>
+                            <CheckBox value="banana">香蕉</CheckBox>
+                            <CheckBox value="pear">梨子</CheckBox>
+                            <CheckBox value="grape">葡萄</CheckBox>
                         </CheckBoxGroup>
                         <Button className="e-ml-1rem" onClick={this.checkBoxHandleSubmit.bind(this)}>提交</Button>
                         <span className="e-ph-1rem">{this.state.checkBoxGroupRefValue}</span>
@@ -189,36 +189,45 @@ class Container extends Component {
                     <div className="e-section-demo">
                         <Form ref="formRef">
                             <h6>1.你经常吃水果吗？</h6>
-                            <div>
-                                <Select name="selectRef" placeholder="请选择" required>
+                            <FormItem name="selectRef"
+                                placeholder="请选择"
+                                required>
+                                <Select>
                                     <ListItem value={1}>是</ListItem>
                                     <ListItem value={0}>否</ListItem>
                                 </Select>
-                            </div>
+                            </FormItem>
                             <h6>2.哪个水果更好吃？</h6>
-                            <div>
-                                <RadioBoxGroup required>
-                                    <RadioBox name="radioBoxRef" value="apple">苹果</RadioBox>
-                                    <RadioBox name="radioBoxRef" value="banana">香蕉</RadioBox>
+                            <FormItem name="radioBoxRef" required>
+                                <RadioBoxGroup>
+                                    <RadioBox value="apple">苹果</RadioBox>
+                                    <RadioBox value="banana">香蕉</RadioBox>
                                 </RadioBoxGroup>
-                            </div>
+                            </FormItem>
                             <h6>3.你喜欢哪些水果？</h6>
-                            <div>
-                                <CheckBoxGroup required>
-                                    <CheckBox name="checkBoxRef" value="apple">苹果</CheckBox>
-                                    <CheckBox name="checkBoxRef" value="banana">香蕉</CheckBox>
-                                    <CheckBox name="checkBoxRef" value="pear">梨子</CheckBox>
-                                    <CheckBox name="checkBoxRef" value="grape">葡萄</CheckBox>
+                            <FormItem name="checkBoxRef" required>
+                                <CheckBoxGroup>
+                                    <CheckBox value="apple">苹果</CheckBox>
+                                    <CheckBox value="banana">香蕉</CheckBox>
+                                    <CheckBox value="pear">梨子</CheckBox>
+                                    <CheckBox value="grape">葡萄</CheckBox>
                                 </CheckBoxGroup>
-                            </div>
+                            </FormItem>
                             <h6>4.你最喜欢吃的水果是什么？</h6>
-                            <div>
-                                <TextBox name="textBoxRef" pattern={/\S*/g} patternMessage="请输入非空字符" placeholder="请输入" required/>
-                            </div>
+                            <FormItem name="textBoxRef"
+                                pattern={/\S*/g}
+                                patternMessage="请输入非空字符"
+                                placeholder="请输入"
+                                required>
+                                <TextBox />
+                            </FormItem>
                             <h6>5.你为什么最喜欢吃？</h6>
-                            <div>
-                                <TextArea name="textAreaRef" pattern={/^[A-Za-z0-9\u4e00-\u9fa5]{1,10}$/g} patternMessage="字符数不可大于10个" defaultValue="因为好吃啊!!!" required></TextArea>
-                            </div>
+                            <FormItem name="textAreaRef"
+                                pattern={/^[A-Za-z0-9\u4e00-\u9fa5]{1,10}$/g}
+                                patternMessage="字符数不可大于10个"
+                                required>
+                                <TextArea defaultValue="因为好吃啊!!!"></TextArea>
+                            </FormItem>
                         </Form>
                         <Button className="e-ml-1rem" onClick={this.formHandleSubmit.bind(this)}>提交</Button>
                         <span className="e-ph-1rem">{this.state.formRefValue}</span>

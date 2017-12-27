@@ -10,5 +10,6 @@ export default class Select extends ComboBox {
     }
 }
 Select.defaultProps = {
-    dataType: "select"
+    dataType: "select",
+    domType: "input",
 }
