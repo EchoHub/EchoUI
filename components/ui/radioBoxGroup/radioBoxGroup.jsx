@@ -12,30 +12,28 @@ export default class RadioBoxGroup extends Component {
         }
     }
 
-    value() {
-        const nodes = this.refs["radioBoxGroup"].querySelectorAll("input[type=radio]:checked")
-        if (!nodes.length) return ""
-        let resultArr = []
-        for (const item of nodes) {
-            resultArr.push(item.value)
+    get value() {
+        return [this.state.currentValue];
+    }
+
+    set value(v) {
+        const nodes = this.refs["radioBoxGroup"].querySelectorAll("input[type=radio]");
+        for(const item of v) {
+            for(const key in nodes) {
+                nodes[key].value === item && (this.setState({
+                    currentNodeNumber: key,
+                    currentValue: item
+                }));
+            }
         }
-        return resultArr
     }
 
     /**
-     * @desc 设置当前选中的第几个
+     * @desc 设置radiobox 当前节点,和当前值
      */
-    setCurrentNodeNumber(currentNodeNumber) {
+    setRadioBoxValueHandle(currentNodeNumber, value) {
         this.setState({
-            currentNodeNumber: currentNodeNumber
-        })
-    }
-
-    /**
-     * @desc 设置radiobox dataValue
-     */
-    setRadioBoxValueHandle(value) {
-        this.setState({
+            currentNodeNumber: currentNodeNumber,
             currentValue: value
         })
     }
@@ -52,9 +50,9 @@ export default class RadioBoxGroup extends Component {
                         className={className}
                         parentVNode={this}
                         nodeNumber={i}
-                        isCheck={this.state.currentNodeNumber === i ? true : false}
-                        setRadioBoxValueHandle={this.setRadioBoxValueHandle.bind(this)}
+                        isCheck={+this.state.currentNodeNumber === i ? true : false}
                         dataValue={this.state.currentValue}
+                        setRadioBoxValueHandle={this.setRadioBoxValueHandle.bind(this)}
                     >{d.props.children}</RadioBox>
                 }) : null
             }

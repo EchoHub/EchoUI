@@ -25,6 +25,15 @@ export default class CheckBox extends Component {
         }
         return params
     }
+    componentWillReceiveProps(nextProps) {
+        if(nextProps) {
+            for(const v of nextProps.dataValue) {
+                v === nextProps.value && this.setState({
+                    isCheck: true
+                });
+            }
+        }
+    }
     /**
      * @desc checkbox change事件
      * @param event event
@@ -49,7 +58,7 @@ export default class CheckBox extends Component {
                 checked={this.state.isCheck}
                 inputRef={this.props["name"]}
                 dataType={this.props.dataType}
-                dataValue={this.props.dataValue}
+                // dataValue={this.props.dataValue}
             />
             <span className="e-checkbox-content">{this.props.children}</span>
         </div>
@@ -58,8 +67,14 @@ export default class CheckBox extends Component {
     /**
      * @desc 获取checkbox值
      */
-    value() {
-        return this.props.dataValue
+    // get value() {
+    //     return this.props.dataValue
+    // }
+
+    set checked(v) {
+        v && this.setState({
+            isCheck: v
+        })
     }
 }
 CheckBox.defaultProps = {

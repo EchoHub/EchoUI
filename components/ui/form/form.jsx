@@ -15,7 +15,9 @@ export default class Form extends Component {
         super(props)
     }
     componentDidMount() {
-        console.log(this.refs)
+    }
+    componentWillReceiveProps(nextProps) {
+        nextProps.value && (this.value = nextProps.value)
     }
     render() {
         let nodes = [];
@@ -25,7 +27,7 @@ export default class Form extends Component {
             switch ((item.type.name || item.type).toUpperCase()) {
                 // formItem
                 case "FORMITEM":
-                    nodes.push(<FormItem ref={props.name} {...props}>{vNodes}</FormItem>);
+                    nodes.push(<FormItem key={props.name} ref={props.name} {...props}>{vNodes}</FormItem>);
                     break;
                 default:
                     nodes.push(item);
@@ -34,13 +36,26 @@ export default class Form extends Component {
         }
         return <form className="e-form">{nodes}</form>
     }
-
-    value() {
+    /**
+     * @desc 取值
+     * @param 传入参数
+     */
+    get value() {
         let result = {}
         for(const key in this.refs) {
-            result = Object.assign({}, result, this.refs[key].value())
+            result = Object.assign({}, result, this.refs[key].value)
         }
         return result
+    }
+    /**
+     * @desc 赋值
+     * @param 传入参数
+     */
+    set value(val) {
+        if(!Object.keys(val).length) return;
+        for(const key in this.refs) {
+            this.refs[key].value = val[this.refs[key].props.name]
+        }
     }
 }
 
@@ -59,19 +74,19 @@ export class FormItem extends Component {
             this.newProps = Object.assign({}, formFilterProps(this.props), formFilterProps(item.props))
             switch ((item.type.name || item.type).toUpperCase()) {
                 case "SELECT":
-                    nodes.push(<Select ref="select" {...this.newProps}>{vNodes}</Select>);
+                    nodes.push(<Select key={this.props.name} ref="select" {...this.newProps}>{vNodes}</Select>);
                     break;
                 case "TEXTBOX":
-                    nodes.push(<TextBox ref="textbox" {...this.newProps}></TextBox>);
+                    nodes.push(<TextBox key={this.props.name} ref="textbox" {...this.newProps}></TextBox>);
                     break;
                 case "RADIOBOXGROUP":
-                    nodes.push(<RadioBoxGroup ref="radioBoxGroup" {...this.newProps}>{vNodes}</RadioBoxGroup>);
+                    nodes.push(<RadioBoxGroup key={this.props.name} ref="radioBoxGroup" {...this.newProps}>{vNodes}</RadioBoxGroup>);
                     break;
                 case "CHECKBOXGROUP":
-                    nodes.push(<CheckBoxGroup ref="radioBoxGroup" {...this.newProps}>{vNodes}</CheckBoxGroup>);
+                    nodes.push(<CheckBoxGroup key={this.props.name} ref="radioBoxGroup" {...this.newProps}>{vNodes}</CheckBoxGroup>);
                     break;
                 case "TEXTAREA":
-                    nodes.push(<TextArea ref="textArea" {...this.newProps}></TextArea>);
+                    nodes.push(<TextArea key={this.props.name} ref="textArea" {...this.newProps}></TextArea>);
                     break;
                 default:
                     nodes.push(item);
@@ -81,15 +96,28 @@ export class FormItem extends Component {
         return <div>{nodes}</div>
     }
 
-    value() {
+    get value() {
         if(!this.refs) {
             throw "not form input"
         }
         let result = {}
         for(const key in this.refs) {
-            result[this.newProps.name] = this.refs[key].value()
+            result[this.newProps.name] = this.refs[key].value
         }
         return result || null
+    }
+
+    /**
+     * @desc 赋值
+     * @param 传入参数
+     */
+    set value(v) {
+        if(!this.refs || v === undefined) {
+            throw "illegal syntax"
+        }
+        for(const key in this.refs) {
+            this.refs[key].value = v
+        }
     }
 }
 

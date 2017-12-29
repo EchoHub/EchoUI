@@ -7,13 +7,18 @@ import "./textBox.scss"
 export default class TextBox extends Component {
     constructor(props) {
         super(props)
+        this.state = {
+            defaultValue: ""  // 默认值
+        }
     }
 
-    value() {
-        const val = this.refs[this.props["name"]].refs[this.props["name"]].value
+    get value() {
+        const val = this.refs[this.props["name"]].value
         return val
     }
-
+    set value(v) {
+        this.refs[this.props["name"]].value = v
+    }
     render() {
         return <Input
             ref={this.props["name"]}

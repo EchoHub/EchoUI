@@ -7,16 +7,22 @@ import "./textArea.scss"
 export default class TextArea extends Component {
     constructor(props) {
         super(props)
+        this.state = {
+            defaultValue: ""
+        }
     }
 
     /**
      * @desc 获取节点value
      */
-    value() {
-        const val = this.refs[this.props["name"]].refs[this.props["name"]].value
+    get value() {
+        const val = this.refs[this.props["name"]].value
         return val
     }
 
+    set value(v) {
+        this.refs[this.props["name"]].value = v
+    }
     render() {
         return <Input
             ref={this.props["name"]}

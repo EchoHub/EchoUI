@@ -32,6 +32,7 @@ export default class ComboBox extends Component {
             rootNodeClassName: rootNodeClassName
         })
     }
+    componentWillReceiveProps(nextProps) { }
     render() {
         // 过滤children特殊字段
         let newProps = {
@@ -46,7 +47,7 @@ export default class ComboBox extends Component {
                 {...newProps}
                 type="text"
                 dataType={this.props.dataType}
-                dataValue={this.state.currentValue} />
+                dataValue={this.state.currentNodeContent} />
             <span className="e-combobox-button"
                 onClick={event => this.toggleListHandle(event)}>
                 <i className="icon iconfont icon-shurukuangxialajiantou"></i>
@@ -57,7 +58,7 @@ export default class ComboBox extends Component {
                     {
                         this.props.children && this.props.children.length ? this.props.children.map((d, i) => {
                             return <ListItem key={i} nodeIndex={i}
-                                isSelected={i === this.state.curListItemKey ? true : false}
+                                isSelected={+this.state.currentValue == d.props.value ? true : false}
                                 updateComboxBoxStatusHandle={this.updateComboxBoxStatusHandle.bind(this)}
                                 value={d.props.value}
                                 {...d.state}>{d.props.children}</ListItem>
@@ -71,15 +72,18 @@ export default class ComboBox extends Component {
     /**
      * @desc 获取节点ListItem的value
      */
-    value() {
-        // const val = this.refs[this.props["name"]].refs[this.props["name"]].value
-        // return value
+    get value() {
         return this.state.currentValue
+    }
+    set value(v) {
+        this.setState({
+            currentValue: v
+        })
     }
     /**
      * @desc 获取节点nodeContent 节点内容 即ComboBox中input内容
      */
-    text() {
+    get text() {
         return this.state.currentNodeContent
     }
     /**
@@ -108,7 +112,7 @@ export class ListItem extends Component {
         }
     }
     componentWillReceiveProps(nextProps) {
-        this.setState({
+        nextProps && this.setState({
             className: nextProps.isSelected ? "e-listitem selected" : "e-listitem"
         })
     }

@@ -16,13 +16,13 @@ class Container extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            date: new Date()
+            date: new Date(),
+            formValue: {}
         }
 
     }
     componentDidMount() {
         console.log("this is componentDidMount");
-        console.log(this.props.children);
     }
 
     componentWillUnmount() {
@@ -36,7 +36,7 @@ class Container extends Component {
 
     }
     changeHandle(event) {
-        console.log("%c this is change" + event.target.value, "color: #2196f3")
+        // console.log("%c this is change" + event.target.value, "color: #2196f3")
     }
     inputHandle(event) {
         // console.log("%c This is inputHandle event:" + event.target.value, "color: #ff4949")
@@ -54,7 +54,7 @@ class Container extends Component {
      * @desc 单选框
      */
     radioBoxHandleSubmit() {
-        const val = this.refs.radioBoxRef.value()
+        const val = this.refs.radioBoxRef.value
         this.setState({
             radioBoxGroupRefValue: val
         })
@@ -63,7 +63,7 @@ class Container extends Component {
      * @desc 多选框
      */
     checkBoxHandleSubmit() {
-        const val = this.refs.checkBoxRef.value()
+        const val = this.refs.checkBoxRef.value
         this.setState({
             checkBoxGroupRefValue: val ? val.join(",") : ""
         })
@@ -72,7 +72,7 @@ class Container extends Component {
      * @desc 文本框提交
      */
     textBoxHandleSubmit() {
-        const val = this.refs.textBoxRef.value()
+        const val = this.refs.textBoxRef.value
         this.setState({
             textBoxRefValue: val
         })
@@ -81,7 +81,7 @@ class Container extends Component {
      * @desc 文本域提交
      */
     textAreaHandleSubmit() {
-        const val = this.refs.textAreaRef.value()
+        const val = this.refs.textAreaRef.value
         this.setState({
             textAreaRefValue: val
         })
@@ -90,8 +90,8 @@ class Container extends Component {
      * @desc 下拉菜单选项
      */
     selectHandleSubmit() {
-        const val = this.refs.selectRef.value()
-        const text = this.refs.selectRef.text()
+        const val = this.refs.selectRef.value
+        const text = this.refs.selectRef.text
         this.setState({
             selectRefValue: `${text}: ${val}`
         })
@@ -100,11 +100,25 @@ class Container extends Component {
      * @desc 表单提交
      */
     formHandleSubmit() {
-        const val = this.refs.formRef.value()
+        const val = this.refs.formRef.value;
         console.log(val)
         // this.setState({
         //     formRefValue: val
         // })
+    }
+    /**
+     * @desc 表单赋值
+     */
+    setFormValue() {
+        this.setState({
+            formValue: {
+                selectRef: 1,
+                radioBoxRef: ["banana"],
+                checkBoxRef: ["banana", "pear"],
+                textBoxRef: "你猜～～～",
+                textAreaRef: "好吃啊～～～"
+            }
+        })
     }
     render() {
         return (
@@ -187,7 +201,7 @@ class Container extends Component {
                     </div>
                     <h4>表单</h4>
                     <div className="e-section-demo">
-                        <Form ref="formRef">
+                        <Form ref="formRef" value={this.state.formValue}>
                             <h6>1.你经常吃水果吗？</h6>
                             <FormItem name="selectRef"
                                 placeholder="请选择"
@@ -225,10 +239,12 @@ class Container extends Component {
                             <FormItem name="textAreaRef"
                                 pattern={/^[A-Za-z0-9\u4e00-\u9fa5]{1,10}$/g}
                                 patternMessage="字符数不可大于10个"
+                                defaultValue="因为好吃啊!!!"
                                 required>
-                                <TextArea defaultValue="因为好吃啊!!!"></TextArea>
+                                <TextArea></TextArea>
                             </FormItem>
                         </Form>
+                        <Button className="e-ml-1rem" onClick={this.setFormValue.bind(this)}>赋值</Button>
                         <Button className="e-ml-1rem" onClick={this.formHandleSubmit.bind(this)}>提交</Button>
                         <span className="e-ph-1rem">{this.state.formRefValue}</span>
                     </div>

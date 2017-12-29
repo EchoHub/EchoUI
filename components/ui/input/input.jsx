@@ -12,7 +12,6 @@ export default class Input extends Control {
         }
     }
     componentDidMount() {
-        this.props["setInputs"] && this.props["setInputs"](this, this.props["formOwner"])
     }
     componentWillReceiveProps(nextProps) {
         nextProps && this.setState({
@@ -29,13 +28,10 @@ export default class Input extends Control {
         }
         for (const key in props) {
             const filterKey = /on[A-Z][a-z]*$/.test(key) ? key.toLocaleLowerCase() : key;
-            if (filterKey === "setInputs" || filterKey === "formOwner") {
-                continue;
-            }
             node[filterKey] !== undefined && (params[key] = props[key] instanceof Function ?
-                event =>  props[key](event) :
-                    filterKey === "className" ?
-                        `e-textbox ${props[key].replace(/e-textbox/g, "")}` : props[key]);
+                event => props[key](event) :
+                filterKey === "className" ?
+                    `e-textbox ${props[key].replace(/e-textbox/g, "")}` : props[key]);
 
             // 如果有eRef 则进行绑定
             key === "inputRef" && (params["ref"] = props["inputRef"])
@@ -48,7 +44,6 @@ export default class Input extends Control {
             case "TEXTAREA":
                 node = <textarea
                     {...this.state.nodeOwnProperty}
-                    data-type="textarea"
                     required={this.props.hasOwnProperty("required") ? true : false}
                     pattern={this.props.pattern || null}
                     patternmsg={this.props.patternMessage || null}
@@ -58,8 +53,6 @@ export default class Input extends Control {
             default:
                 node = <input
                     {...this.state.nodeOwnProperty}
-                    data-type={this.props.dataType || "input"}
-                    data-value={this.props.dataValue}
                     required={this.props.hasOwnProperty("required") ? true : false}
                     pattern={this.props.pattern || null}
                     patternmsg={this.props.patternMessage || null}
@@ -69,6 +62,13 @@ export default class Input extends Control {
         return node;
     }
 
+    get value() {
+        return this.refs[this.props["name"]].value
+    }
+
+    set value(v) {
+        this.refs[this.props["name"]].value = v;
+    }
     /**
      * @desc 输入验证
      */

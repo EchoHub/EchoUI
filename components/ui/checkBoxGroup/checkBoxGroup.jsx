@@ -12,16 +12,15 @@ export default class CheckBoxGroup extends Component {
         }
     }
 
-    value() {
-        const nodes = this.refs["checkBoxGroup"].querySelectorAll("input[type=checkbox]:checked")
-        if (!nodes.length) return ""
-        let resultArr = []
-        for (const item of nodes) {
-            resultArr.push(item.value)
-        }
-        return resultArr
+    get value() {
+        return this.state.currentValue
     }
 
+    set value(v) {
+        this.setState({
+            currentValue: v
+        })
+    }
     /**
      * @desc 设置checkbox dataValue
      */
@@ -42,13 +41,14 @@ export default class CheckBoxGroup extends Component {
             {
                 this.props.children && this.props.children.length ? this.props.children.map((d, i) => {
                     const className = d.props["className"] + " e-mh-4";
+                    let isChecked = false;
                     return <CheckBox
                         key={i}
                         name={this.props.name}
                         {...d.props}
                         className={className}
                         setCheckBoxValueHandle={this.setCheckBoxValueHandle.bind(this)}
-                        dataValue={this.state.currentValue}
+                        dataValue={this.state.currentValue} // 当前多选组 默认选中项 array
                     >{d.props.children}</CheckBox>
                 }) : null
             }

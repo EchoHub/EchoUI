@@ -8,7 +8,8 @@ export default class RadioBox extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            nodeOwnProperty: this.filterPropsHandle(props)
+            nodeOwnProperty: this.filterPropsHandle(props),
+            isCheck: false
         };
     }
     filterPropsHandle(props) {
@@ -24,33 +25,36 @@ export default class RadioBox extends Component {
         }
         return params
     }
+    componentWillReceiveProps(nextProps) {
+        nextProps && (this.setState({
+            nodeOwnProperty: this.filterPropsHandle(nextProps),
+            isCheck: nextProps.isCheck
+        }))
+    }
     /**
      * @desc radiobox change事件
      * @param event event
      */
     changeRadioBoxHandle(event) {
-        this.props.parentVNode.setCurrentNodeNumber(this.props.nodeNumber)
         const nodeRef = this.refs[this.props["name"]].refs[this.props["name"]]
-        // this.setState({
-        //     checkValue: nodeRef.value
-        // })
-        this.props.setRadioBoxValueHandle(nodeRef.value)
+        this.props.setRadioBoxValueHandle(this.props.nodeNumber, nodeRef.value)
     }
     render() {
+        const props = this.props
+        const isCheck = this.state.isCheck
         return <div className={`e-radiobox 
-            ${this.props.className.replace(/e-radiobox/g, "")}
-            ${this.props.isCheck ? "active" : ""}`}>
+            ${props.className.replace(/e-radiobox/g, "")}
+            ${isCheck ? "active" : ""}`}>
             <span className="e-radiobox-inner"
                 onClick={this.changeRadioBoxHandle.bind(this)}></span>
-                <Input
-                    ref={this.props["name"]}
-                    {...this.state.nodeOwnProperty}
-                    checked={this.props.isCheck}
-                    inputRef={this.props["name"]}
-                    dataType={this.props.dataType}
-                    dataValue={this.props.dataValue}
-                />
-                <span className="e-radiobox-content">{this.props.children}
+            <Input
+                ref={this.props["name"]}
+                {...this.state.nodeOwnProperty}
+                inputRef={props["name"]}
+                dataType={props.dataType}
+                dataValue={props.dataValue}
+            />
+            <span className="e-radiobox-content">{this.props.children}
             </span>
         </div>
     }
@@ -58,7 +62,7 @@ export default class RadioBox extends Component {
     /**
      * @desc 获取radiobox值
      */
-    value() {
+    get value() {
         return this.props.dataValue
     }
 }
