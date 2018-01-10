@@ -72,15 +72,56 @@ export default class Input extends Control {
     /**
      * @desc 输入验证
      */
+    errorInfo
     checkValidity() {
-
+        let valid = true;
+        const value = this.refs[this.props["name"]].value
+        for (const key in this.props) {
+            switch (key) {
+                case "required": // 必填校验
+                    valid = value !== "" ? true : false;
+                    !this.errorType && !valid && (this.errorType = 1);
+                    break;
+                case "pattern": // 正则校验
+                    valid = eval(this.props[key]).test(value) ? true : false;
+                    !this.errorType && !valid && (this.errorType = 2);
+                    break;
+                default:
+                    break;
+            }
+        }
+        return valid
     }
 
     /**
      * @desc 报告错误
+     * @param vNode 节点
+     * @param errorType 报错类型
      */
-    reportValidity() {
-
+    get reportValidity() {
+        return {
+            vNode: this,
+            report: () => {
+                let errorInfo
+                switch (this.errorType) {
+                    case 1:
+                        // 必填报错;
+                        errorInfo = "此项为必填项";
+                        break;
+                    case 2:
+                        // 正则报错
+                        errorInfo = this.props.patternMessage;
+                        break;
+                    default:
+                        errorInfo = "无效输入值";
+                        break;
+                }
+                return {
+                    errorInfo: errorInfo
+                }
+            },
+            valid: this.checkValidity()
+        }
     }
 }
 /**

@@ -46,8 +46,7 @@ export default class ComboBox extends Component {
             <Input
                 {...newProps}
                 type="text"
-                dataType={this.props.dataType}
-                dataValue={this.state.currentNodeContent} />
+                dataType={this.props.dataType}/>
             <span className="e-combobox-button"
                 onClick={event => this.toggleListHandle(event)}>
                 <i className="icon iconfont icon-shurukuangxialajiantou"></i>
@@ -57,8 +56,9 @@ export default class ComboBox extends Component {
                 <ul className="e-combobox-ul">
                     {
                         this.props.children && this.props.children.length ? this.props.children.map((d, i) => {
+                            const isSelected = this.state.currentValue === d.props.value ? true : false;
                             return <ListItem key={i} nodeIndex={i}
-                                isSelected={+this.state.currentValue == d.props.value ? true : false}
+                                isSelected={isSelected}
                                 updateComboxBoxStatusHandle={this.updateComboxBoxStatusHandle.bind(this)}
                                 value={d.props.value}
                                 {...d.state}>{d.props.children}</ListItem>
@@ -76,8 +76,15 @@ export default class ComboBox extends Component {
         return this.state.currentValue
     }
     set value(v) {
+        let currentNodeContent = ""
+        if(this.props.children && this.props.children.length) {
+            for(const item of this.props.children) {
+                item.props.value === v && (currentNodeContent = item.props.children)
+            }
+        }
         this.setState({
-            currentValue: v
+            currentValue: v,
+            currentNodeContent: currentNodeContent
         })
     }
     /**
@@ -86,6 +93,62 @@ export default class ComboBox extends Component {
     get text() {
         return this.state.currentNodeContent
     }
+
+    /**
+     * @desc 输入验证
+     */
+    errorType
+    checkValidity() {
+        let valid = true;
+        const value = this.state.currentValue
+        for (const key in this.props) {
+            switch (key) {
+                case "required": // 必填校验
+                    valid = value !== "" ? true : false;
+                    !this.errorType && !valid && (this.errorType = 1);
+                    break;
+                case "pattern": // 正则校验
+                    valid = eval(this.props[key]).test(value) ? true : false;
+                    !this.errorType && valid && (this.errorType = 2);
+                    break;
+                default:
+                    break;
+            }
+        }
+        return valid
+    }
+
+    /**
+     * @desc 报告错误
+     * @param vNode 节点
+     * @param errorType 报错类型
+     */
+    get reportValidity() {
+        return {
+            vNode: this,
+            report: () => {
+                let errorInfo
+                switch (this.errorType) {
+                    case 1:
+                        // 必填报错;
+                        errorInfo = "此项为必填项";
+                        break;
+                    case 2:
+                        // 正则报错
+                        errorInfo = this.props.patternMessage;
+                        break;
+                    default:
+                        errorInfo = "无效输入值";
+                        break;
+                }
+                return {
+                    errorInfo: errorInfo
+                }
+            },
+            valid: this.checkValidity()
+        }
+    }
+
     /**
      * @desc 下拉框开关
      */

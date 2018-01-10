@@ -5,10 +5,11 @@ import TextBox from "./../textBox/textBox.jsx"
 import TextArea from "./../textArea/textArea.jsx"
 import RadioBoxGroup from "./../radioBoxGroup/radioBoxGroup.jsx"
 import CheckBoxGroup from "./../checkBoxGroup/checkBoxGroup.jsx"
+import ToolTip from "./../toolTip/toolTip.jsx"
 import { param } from "./../../util/regexp/regexp.ts"
 import "./form.scss"
 /**
- * @desc 表单,结合FormItem使用
+ * @desc 表单,结合FormItem使用，Form直属子节点为FormItem 暂不支持在FormItem外包装其他节点
  */
 export default class Form extends Component {
     constructor(props) {
@@ -27,7 +28,13 @@ export default class Form extends Component {
             switch ((item.type.name || item.type).toUpperCase()) {
                 // formItem
                 case "FORMITEM":
-                    nodes.push(<FormItem key={props.name} ref={props.name} {...props}>{vNodes}</FormItem>);
+                    nodes.push(<FormItem
+                        key={props.name}
+                        ref={props.name}
+                        {...props}
+                    >
+                        {vNodes}
+                    </FormItem>);
                     break;
                 default:
                     nodes.push(item);
@@ -42,7 +49,7 @@ export default class Form extends Component {
      */
     get value() {
         let result = {}
-        for(const key in this.refs) {
+        for (const key in this.refs) {
             result = Object.assign({}, result, this.refs[key].value)
         }
         return result
@@ -52,19 +59,44 @@ export default class Form extends Component {
      * @param 传入参数
      */
     set value(val) {
-        if(!Object.keys(val).length) return;
-        for(const key in this.refs) {
+        if (!Object.keys(val).length) return;
+        for (const key in this.refs) {
             this.refs[key].value = val[this.refs[key].props.name]
         }
+    }
+
+    /**
+     * @desc 验证报告
+     */
+    get reportValidity() {
+        let reports = [];
+        let valid = true;
+        for (const key in this.refs) {
+            if (valid && !this.refs[key].reportValidity.valid) {
+                valid = false;
+            }
+            reports.push(this.refs[key].reportValidity);
+        }
+        return {
+            reports: reports,
+            valid: valid,
+            report: () => {
+                console.log(valid)
+            }
+        };
     }
 }
 
 /**
- * @desc 表单输入项, 结合Form使用
+ * @desc 表单输入项, 结合Form使用 一般和输入框捆绑使用，FormItem中不存在其他节点，即只有输入框
  */
 export class FormItem extends Component {
     constructor(props) {
         super(props)
+        this.state = {
+            showToolTip: false,
+            tooTipContent: ""
+        }
     }
     componentDidMount() { }
     render() {
@@ -93,15 +125,17 @@ export class FormItem extends Component {
                     break;
             }
         }
-        return <div>{nodes}</div>
+        return <div className="e-formitem">{nodes}{
+            this.state.showToolTip ? <ToolTip parentTarget={this}>{this.state.tooTipContent}</ToolTip> : ""
+        }</div>
     }
 
     get value() {
-        if(!this.refs) {
+        if (!this.refs) {
             throw "not form input"
         }
         let result = {}
-        for(const key in this.refs) {
+        for (const key in this.refs) {
             result[this.newProps.name] = this.refs[key].value
         }
         return result || null
@@ -112,13 +146,36 @@ export class FormItem extends Component {
      * @param 传入参数
      */
     set value(v) {
-        if(!this.refs || v === undefined) {
+        if (!this.refs || v === undefined) {
             throw "illegal syntax"
         }
-        for(const key in this.refs) {
-            this.refs[key].value = v
+        for (const key in this.refs) {
+            this.refs[key].value = v;
         }
     }
+    checkValidity(reportValidity) {
+        if (!reportValidity.valid) {
+            this.setState({
+                showToolTip: true,
+                tooTipContent: reportValidity.report().errorInfo
+            })
+        }
+    }
+    /**
+     * @desc 验证报告
+     */
+    get reportValidity() {
+        let reports = [];
+        for (const key in this.refs) {
+            this.checkValidity(this.refs[key].reportValidity)
+            reports.push(this.refs[key].reportValidity);
+        }
+        return {
+            vNode: this,
+            reports: reports
+        };
+    }
+
 }
 
 /**

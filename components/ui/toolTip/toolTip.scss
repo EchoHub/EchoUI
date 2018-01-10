@@ -1,0 +1,12 @@
+@import "./../../common";
+.e-tooltip{
+    background: #333333;
+    color: #fff;
+    font-size: .6rem;
+    display: inline-block;
+    padding: .1rem .5rem;
+    border-radius: 2px;
+    position: fixed;
+    z-index: 999;
+    opacity: .9;
+}

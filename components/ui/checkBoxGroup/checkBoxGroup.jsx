@@ -54,6 +54,20 @@ export default class CheckBoxGroup extends Component {
             }
         </div>
     }
+
+    /**
+     * @desc 报告错误
+     * @param vNode 节点
+     * @param errorType 报错类型
+     */
+    get reportValidity() {
+        return {
+            vNode: this,
+            report: () => {
+            },
+            valid: true
+        }
+    }
 }
 CheckBoxGroup.defaultProps = {
     domType: "input",

@@ -25,6 +25,15 @@ export default class TextBox extends Component {
             {...this.props}
             inputRef={this.props["name"]} />
     }
+
+    /**
+     * @desc 报告错误
+     * @param vNode 节点
+     * @param errorType 报错类型
+     */
+    get reportValidity() {
+        return this.refs[this.props["name"]].reportValidity
+    }
 }
 TextBox.defaultProps = {
     domType: "input",
