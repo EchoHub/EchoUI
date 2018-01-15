@@ -1,6 +1,6 @@
-
 import React, { Component } from "react"
 import Control from "./../control/control.jsx"
+import "./input.scss"
 /**
  * @desc 表示一个输入框基类
  */
@@ -10,13 +10,29 @@ export default class Input extends Control {
         this.state = {
             nodeOwnProperty: this.filterPropsHandle(props)
         }
+        /**
+        * @desc 节点状态枚举 0:默认 1: 成功 2: 错误
+        */
+        this.nodeStateClassMap = {
+            0: "",
+            1: "e-textbox-success",
+            2: "e-textbox-error"
+        }
     }
     componentDidMount() {
     }
     componentWillReceiveProps(nextProps) {
-        nextProps && this.setState({
-            nodeOwnProperty: this.filterPropsHandle(nextProps)
-        })
+        if (nextProps) {
+            let _className
+            if (nextProps.nodeState !== undefined) {
+                _className = nextProps["className"] ?
+                    `${nextProps["className"]} ${this.nodeStateClassMap[nextProps.nodeState]}` :
+                    " " + this.nodeStateClassMap[nextProps.nodeState]
+            }
+            this.setState({
+                nodeOwnProperty: Object.assign({}, this.filterPropsHandle(nextProps), _className ? { className: _className } : {})
+            });
+        }
     }
     /**
      * @desc 过滤属性 对创建节点进行属性、事件等绑定
@@ -28,10 +44,25 @@ export default class Input extends Control {
         }
         for (const key in props) {
             const filterKey = /on[A-Z][a-z]*$/.test(key) ? key.toLocaleLowerCase() : key;
-            node[filterKey] !== undefined && (params[key] = props[key] instanceof Function ?
-                event => props[key](event) :
-                filterKey === "className" ?
-                    `e-textbox ${props[key].replace(/e-textbox/g, "")}` : props[key]);
+            // node[filterKey] !== undefined && (params[key] = props[key] instanceof Function ?
+            //     event => props[key](event) :
+            //     filterKey === "className" ?
+            //         `e-textbox ${props[key].replace(/e-textbox/g, "")}` : props[key]);
+
+            // 过滤特殊字段
+            if (node[filterKey] !== undefined) {
+                switch (filterKey) {
+                    case "pattern":
+                    case "patternMessage":
+                        break;
+                    case "className":
+                        params[key] = `e-textbox ${props[key].replace(/e-textbox/g, "")}`;
+                        break;
+                    default:
+                        params[key] = props[key] instanceof Function ? event => props[key](event) : props[key];
+                        break;
+                }
+            }
 
             // 如果有eRef 则进行绑定
             key === "inputRef" && (params["ref"] = props["inputRef"])
@@ -45,8 +76,6 @@ export default class Input extends Control {
                 node = <textarea
                     {...this.state.nodeOwnProperty}
                     required={this.props.hasOwnProperty("required") ? true : false}
-                    pattern={this.props.pattern || null}
-                    patternmsg={this.props.patternMessage || null}
                 ></textarea>
                 break;
             case "INPUT":
@@ -54,8 +83,6 @@ export default class Input extends Control {
                 node = <input
                     {...this.state.nodeOwnProperty}
                     required={this.props.hasOwnProperty("required") ? true : false}
-                    pattern={this.props.pattern || null}
-                    patternmsg={this.props.patternMessage || null}
                 />
                 break;
         }
@@ -74,17 +101,19 @@ export default class Input extends Control {
      */
     errorInfo
     checkValidity() {
-        let valid = true;
+        let valid = true, hasSetValid = false; // hasSetValid是否进行过校验
         const value = this.refs[this.props["name"]].value
         for (const key in this.props) {
             switch (key) {
                 case "required": // 必填校验
-                    valid = value !== "" ? true : false;
-                    !this.errorType && !valid && (this.errorType = 1);
+                    valid = value !== "" ? hasSetValid ? valid : true : false;
+                    ((!this.errorType && !valid) || (hasSetValid && value === "")) && (this.errorType = 1);
                     break;
                 case "pattern": // 正则校验
-                    valid = eval(this.props[key]).test(value) ? true : false;
-                    !this.errorType && !valid && (this.errorType = 2);
+                    const regParts = this.props.pattern.toString().match("^/(.*?)/([gimy]*$)")
+                    valid = new RegExp(regParts[1], regParts[2]).test(value) ? true : false;
+                    hasSetValid = true
+                    value !== "" && !valid && (this.errorType = 2);
                     break;
                 default:
                     break;
@@ -106,7 +135,7 @@ export default class Input extends Control {
                 switch (this.errorType) {
                     case 1:
                         // 必填报错;
-                        errorInfo = "此项为必填项";
+                        errorInfo = "该项为必填项";
                         break;
                     case 2:
                         // 正则报错

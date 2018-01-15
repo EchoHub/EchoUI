@@ -9,4 +9,17 @@
     position: fixed;
     z-index: 999;
     opacity: .9;
+    max-width: 20rem;
+    &:after{
+        border-left: 4px solid transparent;
+        height: 4px;
+        content: "";
+        top: 20px;
+        display: inline-block;
+        position: absolute;
+        border-right: 4px solid transparent;
+        border-top: 4px solid #333333;
+        left: 50%;
+        margin-left: -2px;
+    }
 }

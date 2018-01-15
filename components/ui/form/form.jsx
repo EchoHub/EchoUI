@@ -81,7 +81,7 @@ export default class Form extends Component {
             reports: reports,
             valid: valid,
             report: () => {
-                console.log(valid)
+                console.log(reports)
             }
         };
     }
@@ -95,7 +95,8 @@ export class FormItem extends Component {
         super(props)
         this.state = {
             showToolTip: false,
-            tooTipContent: ""
+            nodeState: 0, // 0:默认 1:成功 2:错误
+            toolTipContent: ""
         }
     }
     componentDidMount() { }
@@ -106,19 +107,44 @@ export class FormItem extends Component {
             this.newProps = Object.assign({}, formFilterProps(this.props), formFilterProps(item.props))
             switch ((item.type.name || item.type).toUpperCase()) {
                 case "SELECT":
-                    nodes.push(<Select key={this.props.name} ref="select" {...this.newProps}>{vNodes}</Select>);
+                    nodes.push(<Select
+                        key={this.props.name}
+                        ref="select"
+                        {...this.newProps}
+                        nodeState={this.state.nodeState}
+                    >{vNodes}</Select>);
                     break;
                 case "TEXTBOX":
-                    nodes.push(<TextBox key={this.props.name} ref="textbox" {...this.newProps}></TextBox>);
+                    nodes.push(<TextBox
+                        key={this.props.name}
+                        ref="textbox"
+                        {...this.newProps}
+                        nodeState={this.state.nodeState}
+                    ></TextBox>);
                     break;
                 case "RADIOBOXGROUP":
-                    nodes.push(<RadioBoxGroup key={this.props.name} ref="radioBoxGroup" {...this.newProps}>{vNodes}</RadioBoxGroup>);
+                    nodes.push(<RadioBoxGroup
+                        key={this.props.name}
+                        ref="radioBoxGroup"
+                        {...this.newProps}
+                        nodeState={this.state.nodeState}
+                    >{vNodes}</RadioBoxGroup>);
                     break;
                 case "CHECKBOXGROUP":
-                    nodes.push(<CheckBoxGroup key={this.props.name} ref="radioBoxGroup" {...this.newProps}>{vNodes}</CheckBoxGroup>);
+                    nodes.push(<CheckBoxGroup
+                        key={this.props.name}
+                        ref="radioBoxGroup"
+                        {...this.newProps}
+                        nodeState={this.state.nodeState}
+                    >{vNodes}</CheckBoxGroup>);
                     break;
                 case "TEXTAREA":
-                    nodes.push(<TextArea key={this.props.name} ref="textArea" {...this.newProps}></TextArea>);
+                    nodes.push(<TextArea
+                        key={this.props.name}
+                        ref="textArea"
+                        {...this.newProps}
+                        nodeState={this.state.nodeState}
+                    ></TextArea>);
                     break;
                 default:
                     nodes.push(item);
@@ -126,7 +152,11 @@ export class FormItem extends Component {
             }
         }
         return <div className="e-formitem">{nodes}{
-            this.state.showToolTip ? <ToolTip parentTarget={this}>{this.state.tooTipContent}</ToolTip> : ""
+            this.state.showToolTip ? <ToolTip
+                parentTarget={this}
+                _nodeState={this.state.toolState}
+                _children={this.state.toolTipContent}
+            ></ToolTip> : ""
         }</div>
     }
 
@@ -156,22 +186,39 @@ export class FormItem extends Component {
     checkValidity(reportValidity) {
         if (!reportValidity.valid) {
             this.setState({
+                toolState: 1,
+                nodeState: 2,
                 showToolTip: true,
-                tooTipContent: reportValidity.report().errorInfo
-            })
+                toolTipContent: reportValidity.report().errorInfo
+            });
+            return;
         }
+        this.setState({
+            nodeState: 1
+        });
     }
     /**
      * @desc 验证报告
      */
     get reportValidity() {
-        let reports = [];
+        let reports = [], valid = true;
+        this.setState({
+            toolState: 0,
+            showToolTip: false,
+            nodeState: 0,
+            toolTipContent: ""
+        });
         for (const key in this.refs) {
-            this.checkValidity(this.refs[key].reportValidity)
-            reports.push(this.refs[key].reportValidity);
+            const reportValidity = this.refs[key].reportValidity;
+            if (valid && !reportValidity.valid) {
+                valid = false
+            }
+            this.checkValidity(reportValidity);
+            reports.push(reportValidity);
         }
         return {
             vNode: this,
+            valid: valid,
             reports: reports
         };
     }

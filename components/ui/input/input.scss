@@ -1,0 +1,9 @@
+@import "./../../common";
+.e-textbox{
+}
+.e-textbox.e-textbox-success{
+    border: 1px solid $border-color-success;
+}
+.e-textbox.e-textbox-error{
+    border: 1px solid $border-color-error;
+}

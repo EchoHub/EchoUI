@@ -2,6 +2,7 @@
 @import "./util/font/iconfont.scss";
 // 主题色
 $color-warning: #ff4949;
+$color-error: #d63a29;
 $color-success: #5FB878;
 $color-primary: #2196f3;
 $color-light-blue: #66b1ff;
@@ -11,6 +12,7 @@ $color-bbb: #bbb;
 $color-666: #666;
 // 边框色
 $border-color-warning: $color-warning;
+$border-color-error: $color-error;
 $border-color-success: $color-success;
 $border-color-primary: $color-primary;
 // 输入框配置

@@ -100,11 +100,13 @@ class Container extends Component {
      * @desc 表单提交
      */
     formHandleSubmit() {
-        console.log(this.refs.formRef.reportValidity.report())
-        const val = this.refs.formRef.value;
-        // this.setState({
-        //     formRefValue: val
-        // })
+        if(this.refs.formRef.reportValidity.valid) {
+            const val = this.refs.formRef.value;
+            console.log("表单提交的内容是：", val)
+            // this.setState({
+            //     formRefValue: val
+            // })
+        }
     }
     /**
      * @desc 表单赋值
@@ -191,7 +193,7 @@ class Container extends Component {
                     </div>
                     <h4>下拉框</h4>
                     <div className="e-section-demo">
-                        <Select ref="selectRef" name="selectRef" className="123">
+                        <Select ref="selectRef" name="selectRef" className="formSelect">
                             <ListItem value={1}>下拉项 一</ListItem>
                             <ListItem value={2}>下拉项 二</ListItem>
                             <ListItem value={3}>下拉项 三</ListItem>
@@ -229,7 +231,7 @@ class Container extends Component {
                             </FormItem>
                             <h6>4.你最喜欢吃的水果是什么？</h6>
                             <FormItem name="textBoxRef"
-                                pattern={/\S{1,}/g}
+                                pattern={/\S{1,10}/g}
                                 patternMessage="请输入非空字符"
                                 placeholder="请输入"
                                 required>
@@ -238,9 +240,9 @@ class Container extends Component {
                             <h6>5.你为什么最喜欢吃？</h6>
                             <FormItem name="textAreaRef"
                                 pattern={/^\S{1,10}$/g}
-                                patternMessage="字符数不可大于10个"
+                                patternMessage="字符数长度不可大于10个字符"
                                 defaultValue="因为好吃啊!!!"
-                                >
+                                required>
                                 <TextArea></TextArea>
                             </FormItem>
                         </Form>
