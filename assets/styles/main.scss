@@ -1,3 +1,58 @@
+body{
+    margin: 0;
+    padding: 0;
+    font-family: "Times New Roman";
+}
+.e-header{
+    .logo{
+        font-family: "Times New Roman";
+        background: #666666;
+        color: #fff;
+        padding: 10px;
+        margin: 0;
+    }
+}
+.e-main-wrapper{
+    .e-main-menu{
+        width: 240px;
+        float: left;
+        &-nav{
+            margin: 20px 0 0 20px;
+            border-right: 1px solid #ddd;
+            .e-main-aside-nav-title{
+                color: rgba(0, 0, 0, .6);
+                .e-aside-nav-title-tip{
+                    font-size: .8rem;
+                    color: rgba(0, 0, 0, .45);
+                }
+            }
+            .e-main-aside-nav-subtitle{
+                font-size: .8rem;
+                color: rgba(0, 0, 0, .6); 
+                padding-left: 15px;
+                line-height: 3rem;
+            }
+            .e-main-aside{
+                margin: 0;
+                list-style: none;
+                font-size: .8rem;
+                color: #333;
+                li{
+                    cursor: pointer;
+                    line-height: 2rem;
+                    &:hover{
+                        text-decoration: underline;
+                        opacity: .8;
+                    }
+                }
+            }
+        }
+    }
+    .e-main-container{
+        width: calc(100% - 240px);
+        float: right;
+    }
+}
 .e-container{
     &-title{
         border-left: 10px solid #2196f3;
@@ -7,12 +62,12 @@
     }
     &-subtitle{
         padding-left: 10px;
-        color: #2196f3;
+        color: #666;
         margin-left: 10px;
     }
     &-subsubtitle{
         padding-left: 10px;
-        color: #2196f3;
+        color: #666;
         margin-left: 20px;
     }
     .e-section-demo{
@@ -28,7 +83,9 @@
         }
     }
 }
+.e-row{
 
+}
 // publlic css
 .e-mh-4{
     margin: 0 4px;

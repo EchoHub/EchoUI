@@ -1,8 +1,13 @@
 界面组件:
-    表单：
+    通用：（共 个，✅ 个）
+      - ui/button 按钮
+      - ui/buttonGroup 按钮组
+    表单：(共 16 个， ✅ 12 个)
       - ui/input 输入框基类  ✅
       - ui/textBox 文本框  ✅
       - ui/textArea 文本域  ✅
+      - ui/inputNumber 数字输入框
+      - ui/timePicker 时间选择框
       - ui/select 下拉菜单  ✅
       - ui/suggest 支持模糊查询的下拉
       - ui/comboxBox 组合框 ✅
@@ -14,11 +19,14 @@
       - ui/radioBoxGroup 单选框组 ✅
       - ui/form ✅
       - ui/formItem ✅
-    浮层：
-      - ui/popup
-      - ui/toolTip
-      - ui/dialog
-      - ui/messageBox
+    浮层：(共 6 个，✅ 1 个)
+      - ui/alert 警告
+      - ui/toolTip ✅
+      - ui/message 消息提示
+      - ui/modal 模态框
+      - ui/messageBox 弹框
+      - ui/Notification 通知
+    
 # 设计排版:
 #   通用:
 #     - typo/reset

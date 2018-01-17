@@ -100,7 +100,7 @@ class Container extends Component {
      * @desc 表单提交
      */
     formHandleSubmit() {
-        if(this.refs.formRef.reportValidity.valid) {
+        if (this.refs.formRef.reportValidity.valid) {
             const val = this.refs.formRef.value;
             console.log("表单提交的内容是：", val)
             // this.setState({
@@ -125,132 +125,173 @@ class Container extends Component {
     render() {
         return (
             <div className="e-container">
-                <h1 className="e-container-title">{this.props.name}</h1>
-                <h2 className="e-container-subtitle">* UI组件</h2>
-                <h4 className="e-container-subsubtitle">1. 按钮组件 button</h4>
-                <section className="e-section-container">
-                    <h4>按钮 normal</h4>
-                    <div className="e-section-demo">
-                        <Button className="e-mr-1rem e-button-default">默认</Button>
-                        <Button className="e-mr-1rem e-button-primary">正常</Button>
-                        <Button className="e-mr-1rem e-button-light">线条</Button>
+                <header className="e-header">
+                    <div className="e-row">
+                        <h1 class="logo">ECHO</h1>
                     </div>
-                    <h4>按钮 small</h4>
-                    <div className="e-section-demo">
-                        <Button className="e-mr-1rem e-button-default e-button-small">默认</Button>
-                        <Button className="e-mr-1rem e-button-primary e-button-small">正常</Button>
-                        <Button className="e-mr-1rem e-button-light e-button-small">线条</Button>
+                </header>
+                <div className="e-main-wrapper">
+                    <div className="e-main-menu">
+                        <div className="e-main-menu-nav">
+                            <div className="e-main-aside-nav-title">UI组件 <span className="e-aside-nav-title-tip">(UI Components)</span></div>
+                            <div className="e-main-aside-nav-subtitle">通用 <span className="e-aside-nav-title-tip">General</span></div>
+                            <ul className="e-main-aside">
+                                <li>按钮 Button</li>
+                            </ul>
+                            <div className="e-main-aside-nav-subtitle">表单 <span className="e-aside-nav-title-tip">Form</span></div>
+                            <ul className="e-main-aside">
+                                <li>多选框 CheckBox</li>
+                                <li>多选框组 CheckBoxGroup</li>
+                                <li>表单 Form</li>
+                                <li>输入框 Input</li>
+                                <li>计数器 InputNumber</li>
+                                <li>多选下拉框 MultiSelect</li>
+                                <li>单选框 Radio</li>
+                                <li>单选框组 RadioGroup</li>
+                                <li>下拉框 Select</li>
+                                <li>带模糊查询的下拉框 Suggest</li>
+                                <li>时间选择框 TimePicker</li>
+                            </ul>
+                            <div className="e-main-aside-nav-subtitle">通知 <span className="e-aside-nav-title-tip">Notice</span></div>
+                            <ul className="e-main-aside">
+                                <li>警告 Alert</li>
+                                <li>消息提示 Message</li>
+                                <li>消息框 MessageBox</li>
+                                <li>对话框 Modal</li>
+                                <li>通知提醒框 Notification</li>
+                                <li>文字提示 ToolTip</li>
+                            </ul>
+                        </div>
                     </div>
-                    <h4>按钮 larger</h4>
-                    <div className="e-section-demo">
-                        <Button className="e-mr-1rem e-button-default e-button-large">默认</Button>
-                        <Button className="e-mr-1rem e-button-primary e-button-large">正常</Button>
-                        <Button className="e-mr-1rem e-button-light e-button-large">线条</Button>
-                    </div>
-                </section>
-                <h4 className="e-container-subsubtitle">2. 表单组件 form</h4>
-                <section className="e-section-container">
-                    <h4>单选框</h4>
-                    <div className="e-section-demo">
-                        <RadioBoxGroup name="radioBoxRef" ref="radioBoxRef">
-                            <RadioBox value="apple">苹果</RadioBox>
-                            <RadioBox value="banana">香蕉</RadioBox>
-                            <RadioBox value="pear">梨子</RadioBox>
-                            <RadioBox value="grape">葡萄</RadioBox>
-                        </RadioBoxGroup>
-                        <Button className="e-ml-1rem" onClick={this.radioBoxHandleSubmit.bind(this)}>提交</Button>
-                        <span className="e-ph-1rem">{this.state.radioBoxGroupRefValue}</span>
-                        <br />
-                    </div>
-                    <h4>多选框</h4>
-                    <div className="e-section-demo">
-                        <CheckBoxGroup name="checkBoxRef" ref="checkBoxRef">
-                            <CheckBox value="apple">苹果</CheckBox>
-                            <CheckBox value="banana">香蕉</CheckBox>
-                            <CheckBox value="pear">梨子</CheckBox>
-                            <CheckBox value="grape">葡萄</CheckBox>
-                        </CheckBoxGroup>
-                        <Button className="e-ml-1rem" onClick={this.checkBoxHandleSubmit.bind(this)}>提交</Button>
-                        <span className="e-ph-1rem">{this.state.checkBoxGroupRefValue}</span>
-                        <br />
-                    </div>
-                    <h4>文本框</h4>
-                    <div className="e-section-demo">
-                        <TextBox ref="textBoxRef" name="textBoxRef" onChange={this.changeHandle} onClick={this.clickHandle}
-                            placeholder="请输入"
-                            onFocus={this.focusHandle} onBlur={this.blurHandle} onInput={this.inputHandle} />
-                        <Button className="e-ml-1rem" onClick={this.textBoxHandleSubmit.bind(this)}>提交</Button>
-                        <span className="e-ph-1rem">{this.state.textBoxRefValue}</span>
-                        <br />
-                    </div>
-                    <h4>文本域</h4>
-                    <div className="e-section-demo">
-                        <TextArea ref="textAreaRef" name="textAreaRef" onChange={this.changeHandle} onClick={this.clickHandle}
-                            defaultValue="默认文本"
-                            onFocus={this.focusHandle} onBlur={this.blurHandle}></TextArea>
-                        <Button className="e-ml-1rem" onClick={this.textAreaHandleSubmit.bind(this)}>提交</Button>
-                        <span className="e-ph-1rem">{this.state.textAreaRefValue}</span>
-                    </div>
-                    <h4>下拉框</h4>
-                    <div className="e-section-demo">
-                        <Select ref="selectRef" name="selectRef" className="formSelect">
-                            <ListItem value={1}>下拉项 一</ListItem>
-                            <ListItem value={2}>下拉项 二</ListItem>
-                            <ListItem value={3}>下拉项 三</ListItem>
-                        </Select>
-                        <Button className="e-ml-1rem" onClick={this.selectHandleSubmit.bind(this)}>提交</Button>
-                        <span className="e-ph-1rem">{this.state.selectRefValue}</span>
-                    </div>
-                    <h4>表单</h4>
-                    <div className="e-section-demo">
-                        <Form ref="formRef" value={this.state.formValue}>
-                            <h6>1.你经常吃水果吗？</h6>
-                            <FormItem name="selectRef"
-                                placeholder="请选择"
-                                required>
-                                <Select>
-                                    <ListItem value={1}>是</ListItem>
-                                    <ListItem value={0}>否</ListItem>
-                                </Select>
-                            </FormItem>
-                            <h6>2.哪个水果更好吃？</h6>
-                            <FormItem name="radioBoxRef" required>
-                                <RadioBoxGroup>
+                    <div className="e-main-container">
+                        <h2 className="e-container-subtitle">* UI组件</h2>
+                        <h4 className="e-container-subsubtitle">1. 按钮组件 button</h4>
+                        <section className="e-section-container">
+                            <h4>按钮 normal</h4>
+                            <div className="e-section-demo">
+                                <Button className="e-mr-1rem e-button-default">默认</Button>
+                                <Button className="e-mr-1rem e-button-primary">正常</Button>
+                                <Button className="e-mr-1rem e-button-light">线条</Button>
+                            </div>
+                            <h4>按钮 small</h4>
+                            <div className="e-section-demo">
+                                <Button className="e-mr-1rem e-button-default e-button-small">默认</Button>
+                                <Button className="e-mr-1rem e-button-primary e-button-small">正常</Button>
+                                <Button className="e-mr-1rem e-button-light e-button-small">线条</Button>
+                            </div>
+                            <h4>按钮 larger</h4>
+                            <div className="e-section-demo">
+                                <Button className="e-mr-1rem e-button-default e-button-large">默认</Button>
+                                <Button className="e-mr-1rem e-button-primary e-button-large">正常</Button>
+                                <Button className="e-mr-1rem e-button-light e-button-large">线条</Button>
+                            </div>
+                        </section>
+                        <h4 className="e-container-subsubtitle">2. 表单组件 form</h4>
+                        <section className="e-section-container">
+                            <h4>单选框</h4>
+                            <div className="e-section-demo">
+                                <RadioBoxGroup name="radioBoxRef" ref="radioBoxRef">
                                     <RadioBox value="apple">苹果</RadioBox>
                                     <RadioBox value="banana">香蕉</RadioBox>
+                                    <RadioBox value="pear">梨子</RadioBox>
+                                    <RadioBox value="grape">葡萄</RadioBox>
                                 </RadioBoxGroup>
-                            </FormItem>
-                            <h6>3.你喜欢哪些水果？</h6>
-                            <FormItem name="checkBoxRef" required>
-                                <CheckBoxGroup>
+                                <Button className="e-ml-1rem" onClick={this.radioBoxHandleSubmit.bind(this)}>提交</Button>
+                                <span className="e-ph-1rem">{this.state.radioBoxGroupRefValue}</span>
+                                <br />
+                            </div>
+                            <h4>多选框</h4>
+                            <div className="e-section-demo">
+                                <CheckBoxGroup name="checkBoxRef" ref="checkBoxRef">
                                     <CheckBox value="apple">苹果</CheckBox>
                                     <CheckBox value="banana">香蕉</CheckBox>
                                     <CheckBox value="pear">梨子</CheckBox>
                                     <CheckBox value="grape">葡萄</CheckBox>
                                 </CheckBoxGroup>
-                            </FormItem>
-                            <h6>4.你最喜欢吃的水果是什么？</h6>
-                            <FormItem name="textBoxRef"
-                                pattern={/\S{1,10}/g}
-                                patternMessage="请输入非空字符"
-                                placeholder="请输入"
-                                required>
-                                <TextBox />
-                            </FormItem>
-                            <h6>5.你为什么最喜欢吃？</h6>
-                            <FormItem name="textAreaRef"
-                                pattern={/^\S{1,10}$/g}
-                                patternMessage="字符数长度不可大于10个字符"
-                                defaultValue="因为好吃啊!!!"
-                                required>
-                                <TextArea></TextArea>
-                            </FormItem>
-                        </Form>
-                        <Button className="e-ml-1rem" onClick={this.setFormValue.bind(this)}>赋值</Button>
-                        <Button className="e-ml-1rem" onClick={this.formHandleSubmit.bind(this)}>提交</Button>
-                        <span className="e-ph-1rem">{this.state.formRefValue}</span>
+                                <Button className="e-ml-1rem" onClick={this.checkBoxHandleSubmit.bind(this)}>提交</Button>
+                                <span className="e-ph-1rem">{this.state.checkBoxGroupRefValue}</span>
+                                <br />
+                            </div>
+                            <h4>文本框</h4>
+                            <div className="e-section-demo">
+                                <TextBox ref="textBoxRef" name="textBoxRef" onChange={this.changeHandle} onClick={this.clickHandle}
+                                    placeholder="请输入"
+                                    onFocus={this.focusHandle} onBlur={this.blurHandle} onInput={this.inputHandle} />
+                                <Button className="e-ml-1rem" onClick={this.textBoxHandleSubmit.bind(this)}>提交</Button>
+                                <span className="e-ph-1rem">{this.state.textBoxRefValue}</span>
+                                <br />
+                            </div>
+                            <h4>文本域</h4>
+                            <div className="e-section-demo">
+                                <TextArea ref="textAreaRef" name="textAreaRef" onChange={this.changeHandle} onClick={this.clickHandle}
+                                    defaultValue="默认文本"
+                                    onFocus={this.focusHandle} onBlur={this.blurHandle}></TextArea>
+                                <Button className="e-ml-1rem" onClick={this.textAreaHandleSubmit.bind(this)}>提交</Button>
+                                <span className="e-ph-1rem">{this.state.textAreaRefValue}</span>
+                            </div>
+                            <h4>下拉框</h4>
+                            <div className="e-section-demo">
+                                <Select ref="selectRef" name="selectRef" className="formSelect">
+                                    <ListItem value={1}>下拉项 一</ListItem>
+                                    <ListItem value={2}>下拉项 二</ListItem>
+                                    <ListItem value={3}>下拉项 三</ListItem>
+                                </Select>
+                                <Button className="e-ml-1rem" onClick={this.selectHandleSubmit.bind(this)}>提交</Button>
+                                <span className="e-ph-1rem">{this.state.selectRefValue}</span>
+                            </div>
+                            <h4>表单</h4>
+                            <div className="e-section-demo">
+                                <Form ref="formRef" value={this.state.formValue}>
+                                    <h6>1.你经常吃水果吗？</h6>
+                                    <FormItem name="selectRef"
+                                        placeholder="请选择"
+                                        required>
+                                        <Select>
+                                            <ListItem value={1}>是</ListItem>
+                                            <ListItem value={0}>否</ListItem>
+                                        </Select>
+                                    </FormItem>
+                                    <h6>2.哪个水果更好吃？</h6>
+                                    <FormItem name="radioBoxRef" required>
+                                        <RadioBoxGroup>
+                                            <RadioBox value="apple">苹果</RadioBox>
+                                            <RadioBox value="banana">香蕉</RadioBox>
+                                        </RadioBoxGroup>
+                                    </FormItem>
+                                    <h6>3.你喜欢哪些水果？</h6>
+                                    <FormItem name="checkBoxRef" required>
+                                        <CheckBoxGroup>
+                                            <CheckBox value="apple">苹果</CheckBox>
+                                            <CheckBox value="banana">香蕉</CheckBox>
+                                            <CheckBox value="pear">梨子</CheckBox>
+                                            <CheckBox value="grape">葡萄</CheckBox>
+                                        </CheckBoxGroup>
+                                    </FormItem>
+                                    <h6>4.你最喜欢吃的水果是什么？</h6>
+                                    <FormItem name="textBoxRef"
+                                        pattern={/\S{1,10}/g}
+                                        patternMessage="请输入非空字符"
+                                        placeholder="请输入"
+                                        required>
+                                        <TextBox />
+                                    </FormItem>
+                                    <h6>5.你为什么最喜欢吃？</h6>
+                                    <FormItem name="textAreaRef"
+                                        pattern={/^\S{1,10}$/g}
+                                        patternMessage="字符数长度不可大于10个字符"
+                                        defaultValue="因为好吃啊!!!"
+                                        required>
+                                        <TextArea></TextArea>
+                                    </FormItem>
+                                </Form>
+                                <Button className="e-ml-1rem" onClick={this.setFormValue.bind(this)}>赋值</Button>
+                                <Button className="e-ml-1rem" onClick={this.formHandleSubmit.bind(this)}>提交</Button>
+                                <span className="e-ph-1rem">{this.state.formRefValue}</span>
+                            </div>
+                        </section>
+                        <h4 className="e-container-subsubtitle">3. 通知 Notice</h4>
                     </div>
-                </section>
+                </div>
             </div>
         )
     }
