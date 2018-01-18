@@ -166,7 +166,7 @@ class Container extends Component {
                 break;
             case "alert":
                 messageBox.alert("Alert Title", "Alert Content", theme, {
-                    activeMask: typeof activeMask === "boolean" ? activeMask : false,
+                    activeMask: typeof activeMask === "boolean" ? activeMask : true,
                     dragable: typeof dragable === "boolean" ? dragable : false
                 });
                 break;
@@ -174,7 +174,7 @@ class Container extends Component {
                 messageBox.confirm("Confirm Title", "Confirm Content", null, theme, () => {
                     messageBox.alert("Ok Title", "Ok Content", "info");
                 }, null, {
-                    activeMask: typeof activeMask === "boolean" ? activeMask : false, 
+                    activeMask: typeof activeMask === "boolean" ? activeMask : true, 
                     dragable: typeof dragable === "boolean" ? dragable : false
                 });
                 break;

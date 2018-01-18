@@ -159,8 +159,8 @@ export class MessageBox {
             content: content,
             icon: icon,
             buttons: null,
-            activeMask: ops? ops.activeMask : null,
-            dragable: ops? ops.dragable : null,
+            activeMask: ops? ops.activeMask : true,
+            dragable: ops? ops.dragable : false,
         };
         this.createModal(options);
     }
@@ -176,8 +176,8 @@ export class MessageBox {
             icon: icon,
             onOk: onOk,
             onCancel: onCancel,
-            activeMask: ops.activeMask,
-            dragable: ops.dragable,
+            activeMask: ops? ops.activeMask : true,
+            dragable: ops? ops.dragable : false,
         };
         this.createModal(options);
     }
