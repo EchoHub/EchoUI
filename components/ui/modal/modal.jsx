@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { render, findDOMNode } from "react-dom";
 import "./modal.scss";
+import Button from "./../button/button.jsx";
 /**
  * @desc 对话框
  */
@@ -81,6 +82,27 @@ export default class Modal extends Component {
         }
     }
 
+    /**
+     * 
+     * @param {*} isOk Boolean 用于判断 当前按钮操作是否是 确认按钮 true or false
+     * @param {*} event 当前event
+     */
+    clickHandle(isOk, event) {
+        if(isOk) {
+            this.props.onOk ? this.props.onOk() : this.ok();
+            return 
+        }
+        this.props.onCancel ? this.props.onCancel() : this.cancel()
+    }
+
+    ok(){
+        findDOMNode(this).remove();
+    }
+
+    cancel() {
+        findDOMNode(this).remove();
+    }
+
     render() {
         return <div className={`e-modal-dialog${this.props.activeMask ? " e-modal-mask" : ""}`}>
             <div className="e-modal"
@@ -91,6 +113,17 @@ export default class Modal extends Component {
                     this.props.icon ? <span className={`e-modal-icon icon iconfont ${this.props.iconEnum[this.props.icon]}`}></span> : null
                 } {this.props.title}</div>
                 <div className="e-modal-content">{this.props.content}</div>
+                {
+                    this.props.buttons ? <div className="e-modal-buttons e-mt-10 e-text-right">
+                        {
+                            Object.keys(this.props.buttons).map((d, i) =>
+                                <Button className="e-button-small e-mr-4" key={d} onClick={e => {
+                                    this.clickHandle(this.props.buttons[d], e)
+                                }}>{d}</Button>
+                            )
+                        }
+                    </div> : null
+                }
             </div>
         </div>
     }
@@ -125,8 +158,9 @@ export class MessageBox {
             title: title || "温馨提示",
             content: content,
             icon: icon,
-            activeMask: ops.activeMask,
-            dragable: ops.dragable,
+            buttons: null,
+            activeMask: ops? ops.activeMask : null,
+            dragable: ops? ops.dragable : null,
         };
         this.createModal(options);
     }

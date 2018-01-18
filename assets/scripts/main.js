@@ -159,23 +159,23 @@ class Container extends Component {
                 messageBox.show({
                     title: "Modal Title",
                     content: "Modal Content",
-                    icon: theme
+                    icon: theme,
+                    activeMask: typeof activeMask === "boolean" ? activeMask : false,
+                    dragable: typeof dragable === "boolean" ? dragable : false
                 });
                 break;
             case "alert":
                 messageBox.alert("Alert Title", "Alert Content", theme, {
-                    activeMask: activeMask,
-                    dragable: dragable
+                    activeMask: typeof activeMask === "boolean" ? activeMask : false,
+                    dragable: typeof dragable === "boolean" ? dragable : false
                 });
                 break;
             case "confirm":
                 messageBox.confirm("Confirm Title", "Confirm Content", null, theme, () => {
                     messageBox.alert("Ok Title", "Ok Content", "info");
-                }, () => {
-                    messageBox.alert("Cancel Title", "Cancel Content", "info");
-                }, {
-                    activeMask: activeMask, 
-                    dragable: dragable
+                }, null, {
+                    activeMask: typeof activeMask === "boolean" ? activeMask : false, 
+                    dragable: typeof dragable === "boolean" ? dragable : false
                 });
                 break;
         }
@@ -444,7 +444,7 @@ class Container extends Component {
                                 <div className="e-section-demo e-mt-10">
                                     <div className="e-row">
                                         <div className="e-col e-mr-1rem"><Button onClick={this.msgHandle.bind(null, "default")}>默认提示</Button></div>
-                                        <div className="e-col e-mr-1rem"><Button className="e-button-primary" onClick={this.msgHandle.bind(null, "primary")}>消息提示</Button></div>
+                                        <div className="e-col e-mr-1rem"><Button className="e-button-primary" onClick={this.msgHandle.bind(null, "primary")}>常用提示</Button></div>
                                         <div className="e-col e-mr-1rem"><Button className="e-button-success" onClick={this.msgHandle.bind(null, "success")}>成功提示</Button></div>
                                         <div className="e-col e-mr-1rem"><Button className="e-button-warning" onClick={this.msgHandle.bind(null, "warning")}>警告提示</Button></div>
                                         <div className="e-col e-mr-1rem"><Button className="e-button-error" onClick={this.msgHandle.bind(null, "error")}>错误提示</Button></div>
@@ -471,8 +471,8 @@ class Container extends Component {
                                 </div>
                                 <div className="e-section-demo e-mt-10">
                                     <div className="e-row">
-                                        <div className="e-col e-mr-1rem"><Button className="e-button-default" onClick={this.modalHandle.bind(null, "alert", "default", false)}>No mask</Button></div>
-                                        <div className="e-col e-mr-1rem"><Button className="e-button-primary" onClick={this.modalHandle.bind(null, "confirm", "primary", false, true)}>Dragable</Button></div>
+                                        <div className="e-col e-mr-1rem"><Button className="e-button-default" onClick={this.modalHandle.bind(null, "alert", "default", false, false)}>No mask</Button></div>
+                                        <div className="e-col e-mr-1rem"><Button className="e-button-primary" onClick={this.modalHandle.bind(null, "confirm", "primary", true, true)}>Dragable</Button></div>
                                     </div>
                                 </div>
                             </section>

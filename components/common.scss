@@ -51,6 +51,9 @@ $input-radius: .1rem;
 .e-col{
     display: inline-block;
 }
+.e-mr-4{
+    margin-right: 4px;
+}
 .e-mh-4{
     margin: 0 4px;
 }
@@ -86,6 +89,15 @@ $input-radius: .1rem;
 }
 .e-ph-1rem{
     padding: 0 1rem;
+}
+.e-text-right{
+    text-align: right;
+}
+.e-text-left{
+    text-align: left;
+}
+.e-text-center{
+    text-align: center;
 }
 ::-webkit-scrollbar, ::-webkit-scrollbar-track {
     width: 10px;
