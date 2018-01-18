@@ -1,5 +1,10 @@
 @import "./../../common";
 .e-textbox{
+    box-shadow: none;
+    -moz-box-shadow: none;
+    -ms-box-shadow: none;
+    -o-box-shadow: none;
+    -webkit-box-shadow: none;
 }
 .e-textbox.e-textbox-success{
     border: 1px solid $border-color-success;

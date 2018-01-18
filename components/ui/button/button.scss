@@ -1,6 +1,6 @@
 @import "./../../common";
 .e-button{
-    width: 4.5rem;
+    min-width: 4.5rem;
     height: 2rem;
     background: none;
     outline: 0;
@@ -15,11 +15,11 @@
         cursor: pointer;
     }
     &-small {
-        width: 3rem;
+        min-width: 3rem;
         height: 1.6rem;
     }
     &-large {
-        width: 6rem;
+        min-width: 6rem;
         height: 2.4rem;
     }
     &-default{
@@ -34,7 +34,31 @@
         background: $color-primary;
         border: 1px solid $color-primary;
         &:hover{
-            background: $color-light-blue;
+            opacity: .8;
+        }
+    }
+    &-success{
+        color: $color-fff;
+        background: $color-success;
+        border: 1px solid $color-success;
+        &:hover{
+            opacity: .8;
+        }
+    }
+    &-warning{
+        color: $color-fff;
+        background: $color-button-warning;
+        border: 1px solid $color-warning;
+        &:hover{
+            opacity: .8;
+        }
+    }
+    &-error{
+        color: $color-fff;
+        background: $color-button-error;
+        border: 1px solid $color-error;
+        &:hover{
+            opacity: .8;
         }
     }
     &-light{

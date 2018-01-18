@@ -13,6 +13,10 @@ body{
     }
 }
 .e-main-wrapper{
+    display: block;
+    margin-bottom: 60px;
+    float: left;
+    width: 100%;
     .e-main-menu{
         width: 240px;
         float: left;
@@ -37,9 +41,11 @@ body{
                 list-style: none;
                 font-size: .8rem;
                 color: #333;
-                li{
+                li, li > a{
+                    color: #333;
                     cursor: pointer;
                     line-height: 2rem;
+                    text-decoration: none;
                     &:hover{
                         text-decoration: underline;
                         opacity: .8;
@@ -61,14 +67,18 @@ body{
         border-bottom: 2px solid #2196f3;
     }
     &-subtitle{
-        padding-left: 10px;
-        color: #666;
-        margin-left: 10px;
-    }
-    &-subsubtitle{
-        padding-left: 10px;
         color: #666;
         margin-left: 20px;
+        border-bottom: 2px solid #666666;
+    }
+    &-subsubtitle{
+        // padding-left: 10px;
+        // margin-left: 20px;
+        // border-left: 6px solid #2196f3;
+        // color: #666666;
+        padding: 0 10px;
+        color: #666666;
+        font-weight: bold;
     }
     .e-section-demo{
         display: flex;
@@ -76,34 +86,20 @@ body{
     .e-section-container{
         margin: 0 20px;
         padding: 0 10px;
+        &-title{
+            padding-left: 10px;
+            border-left: 5px solid #2196f4;
+            color: #2196f3;
+        }
     }
     .e-form{
         h6{
             margin: 1rem 0;
         }
     }
-}
-.e-row{
-
-}
-// publlic css
-.e-mh-4{
-    margin: 0 4px;
-}
-.e-mr-1rem{
-    margin-right: 1rem;
-}
-.e-ml-1rem{
-    margin-left: 1rem;
-}
-.e-ph-1rem{
-    padding: 0 1rem;
-}
-
-::-webkit-scrollbar, ::-webkit-scrollbar-track {
-    width: 10px;
-    background: #e0e0e0;
-}
-::-webkit-scrollbar-thumb {
-    background: #999;
+    .e-fieldset{
+        margin-left: 20px;
+        border: 1px solid #666;
+        color: #666;
+    }
 }

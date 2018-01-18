@@ -1,0 +1,20 @@
+@import "./../../common";
+.e-message-container{
+    display: inline-block;
+    position: fixed;
+    z-index: 999;
+    max-width: 400px;
+    max-height: 600px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    top: 0;
+    left: 50%;
+    // transition: all ease .4s;
+    // -moz-transition: all ease .4s;
+    // -ms-transition: all ease .4s;
+    // -o-transition: all ease .4s;
+    // -webkit-transition: all ease .4s;
+    box-shadow: 0 0 4px rgba(100,100, 100, .3);
+    border-radius: 3px;
+}

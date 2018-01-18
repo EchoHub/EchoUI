@@ -1,20 +1,30 @@
 // 字体图标
 @import "./util/font/iconfont.scss";
 // 主题色
-$color-warning: #ff4949;
+$color-warning: #ffe58f;
 $color-error: #d63a29;
 $color-success: #5FB878;
 $color-primary: #2196f3;
+$color-warning: #ffe58f;
+$color-error: #d63a29;
 $color-light-blue: #66b1ff;
 $color-fff: #fff;
 $color-ddd: #ddd;
 $color-bbb: #bbb;
 $color-666: #666;
+// 按钮
+$color-button-warning: #ffcc60;
+$color-button-error: #FF5722;
 // 边框色
 $border-color-warning: $color-warning;
 $border-color-error: $color-error;
 $border-color-success: $color-success;
 $border-color-primary: $color-primary;
+// 背景色
+$color-bg-success: #f6ffed;
+$color-bg-warning: #fffbe6;
+$color-bg-error: #fff1f0;
+$color-bg-primary: #e6f7ff;
 // 输入框配置
 $input-width: 12rem;
 $input-padding: .5rem .4rem;
@@ -22,3 +32,65 @@ $input-radius: .1rem;
 
 
 // public css
+.primary{
+    color: $color-primary;
+}
+.success{
+    color: $color-success;
+}
+.warning{
+    color: $color-warning;
+}
+.error{
+    color: $color-error;
+}
+.e-row{
+    clear: both;
+    display: block;
+}
+.e-col{
+    display: inline-block;
+}
+.e-mh-4{
+    margin: 0 4px;
+}
+.e-mt-10{
+    margin-top: 10px;
+}
+.e-mr-10{
+    margin-right: 10px;
+}
+.e-ml-10{
+    margin-left: 10px;
+}
+.e-mb-10{
+    margin-bottom: 10px;
+}
+.e-mh-10{
+    margin: 0 10px;
+}
+.e-mv-10{
+    margin: 10px 0;
+}
+.e-mr-1rem{
+    margin-right: 1rem;
+}
+.e-ml-1rem{
+    margin-left: 1rem;
+}
+.e-mh-1rem{
+    margin: 0 1rem;
+}
+.e-mv-1rem{
+    margin: 1rem 0;
+}
+.e-ph-1rem{
+    padding: 0 1rem;
+}
+::-webkit-scrollbar, ::-webkit-scrollbar-track {
+    width: 10px;
+    background: #e0e0e0;
+}
+::-webkit-scrollbar-thumb {
+    background: #999;
+}

@@ -1,0 +1,80 @@
+@import "./../../common";
+.e-alert{
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    z-index: 999;
+    min-width: 200px;
+    max-width: 400px;
+    max-height: 600px;
+    color: #666;
+    background: #fff;
+    &-title{
+        margin: 4px 10px;
+        font-size: 1.2rem;
+        color: #666;
+        .e-alert-flag{
+            display: inline-block;
+            float: left;
+            font-size: 1.6rem;
+            padding: 10px;
+            padding-top: 0px;
+            padding-left: 0;
+            &.primary{
+                color: $color-primary;
+            }
+            &.success{
+                color: $color-success;
+            }
+            &.error{
+                color: $color-error;
+            }
+            &.warning{
+                color: $color-warning;
+            }
+        }
+    }
+    &-close{
+        float: right;
+        color: #d0cccc;
+        line-height: 1.2rem;
+        opacity: .5;
+        transition: all ease .2s;
+        cursor: pointer;
+        &:hover{
+            opacity: 1;
+        }
+    }
+    &-content{
+        margin: 10px;
+        font-size: .9rem;
+        color: #666;
+    }
+    &.primary{
+        background: $color-bg-primary;
+        border: 1px solid $color-primary;
+        .e-alert-close{
+            color: $color-primary;
+        }
+    }
+    &.success {
+        background: $color-bg-success;
+        border: 1px solid $color-success;
+        .e-alert-close{
+            color: $color-success;
+        }
+    }
+    &.error{
+        background: $color-bg-error;
+        border: 1px solid $color-error;
+        .e-alert-close{
+            color: $color-error;
+        }
+    }
+    &.warning{
+        background: $color-bg-warning;
+        border: 1px solid $color-warning;
+        .e-alert-close{
+            color: $color-warning;
+        }
+    }
+}
