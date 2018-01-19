@@ -29,7 +29,7 @@
             background: rgba(240,240, 240, .3);
         }
     }
-    &-primary{
+    &-primary,&.primary{
         color: $color-fff;
         background: $color-primary;
         border: 1px solid $color-primary;
@@ -37,7 +37,7 @@
             opacity: .8;
         }
     }
-    &-success{
+    &-success,&.success{
         color: $color-fff;
         background: $color-success;
         border: 1px solid $color-success;
@@ -45,7 +45,7 @@
             opacity: .8;
         }
     }
-    &-warning{
+    &-warning,&.warning{
         color: $color-fff;
         background: $color-button-warning;
         border: 1px solid $color-warning;
@@ -53,7 +53,7 @@
             opacity: .8;
         }
     }
-    &-error{
+    &-error,&.error{
         color: $color-fff;
         background: $color-button-error;
         border: 1px solid $color-error;
@@ -61,7 +61,7 @@
             opacity: .8;
         }
     }
-    &-light{
+    &-light,&.light{
         color: $color-primary;
         border: 1px solid $color-primary;
         &:hover{

@@ -117,7 +117,7 @@ export default class Modal extends Component {
                     this.props.buttons ? <div className="e-modal-buttons e-mt-10 e-text-right">
                         {
                             Object.keys(this.props.buttons).map((d, i) =>
-                                <Button className="e-button-small e-mr-4" key={d} onClick={e => {
+                                <Button className={`e-button-small e-mr-4 ${this.props.buttons[d] ? this.props.icon : ""}`} key={d} onClick={e => {
                                     this.clickHandle(this.props.buttons[d], e)
                                 }}>{d}</Button>
                             )
