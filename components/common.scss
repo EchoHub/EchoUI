@@ -32,6 +32,9 @@ $input-radius: .1rem;
 
 
 // public css
+.clear{
+    clear: both;
+}
 .primary{
     color: $color-primary;
 }
@@ -100,7 +103,7 @@ $input-radius: .1rem;
     text-align: center;
 }
 ::-webkit-scrollbar, ::-webkit-scrollbar-track {
-    width: 10px;
+    width: 6px;
     background: #e0e0e0;
 }
 ::-webkit-scrollbar-thumb {

@@ -1,0 +1,40 @@
+@import "./../../common";
+.e-notification{
+    position: fixed;
+    top: 30px;
+    right: -999px;
+    background: #fff;
+    z-index: 666;
+    box-shadow: 0 0 6px rgba(0, 0, 0, .3);
+    border-radius: 4px;
+    padding: 10px;
+    min-width: 220px;
+    min-height: 30px;
+    transition: right ease .5s;
+    -moz-transition: right ease .5s;
+    -ms-transition: right ease .5s;
+    -o-transition: right ease .5s;
+    -webkit-transition: right ease .5s;
+    display: table;
+    &-content {
+        max-width: 400px;
+        max-height: 280px;
+        overflow: auto;
+    }
+    &-flag{
+        display: table-cell;
+        top: 6px;
+        position: relative;
+        .icon{
+            font-size: 1.5rem;
+        }
+    }
+    .e-notification-close{
+        cursor: pointer;
+        float: right;
+        color: #888;
+        &:hover{
+            opacity: .8;
+        }
+    }
+}

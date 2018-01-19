@@ -1,30 +1,37 @@
 界面组件:
     通用：（共 2 个，✅ 1 个）
-      - ui/button 按钮
+      - ui/button 按钮 ✅
       - ui/buttonGroup 按钮组
-    表单：(共 16 个， ✅ 12 个)
+    表单：(共 17 个， ✅ 12 个)
       - ui/input 输入框基类  ✅
       - ui/textBox 文本框  ✅
       - ui/textArea 文本域  ✅
       - ui/inputNumber 数字输入框
-      - ui/timePicker 时间选择框
       - ui/select 下拉菜单  ✅
       - ui/suggest 支持模糊查询的下拉
+      - ui/cascader 联级选择器
       - ui/comboxBox 组合框 ✅
-      - ui/multiListBox 多选列表
       - ui/listItem 列表项 ✅
+      - ui/multiListBox 多选列表
       - ui/checkBox 多选框 ✅
       - ui/checkBoxGroup 多选框组 ✅
       - ui/radioBox 单选框 ✅
       - ui/radioBoxGroup 单选框组 ✅
       - ui/form ✅
       - ui/formItem ✅
-    浮层：(共 5 个，✅ 3 个)
+      - ui/timePicker 时间选择框
+    导航：(共 5 个， ✅  个)
+      - ui/navMenu 导航菜单
+      - ui/tabs 标签页
+      - ui/breadCrumbs 面包屑
+      - ui/dropDown 拉下菜单
+      - ui/steps 步骤条
+    浮层：(共 5 个，✅ 4 个)
       - ui/alert 警告 ✅
       - ui/toolTip ✅
       - ui/message 消息提示 ✅
-      - ui/modal 对话框
-      - ui/Notification 通知
+      - ui/modal 对话框 ✅
+      - ui/Notification 通知 ✅
     
 # 设计排版:
 #   通用:

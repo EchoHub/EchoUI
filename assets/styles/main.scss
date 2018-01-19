@@ -20,7 +20,11 @@ body{
     .e-main-menu{
         width: 240px;
         float: left;
+        height: calc(100% - 75px);
+        overflow: hidden;
         &-nav{
+            height: calc(100% - 20px);
+            overflow:visible;
             margin: 20px 0 0 20px;
             border-right: 1px solid #ddd;
             .e-main-aside-nav-title{
@@ -52,6 +56,9 @@ body{
                     }
                 }
             }
+            &:hover {
+                overflow: auto;
+            }
         }
     }
     .e-main-container{
@@ -80,8 +87,17 @@ body{
         color: #666666;
         font-weight: bold;
     }
+    .e-section-intro{
+        border: 1px solid #ddd;
+        font-size: .8rem;
+        padding: .5rem;
+        margin-bottom: 0;
+    }
     .e-section-demo{
-        display: flex;
+        // display: flex;
+        border: 1px solid #ddd;
+        padding: 20px 10px;
+        border-top: 0;
     }
     .e-section-container{
         margin: 0 20px;

@@ -158,7 +158,7 @@ export class MessageBox {
             title: title || "温馨提示",
             content: content,
             icon: icon,
-            buttons: null,
+            buttons: {确定: true},
             activeMask: ops? ops.activeMask : true,
             dragable: ops? ops.dragable : false,
         };

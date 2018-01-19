@@ -15,6 +15,8 @@ import Button from "./../../components/ui/button/button.jsx";
 import Alert from "./../../components/ui/alert/alert.jsx";
 import Message from "./../../components/ui/message/message.jsx";
 import { MessageBox } from "./../../components/ui/modal/modal.jsx";
+import { Notice } from "./../../components/ui/notification/notification.jsx";
+import NavMenu, { SubMenu, MenuTitle, MenuItemGroup, MenuItem } from "./../../components/ui/navMenu/navMenu.jsx";
 class Container extends Component {
     constructor(props) {
         super(props)
@@ -25,12 +27,16 @@ class Container extends Component {
 
     }
     componentDidMount() {
-        console.log("this is componentDidMount");
+        document.body.onscroll = () => {
+            const menu = document.body.querySelector(".e-main-menu");
+            const _menuTop = menu.offsetTop;
+            const scrollTop = document.documentElement.scrollTop || document.body.scrollTop
+            if (scrollTop > _menuTop - 30) menu.style.position = "fixed";
+        }
     }
 
     componentWillUnmount() {
         console.log("this is componentWillUnmount");
-        clearInterval(this.timerId)
     }
     /**
      * @desc 多选框 选择
@@ -52,52 +58,6 @@ class Container extends Component {
     }
     blurHandle(event) {
         // console.log("this is blur", event)
-    }
-    /**
-     * @desc 单选框
-     */
-    radioBoxHandleSubmit() {
-        const val = this.refs.radioBoxRef.value
-        this.setState({
-            radioBoxGroupRefValue: val
-        })
-    }
-    /**
-     * @desc 多选框
-     */
-    checkBoxHandleSubmit() {
-        const val = this.refs.checkBoxRef.value
-        this.setState({
-            checkBoxGroupRefValue: val ? val.join(",") : ""
-        })
-    }
-    /**
-     * @desc 文本框提交
-     */
-    textBoxHandleSubmit() {
-        const val = this.refs.textBoxRef.value
-        this.setState({
-            textBoxRefValue: val
-        })
-    }
-    /**
-     * @desc 文本域提交
-     */
-    textAreaHandleSubmit() {
-        const val = this.refs.textAreaRef.value
-        this.setState({
-            textAreaRefValue: val
-        })
-    }
-    /**
-     * @desc 下拉菜单选项
-     */
-    selectHandleSubmit() {
-        const val = this.refs.selectRef.value
-        const text = this.refs.selectRef.text
-        this.setState({
-            selectRefValue: `${text}: ${val}`
-        })
     }
     /**
      * @desc 表单提交
@@ -174,9 +134,57 @@ class Container extends Component {
                 messageBox.confirm("Confirm Title", "Confirm Content", null, theme, () => {
                     messageBox.alert("Ok Title", "Ok Content", "info");
                 }, null, {
-                    activeMask: typeof activeMask === "boolean" ? activeMask : true, 
-                    dragable: typeof dragable === "boolean" ? dragable : false
-                });
+                        activeMask: typeof activeMask === "boolean" ? activeMask : true,
+                        dragable: typeof dragable === "boolean" ? dragable : false
+                    });
+                break;
+        }
+    }
+    /**
+     * @desc notification 通知 
+     */
+    notificationHandle(theme, autoClose) {
+        const notice = new Notice
+        switch (theme) {
+            case "info":
+                notice.info({
+                    title: "Info Title",
+                    content: "Info Description",
+                    autoClose: autoClose
+                })
+                break;
+            case "success":
+                notice.success({
+                    title: "Success Title",
+                    content: "Success Description",
+                    autoClose: autoClose
+                })
+                break;
+            case "warning":
+                notice.warning({
+                    title: "Warning Title",
+                    content: "Warning Description",
+                    autoClose: autoClose
+                })
+                break;
+            case "error":
+                notice.error({
+                    title: "Error Title",
+                    content: "Error Description",
+                    autoClose: autoClose
+                })
+                break;
+            default:
+                notice.show({
+                    title: "Default Title",
+                    content: `Default DescriptionDefault DescriptionDefault DescriptionDefault DescriptionDefault DescriptionDefault DescriptionDefault DescriptionDefault DescriptionDefault DescriptionDefault DescriptionDefault DescriptionDefault DescriptionDefault DescriptionDefault DescriptionDefault DescriptionDefault DescriptionDefault DescriptionDefault DescriptionDefault DescriptionDefault DescriptionDefault DescriptionDefault DescriptionDefault DescriptionDefault DescriptionDefault Description
+                    Default DescriptionDefault DescriptionDefault DescriptionDefault DescriptionDefault DescriptionDefault DescriptionDefault DescriptionDefault DescriptionDefault DescriptionDefault DescriptionDefault DescriptionDefault DescriptionDefault DescriptionDefault DescriptionDefault DescriptionDefault DescriptionDefault DescriptionDefault DescriptionDefault DescriptionDefault DescriptionDefault DescriptionDefault DescriptionDefault DescriptionDefault Description
+                    Default DescriptionDefault DescriptionDefault DescriptionDefault DescriptionDefault DescriptionDefault DescriptionDefault DescriptionDefault DescriptionDefault DescriptionDefault DescriptionDefault DescriptionDefault DescriptionDefault DescriptionDefault DescriptionDefault DescriptionDefault DescriptionDefault DescriptionDefault DescriptionDefault DescriptionDefault DescriptionDefault DescriptionDefault DescriptionDefault DescriptionDefault Description
+                    Default DescriptionDefault DescriptionDefault DescriptionDefault DescriptionDefault DescriptionDefault DescriptionDefault DescriptionDefault DescriptionDefault DescriptionDefault DescriptionDefault DescriptionDefault DescriptionDefault DescriptionDefault DescriptionDefault DescriptionDefault DescriptionDefault DescriptionDefault DescriptionDefault DescriptionDefault DescriptionDefault DescriptionDefault DescriptionDefault DescriptionDefault Description
+                    `,
+                    theme: theme,
+                    autoClose: autoClose
+                })
                 break;
         }
     }
@@ -200,15 +208,24 @@ class Container extends Component {
                             <ul className="e-main-aside">
                                 <li><a href="#e-checkbox">多选框 CheckBox</a></li>
                                 <li><a href="#e-checkbox">多选框组 CheckBoxGroup</a></li>
-                                <li><a href="#e-form">表单 Form</a></li>
                                 <li><a href="#e-input">输入框 Input</a></li>
-                                <li><a href="#e-select">计数器 InputNumber</a></li>
-                                <li><a href="#e-multiselect">多选下拉框 MultiSelect</a></li>
+                                <li><a href="#e-input">计数器 InputNumber</a></li>
                                 <li><a href="#e-radio">单选框 Radio</a></li>
                                 <li><a href="#e-radio">单选框组 RadioGroup</a></li>
                                 <li><a href="#e-select">下拉框 Select</a></li>
-                                <li><a href="#e-suggest">带模糊查询的下拉框 Suggest</a></li>
+                                <li><a href="#e-select">带模糊查询的下拉框 Suggest</a></li>
+                                <li><a href="#e-select">多选下拉框 MultiSelect</a></li>
+                                <li><a href="#e-select">联级选择器 Cascader</a></li>
+                                <li><a href="#e-form">表单 Form</a></li>
                                 <li><a href="#e-timerpicker">时间选择框 TimePicker</a></li>
+                            </ul>
+                            <div className="e-main-aside-nav-subtitle">导航 <span className="e-aside-nav-title-tip">Navigation</span></div>
+                            <ul className="e-main-aside">
+                                <li><a href="#e-navmenu">导航菜单 NavMenu</a></li>
+                                <li><a href="#e-tabs">标签页 Tabs</a></li>
+                                <li><a href="#e-breadcrumb">面包屑 BreadCrumb</a></li>
+                                <li><a href="#e-dropdown">下拉菜单 DropDown</a></li>
+                                <li><a href="#e-steps">步骤条 Steps</a></li>
                             </ul>
                             <div className="e-main-aside-nav-subtitle">通知 <span className="e-aside-nav-title-tip">Notice</span></div>
                             <ul className="e-main-aside">
@@ -226,31 +243,32 @@ class Container extends Component {
                             <legend className="e-container-subsubtitle">按钮 button</legend>
                             <section className="e-section-container">
                                 <h4 className="e-section-container-title" id="e-button">按钮 Button Normal</h4>
+                                <p className="e-section-intro"><b>按钮</b>：用户的即时操作，响应用户的点击行为的组件。 PS：主要分为正常、小型、大型三类按钮</p>
                                 <div className="e-section-demo">
-                                    <Button className="e-mr-1rem e-button-default">默认</Button>
-                                    <Button className="e-mr-1rem e-button-primary">正常</Button>
-                                    <Button className="e-mr-1rem e-button-success">成功</Button>
-                                    <Button className="e-mr-1rem e-button-warning">警告</Button>
-                                    <Button className="e-mr-1rem e-button-error">错误</Button>
-                                    <Button className="e-mr-1rem e-button-light">线条</Button>
-                                </div>
-                                <h4 className="e-section-container-title">按钮 Button Smaller</h4>
-                                <div className="e-section-demo">
-                                    <Button className="e-mr-1rem e-button-default e-button-small">默认</Button>
-                                    <Button className="e-mr-1rem e-button-primary e-button-small">正常</Button>
-                                    <Button className="e-mr-1rem e-button-success e-button-small">正常</Button>
-                                    <Button className="e-mr-1rem e-button-warning e-button-small">警告</Button>
-                                    <Button className="e-mr-1rem e-button-error e-button-small">错误</Button>
-                                    <Button className="e-mr-1rem e-button-light e-button-small">线条</Button>
-                                </div>
-                                <h4 className="e-section-container-title">按钮 Button Larger</h4>
-                                <div className="e-section-demo">
-                                    <Button className="e-mr-1rem e-button-default e-button-large">默认</Button>
-                                    <Button className="e-mr-1rem e-button-primary e-button-large">正常</Button>
-                                    <Button className="e-mr-1rem e-button-success e-button-large">正常</Button>
-                                    <Button className="e-mr-1rem e-button-warning e-button-large">警告</Button>
-                                    <Button className="e-mr-1rem e-button-error e-button-large">错误</Button>
-                                    <Button className="e-mr-1rem e-button-light e-button-large">线条</Button>
+                                    <div className="e-clear">
+                                        <Button className="e-mr-1rem e-button-default e-button-small">默认</Button>
+                                        <Button className="e-mr-1rem e-button-primary e-button-small">正常</Button>
+                                        <Button className="e-mr-1rem e-button-success e-button-small">正常</Button>
+                                        <Button className="e-mr-1rem e-button-warning e-button-small">警告</Button>
+                                        <Button className="e-mr-1rem e-button-error e-button-small">错误</Button>
+                                        <Button className="e-mr-1rem e-button-light e-button-small">线条</Button>
+                                    </div>
+                                    <div className="e-clear e-mt-10">
+                                        <Button className="e-mr-1rem e-button-default">默认</Button>
+                                        <Button className="e-mr-1rem e-button-primary">正常</Button>
+                                        <Button className="e-mr-1rem e-button-success">成功</Button>
+                                        <Button className="e-mr-1rem e-button-warning">警告</Button>
+                                        <Button className="e-mr-1rem e-button-error">错误</Button>
+                                        <Button className="e-mr-1rem e-button-light">线条</Button>
+                                    </div>
+                                    <div className="e-clear e-mt-10">
+                                        <Button className="e-mr-1rem e-button-default e-button-large">默认</Button>
+                                        <Button className="e-mr-1rem e-button-primary e-button-large">正常</Button>
+                                        <Button className="e-mr-1rem e-button-success e-button-large">正常</Button>
+                                        <Button className="e-mr-1rem e-button-warning e-button-large">警告</Button>
+                                        <Button className="e-mr-1rem e-button-error e-button-large">错误</Button>
+                                        <Button className="e-mr-1rem e-button-light e-button-large">线条</Button>
+                                    </div>
                                 </div>
                             </section>
                         </fieldset>
@@ -258,6 +276,7 @@ class Container extends Component {
                             <legend className="e-container-subsubtitle">表单 form</legend>
                             <section className="e-section-container">
                                 <h4 className="e-section-container-title" id="e-radio">单选框 RadioBox</h4>
+                                <p className="e-section-intro"><b>单选框</b>：多个备选项中选取一个备选项，常和 RadioBoxGroup 一起使用。</p>
                                 <div className="e-section-demo">
                                     <RadioBoxGroup name="radioBoxRef" ref="radioBoxRef">
                                         <RadioBox value="apple">苹果</RadioBox>
@@ -265,11 +284,11 @@ class Container extends Component {
                                         <RadioBox value="pear">梨子</RadioBox>
                                         <RadioBox value="grape">葡萄</RadioBox>
                                     </RadioBoxGroup>
-                                    {/* <Button className="e-ml-1rem" onClick={this.radioBoxHandleSubmit.bind(this)}>提交</Button> */}
                                     <span className="e-ph-1rem">{this.state.radioBoxGroupRefValue}</span>
                                     <br />
                                 </div>
                                 <h4 className="e-section-container-title" id="e-checkbox">多选框 CheckBox</h4>
+                                <p className="e-section-intro"><b>多选框</b>：多个备选项中选取任意个备选项，常和 CheckBoxGroup 一起使用。</p>
                                 <div className="e-section-demo">
                                     <CheckBoxGroup name="checkBoxRef" ref="checkBoxRef">
                                         <CheckBox value="apple">苹果</CheckBox>
@@ -277,38 +296,36 @@ class Container extends Component {
                                         <CheckBox value="pear">梨子</CheckBox>
                                         <CheckBox value="grape">葡萄</CheckBox>
                                     </CheckBoxGroup>
-                                    {/* <Button className="e-ml-1rem" onClick={this.checkBoxHandleSubmit.bind(this)}>提交</Button> */}
                                     <span className="e-ph-1rem">{this.state.checkBoxGroupRefValue}</span>
                                     <br />
                                 </div>
-                                <h4 className="e-section-container-title" id="e-input">文本框 TextBox</h4>
+                                <h4 className="e-section-container-title" id="e-input">输入框 Input</h4>
+                                <p className="e-section-intro"><b>输入框</b>：表单中文本域内容输入的组件。</p>
                                 <div className="e-section-demo">
-                                    <TextBox ref="textBoxRef" name="textBoxRef" onChange={this.changeHandle} onClick={this.clickHandle}
-                                        placeholder="请输入"
-                                        onFocus={this.focusHandle} onBlur={this.blurHandle} onInput={this.inputHandle} />
-                                    {/* <Button className="e-ml-1rem" onClick={this.textBoxHandleSubmit.bind(this)}>提交</Button> */}
-                                    <span className="e-ph-1rem">{this.state.textBoxRefValue}</span>
-                                    <br />
-                                </div>
-                                <h4 className="e-section-container-title" id="e-textarea">文本域 TextArea</h4>
-                                <div className="e-section-demo">
-                                    <TextArea ref="textAreaRef" name="textAreaRef" onChange={this.changeHandle} onClick={this.clickHandle}
-                                        defaultValue="默认文本"
-                                        onFocus={this.focusHandle} onBlur={this.blurHandle}></TextArea>
-                                    {/* <Button className="e-ml-1rem" onClick={this.textAreaHandleSubmit.bind(this)}>提交</Button> */}
-                                    <span className="e-ph-1rem">{this.state.textAreaRefValue}</span>
+                                    <div className="e-clear">
+                                        <TextBox ref="textBoxRef" name="textBoxRef" onChange={this.changeHandle} onClick={this.clickHandle}
+                                            placeholder="请输入"
+                                            onFocus={this.focusHandle} onBlur={this.blurHandle} onInput={this.inputHandle} />
+                                    </div>
+                                    <div className="e-clear e-mt-10">
+                                        <TextArea ref="textAreaRef" name="textAreaRef" onChange={this.changeHandle} onClick={this.clickHandle}
+                                            defaultValue="默认文本"
+                                            onFocus={this.focusHandle} onBlur={this.blurHandle}></TextArea>
+                                    </div>
                                 </div>
                                 <h4 className="e-section-container-title" id="e-select">下拉框 Select</h4>
+                                <p className="e-section-intro"><b>下拉框</b>：提供一个下拉菜单，为用户提供选择操作。 PS：包含单选、多选、联级、带模糊查询的选择器。</p>
                                 <div className="e-section-demo">
-                                    <Select ref="selectRef" name="selectRef" className="formSelect">
-                                        <ListItem value={1}>下拉项 一</ListItem>
-                                        <ListItem value={2}>下拉项 二</ListItem>
-                                        <ListItem value={3}>下拉项 三</ListItem>
-                                    </Select>
-                                    {/* <Button className="e-ml-1rem" onClick={this.selectHandleSubmit.bind(this)}>提交</Button> */}
-                                    <span className="e-ph-1rem">{this.state.selectRefValue}</span>
+                                    <div className="e-clear">
+                                        <Select ref="selectRef" name="selectRef" className="formSelect">
+                                            <ListItem value={1}>下拉项 一</ListItem>
+                                            <ListItem value={2}>下拉项 二</ListItem>
+                                            <ListItem value={3}>下拉项 三</ListItem>
+                                        </Select>
+                                    </div>
                                 </div>
                                 <h4 className="e-section-container-title" id="e-form">表单 Form</h4>
+                                <p className="e-section-intro"><b>表单</b>：具有数据收集、校验和提交功能的表单。 PS：包含复选框、单选框、输入框、下拉选择框等元素。</p>
                                 <div className="e-section-demo">
                                     <Form ref="formRef" value={this.state.formValue}>
                                         <h6>1.你经常吃水果吗？</h6>
@@ -353,9 +370,63 @@ class Container extends Component {
                                             <TextArea></TextArea>
                                         </FormItem>
                                     </Form>
-                                    <Button className="e-ml-1rem" onClick={this.setFormValue.bind(this)}>赋值</Button>
-                                    <Button className="e-ml-1rem" onClick={this.formHandleSubmit.bind(this)}>提交</Button>
-                                    <span className="e-ph-1rem">{this.state.formRefValue}</span>
+                                    <Button className="e-button-primary e-mt-10" onClick={this.setFormValue.bind(this)}>赋值</Button>
+                                    <Button className="e-ml-1rem e-mt-10" onClick={this.formHandleSubmit.bind(this)}>提交</Button>
+                                </div>
+                            </section>
+                        </fieldset>
+                        <fieldset className="e-fieldset">
+                            <legend className="e-container-subsubtitle">导航</legend>
+                            <section className="e-section-container">
+                                <h4 className="e-section-container-title" id="e-navmenu">导航菜单 NavMenu</h4>
+                                <p className="e-section-intro"><b>导航菜单</b>：为页面和功能提供导航的菜单列表。</p>
+                                <div className="e-section-demo">
+                                    <NavMenu>
+                                        <SubMenu>
+                                            <MenuTitle>导航一</MenuTitle>
+                                            <MenuItemGroup>
+                                                <MenuTitle>分组一</MenuTitle>
+                                                <MenuItem>菜单一</MenuItem>
+                                                <MenuItem>菜单二</MenuItem>
+                                            </MenuItemGroup>
+                                            <MenuItemGroup>
+                                                <MenuTitle>分组二</MenuTitle>
+                                                <MenuItem>菜单一</MenuItem>
+                                                <MenuItem>菜单二</MenuItem>
+                                            </MenuItemGroup>
+                                            <SubMenu>
+                                                <MenuTitle>分组二</MenuTitle>
+                                                <MenuItem>菜单一</MenuItem>
+                                                <MenuItem>菜单二</MenuItem>
+                                            </SubMenu>
+                                        </SubMenu>
+                                        <SubMenu>
+                                            <MenuTitle>导航二</MenuTitle>
+                                            <MenuItem>菜单一</MenuItem>
+                                            <MenuItem>菜单二</MenuItem>
+                                        </SubMenu>
+                                        <MenuItem>导航三</MenuItem>
+                                    </NavMenu>
+                                </div>
+                                <h4 className="e-section-container-title" id="e-navmenu">标签页 Tabs</h4>
+                                <p className="e-section-intro"><b>标签页</b>：分隔内容上有关联但属于不同类别的数据集合。</p>
+                                <div className="e-section-demo">
+
+                                </div>
+                                <h4 className="e-section-container-title" id="e-navmenu">面包屑 BreadCrumb</h4>
+                                <p className="e-section-intro"><b>面包屑</b>：</p>
+                                <div className="e-section-demo">
+
+                                </div>
+                                <h4 className="e-section-container-title" id="e-navmenu">拉下菜单 DropDown</h4>
+                                <p className="e-section-intro"><b>拉下菜单</b>：</p>
+                                <div className="e-section-demo">
+
+                                </div>
+                                <h4 className="e-section-container-title" id="e-navmenu">步骤条 Steps</h4>
+                                <p className="e-section-intro"><b>步骤条</b>：</p>
+                                <div className="e-section-demo">
+
                                 </div>
                             </section>
                         </fieldset>
@@ -363,85 +434,89 @@ class Container extends Component {
                             <legend className="e-container-subsubtitle">通知 Notice</legend>
                             <section className="e-section-container">
                                 <h4 className="e-section-container-title" id="e-alert">警告框 Alert</h4>
+                                <p className="e-section-intro"><b>操作提示</b>：各种类型的操作提示，多用于表单操作。 PS：有三种可选配置： 默认配置、带关闭按钮、带图标</p>
                                 <div className="e-section-demo">
-                                    <div className="e-row">
-                                        <div className="e-col">
-                                            <Alert className="e-mr-10">Default Description</Alert>
-                                        </div>
-                                        <div className="e-col">
-                                            <Alert className="e-mr-10" theme="primary">Primary Description</Alert>
-                                        </div>
-                                        <div className="e-col">
-                                            <Alert className="e-mr-10" theme="success">Success Description</Alert>
-                                        </div>
-                                        <div className="e-col">
-                                            <Alert className="e-mr-10" theme="error">Error Description</Alert>
-                                        </div>
-                                        <div className="e-col">
-                                            <Alert className="e-mr-10" theme="warning">Warning Description</Alert>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="e-section-demo e-mt-10">
-                                    <div className="e-row">
-                                        <div className="e-col">
-                                            <Alert className="e-mr-10" title="Default Alert">Default Description</Alert>
-                                        </div>
-                                        <div className="e-col">
-                                            <Alert className="e-mr-10" title="Primary Alert" theme="primary">Primary Description</Alert>
-                                        </div>
-                                        <div className="e-col">
-                                            <Alert className="e-mr-10" title="Success Alert" theme="success">Success Description</Alert>
-                                        </div>
-                                        <div className="e-col">
-                                            <Alert className="e-mr-10" title="Error Alert" theme="error">Error Description</Alert>
-                                        </div>
-                                        <div className="e-col">
-                                            <Alert className="e-mr-10" title="Warning Alert" theme="warning">Warning Description</Alert>
+                                    <div className="e-clear">
+                                        <div className="e-row">
+                                            <div className="e-col">
+                                                <Alert className="e-mr-10">Default Description</Alert>
+                                            </div>
+                                            <div className="e-col">
+                                                <Alert className="e-mr-10" theme="primary">Primary Description</Alert>
+                                            </div>
+                                            <div className="e-col">
+                                                <Alert className="e-mr-10" theme="success">Success Description</Alert>
+                                            </div>
+                                            <div className="e-col">
+                                                <Alert className="e-mr-10" theme="error">Error Description</Alert>
+                                            </div>
+                                            <div className="e-col">
+                                                <Alert className="e-mr-10" theme="warning">Warning Description</Alert>
+                                            </div>
                                         </div>
                                     </div>
+                                    <div className="e-clear e-mt-10">
+                                        <div className="e-row">
+                                            <div className="e-col">
+                                                <Alert className="e-mr-10" title="Default Alert">Default Description</Alert>
+                                            </div>
+                                            <div className="e-col">
+                                                <Alert className="e-mr-10" title="Primary Alert" theme="primary">Primary Description</Alert>
+                                            </div>
+                                            <div className="e-col">
+                                                <Alert className="e-mr-10" title="Success Alert" theme="success">Success Description</Alert>
+                                            </div>
+                                            <div className="e-col">
+                                                <Alert className="e-mr-10" title="Error Alert" theme="error">Error Description</Alert>
+                                            </div>
+                                            <div className="e-col">
+                                                <Alert className="e-mr-10" title="Warning Alert" theme="warning">Warning Description</Alert>
+                                            </div>
+                                        </div>
 
-                                </div>
-                                <div className="e-section-demo e-mt-10">
-                                    <div className="e-row">
-                                        <div className="e-col">
-                                            <Alert className="e-mr-10" title="Default Alert" close>Default Description</Alert>
-                                        </div>
-                                        <div className="e-col">
-                                            <Alert className="e-mr-10" title="Primary Alert" theme="primary" close>Primary Description</Alert>
-                                        </div>
-                                        <div className="e-col">
-                                            <Alert className="e-mr-10" title="Success Alert" theme="success" close>Success Description</Alert>
-                                        </div>
-                                        <div className="e-col">
-                                            <Alert className="e-mr-10" title="Error Alert" theme="error" close>Error Description</Alert>
-                                        </div>
-                                        <div className="e-col">
-                                            <Alert className="e-mr-10" title="Warning Alert" theme="warning" close>Warning Description</Alert>
+                                    </div>
+                                    <div className="e-clear e-mt-10">
+                                        <div className="e-row">
+                                            <div className="e-col">
+                                                <Alert className="e-mr-10" title="Default Alert" close>Default Description</Alert>
+                                            </div>
+                                            <div className="e-col">
+                                                <Alert className="e-mr-10" title="Primary Alert" theme="primary" close>Primary Description</Alert>
+                                            </div>
+                                            <div className="e-col">
+                                                <Alert className="e-mr-10" title="Success Alert" theme="success" close>Success Description</Alert>
+                                            </div>
+                                            <div className="e-col">
+                                                <Alert className="e-mr-10" title="Error Alert" theme="error" close>Error Description</Alert>
+                                            </div>
+                                            <div className="e-col">
+                                                <Alert className="e-mr-10" title="Warning Alert" theme="warning" close>Warning Description</Alert>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div className="e-section-demo">
-                                    <div className="e-row e-mt-10">
-                                        <div className="e-col">
-                                            <Alert className="e-mr-10" title="Default Alert" flag="default" close>Default Description</Alert>
-                                        </div>
-                                        <div className="e-col">
-                                            <Alert className="e-mr-10" title="Primary Alert" flag="primary" theme="primary" close>Primary Description</Alert>
-                                        </div>
-                                        <div className="e-col">
-                                            <Alert className="e-mr-10" title="Success Alert" flag="success" theme="success" close>Success Description</Alert>
-                                        </div>
-                                        <div className="e-col">
-                                            <Alert className="e-mr-10" title="Error Alert" flag="error" theme="error" close>Error Description</Alert>
-                                        </div>
-                                        <div className="e-col">
-                                            <Alert className="e-mr-10" title="Warning Alert" flag="warning" theme="warning" close>Warning Description</Alert>
+                                    <div className="e-clear e-mt-10">
+                                        <div className="e-row">
+                                            <div className="e-col">
+                                                <Alert className="e-mr-10" title="Default Alert" flag="default" close>Default Description</Alert>
+                                            </div>
+                                            <div className="e-col">
+                                                <Alert className="e-mr-10" title="Primary Alert" flag="primary" theme="primary" close>Primary Description</Alert>
+                                            </div>
+                                            <div className="e-col">
+                                                <Alert className="e-mr-10" title="Success Alert" flag="success" theme="success" close>Success Description</Alert>
+                                            </div>
+                                            <div className="e-col">
+                                                <Alert className="e-mr-10" title="Error Alert" flag="error" theme="error" close>Error Description</Alert>
+                                            </div>
+                                            <div className="e-col">
+                                                <Alert className="e-mr-10" title="Warning Alert" flag="warning" theme="warning" close>Warning Description</Alert>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                                 <h4 className="e-section-container-title" id="e-message">全局提示 Message</h4>
-                                <div className="e-section-demo e-mt-10">
+                                <p className="e-section-intro"><b>全局提示</b>：各种类型的全局消息提示，默认出现在窗口的顶层中间位置。</p>
+                                <div className="e-section-demo">
                                     <div className="e-row">
                                         <div className="e-col e-mr-1rem"><Button onClick={this.msgHandle.bind(null, "default")}>默认提示</Button></div>
                                         <div className="e-col e-mr-1rem"><Button className="e-button-primary" onClick={this.msgHandle.bind(null, "primary")}>常用提示</Button></div>
@@ -451,7 +526,8 @@ class Container extends Component {
                                     </div>
                                 </div>
                                 <h4 className="e-section-container-title" id="e-modal">对话框 Modal</h4>
-                                <div className="e-section-demo e-mt-10">
+                                <p className="e-section-intro"><b>消息提示</b>：各种类型的消息提示框，仅提供确认按钮关闭消息。</p>
+                                <div className="e-section-demo">
                                     <div className="e-row">
                                         <div className="e-col e-mr-1rem"><Button className="e-button-default" onClick={this.modalHandle.bind(null, "alert", "default")}>Default Show</Button></div>
                                         <div className="e-col e-mr-1rem"><Button className="e-button-primary" onClick={this.modalHandle.bind(null, "alert", "primary")}>Info Show</Button></div>
@@ -460,7 +536,8 @@ class Container extends Component {
                                         <div className="e-col e-mr-1rem"><Button className="e-button-error" onClick={this.modalHandle.bind(null, "alert", "error")}>Error Show</Button></div>
                                     </div>
                                 </div>
-                                <div className="e-section-demo e-mt-10">
+                                <p className="e-section-intro"><b>消息确认框</b>：各种类型的消息确认框，提供确认/取消按钮用于消息确认／取消。</p>
+                                <div className="e-section-demo">
                                     <div className="e-row">
                                         <div className="e-col e-mr-1rem"><Button className="e-button-default" onClick={this.modalHandle.bind(null, "confirm", "default")}>Default Confirm</Button></div>
                                         <div className="e-col e-mr-1rem"><Button className="e-button-primary" onClick={this.modalHandle.bind(null, "confirm", "primary")}>Info Confirm</Button></div>
@@ -469,10 +546,22 @@ class Container extends Component {
                                         <div className="e-col e-mr-1rem"><Button className="e-button-error" onClick={this.modalHandle.bind(null, "confirm", "error")}>Error Confirm</Button></div>
                                     </div>
                                 </div>
-                                <div className="e-section-demo e-mt-10">
+                                <p className="e-section-intro"><b>其他设置</b>：无遮罩模式（No Mask）／可拖拽模式(Dragable)。</p>
+                                <div className="e-section-demo">
                                     <div className="e-row">
                                         <div className="e-col e-mr-1rem"><Button className="e-button-default" onClick={this.modalHandle.bind(null, "alert", "default", false, false)}>No mask</Button></div>
                                         <div className="e-col e-mr-1rem"><Button className="e-button-primary" onClick={this.modalHandle.bind(null, "confirm", "primary", true, true)}>Dragable</Button></div>
+                                    </div>
+                                </div>
+                                <h4 className="e-section-container-title" id="e-notification">通知 Notification</h4>
+                                <p className="e-section-intro"><b>通知</b>：用于全局消息通知，悬浮出现在页面角。</p>
+                                <div className="e-section-demo">
+                                    <div className="e-row">
+                                        <div className="e-col e-mr-1rem"><Button className="e-button-default" onClick={this.notificationHandle.bind(null, "default", false)}>Default Show</Button></div>
+                                        <div className="e-col e-mr-1rem"><Button className="e-button-primary" onClick={this.notificationHandle.bind(null, "info", false)}>Info Show</Button></div>
+                                        <div className="e-col e-mr-1rem"><Button className="e-button-success" onClick={this.notificationHandle.bind(null, "success", false)}>Success Show</Button></div>
+                                        <div className="e-col e-mr-1rem"><Button className="e-button-warning" onClick={this.notificationHandle.bind(null, "warning", true)}>Warning Show</Button></div>
+                                        <div className="e-col e-mr-1rem"><Button className="e-button-error" onClick={this.notificationHandle.bind(null, "error", true)}>Error Show</Button></div>
                                     </div>
                                 </div>
                             </section>
