@@ -36,7 +36,7 @@
         &-list{
             padding-left: 8px;
             display: none;
-            transition:  all ease .4s;
+            overflow: hidden;
             &.open{
                 display: block;
             }
@@ -48,8 +48,11 @@
         }
     }
     &.black{
-        background: #666;
+        background: #333333;
         color: #fff;
         border-right: none;
+        .e-menuitem{
+            color: #fff;
+        }
     }
 }

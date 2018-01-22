@@ -98,6 +98,10 @@ body{
         border: 1px solid #ddd;
         padding: 20px 10px;
         border-top: 0;
+        &-title{
+            padding-left: 10px;
+            border-left: 6px solid #2196f3;
+        }
     }
     .e-section-container{
         margin: 0 20px;
@@ -118,4 +122,8 @@ body{
         border: 1px solid #666;
         color: #666;
     }
+}
+
+.e-flex{
+    display: flex;
 }
