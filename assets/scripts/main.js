@@ -16,7 +16,7 @@ import Alert from "./../../components/ui/alert/alert.jsx";
 import Message from "./../../components/ui/message/message.jsx";
 import { MessageBox } from "./../../components/ui/modal/modal.jsx";
 import { Notice } from "./../../components/ui/notification/notification.jsx";
-import NavMenu, { SubMenu, MenuTitle, MenuItemGroup, MenuItem } from "./../../components/ui/navMenu/navMenu.jsx";
+import NavMenu, { MenuItem, MenuItemTitle, MenuItemList, MenuItemFlag, SubMenu } from "./../../components/ui/navMenu/navMenu.jsx";
 class Container extends Component {
     constructor(props) {
         super(props)
@@ -382,30 +382,33 @@ class Container extends Component {
                                 <p className="e-section-intro"><b>导航菜单</b>：为页面和功能提供导航的菜单列表。</p>
                                 <div className="e-section-demo">
                                     <NavMenu>
-                                        <SubMenu>
-                                            <MenuTitle>导航一</MenuTitle>
-                                            <MenuItemGroup>
-                                                <MenuTitle>分组一</MenuTitle>
-                                                <MenuItem>菜单一</MenuItem>
-                                                <MenuItem>菜单二</MenuItem>
-                                            </MenuItemGroup>
-                                            <MenuItemGroup>
-                                                <MenuTitle>分组二</MenuTitle>
-                                                <MenuItem>菜单一</MenuItem>
-                                                <MenuItem>菜单二</MenuItem>
-                                            </MenuItemGroup>
-                                            <SubMenu>
-                                                <MenuTitle>分组二</MenuTitle>
-                                                <MenuItem>菜单一</MenuItem>
-                                                <MenuItem>菜单二</MenuItem>
-                                            </SubMenu>
-                                        </SubMenu>
-                                        <SubMenu>
-                                            <MenuTitle>导航二</MenuTitle>
-                                            <MenuItem>菜单一</MenuItem>
-                                            <MenuItem>菜单二</MenuItem>
-                                        </SubMenu>
+                                        <MenuItem>
+                                            <MenuItemTitle>导航一</MenuItemTitle>
+                                            <MenuItemList>
+                                                <MenuItemFlag>分栏一</MenuItemFlag>
+                                                <MenuItem>菜单 1</MenuItem>
+                                                <MenuItem>菜单 2</MenuItem>
+                                                <MenuItemFlag>分栏二</MenuItemFlag>
+                                                <MenuItem>菜单 1</MenuItem>
+                                                <MenuItem>菜单 2</MenuItem>
+                                                <SubMenu>
+                                                    <MenuItemTitle>菜单</MenuItemTitle>
+                                                    <MenuItemList>
+                                                        <MenuItem>子菜单 1</MenuItem>
+                                                        <MenuItem>子菜单 2</MenuItem>
+                                                    </MenuItemList>
+                                                </SubMenu>
+                                            </MenuItemList>
+                                        </MenuItem>
+                                        <MenuItem>
+                                            <MenuItemTitle>导航二</MenuItemTitle>
+                                            <MenuItemList>
+                                                <MenuItem>子菜单 1</MenuItem>
+                                                <MenuItem>子菜单 2</MenuItem>
+                                            </MenuItemList>
+                                        </MenuItem>
                                         <MenuItem>导航三</MenuItem>
+                                        <MenuItem>导航四</MenuItem>
                                     </NavMenu>
                                 </div>
                                 <h4 className="e-section-container-title" id="e-navmenu">标签页 Tabs</h4>
