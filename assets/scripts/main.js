@@ -409,7 +409,7 @@ class Container extends Component {
                                     </NavMenu>
                                 </div>
                                 <h4 className="e-section-container-title" id="e-navmenu">标签页 Tabs</h4>
-                                <p className="e-section-intro"><b>标签页</b>：分隔内容上有关联但属于不同类别的数据集合。</p>
+                                <p className="e-section-intro"><b>标签页</b>： 分隔内容上有关联但属于不同类别的数据集合。</p>
                                 <div className="e-section-demo">
 
                                 </div>
