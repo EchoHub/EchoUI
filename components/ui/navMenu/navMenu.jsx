@@ -24,9 +24,9 @@ export default class NavMenu extends Component {
                 }
             })())
         }
-        return <div 
-            className={`e-navmenu${this.props.className? " " + this.props.className : ""} ${this.props.theme || ""}`}
-            >{newArr}</div>
+        return <div
+            className={`e-navmenu${this.props.className ? " " + this.props.className : ""} ${this.props.theme || ""}`}
+        >{newArr}</div>
     }
 }
 /**
@@ -112,43 +112,19 @@ export class MenuItemList extends Component {
     }
     componentDidMount() {
         this.setState({
-            _selfClass: this.props.status? "open": ""
-        })
+            _selfClass: this.props.status ? "e-navmenu-collapsable" : ""
+        });
     }
     componentWillReceiveProps(nextProps, nextState) {
         const _self = findDOMNode(this);
-        let i = 1;
-        let realHeight;
         if (nextProps.status) {
             this.setState({
-                _selfClass: "open"
+                _selfClass: "e-navmenu-collapsable"
             });
-            const interTimer = setInterval(() => {
-                if (i === 1) {
-                    realHeight = _self.offsetHeight;
-                }
-                _self.style.height = i * 10 + "px";
-                if (_self.offsetHeight + 10 > realHeight) {
-                    _self.style.height = null;
-                    clearInterval(interTimer);
-                }
-                i++;
-            }, 5);
         } else {
-            const interTimer = setInterval(() => {
-                if (i === 1) {
-                    realHeight = _self.offsetHeight;
-                }
-                _self.style.height = realHeight - (i * 10) + "px";
-                if (_self.offsetHeight - 10 < 0) {
-                    clearInterval(interTimer);
-                    _self.style.height = null;
-                    this.setState({
-                        _selfClass: ""
-                    });
-                }
-                i++;
-            }, 5);
+            this.setState({
+                _selfClass: ""
+            });
         }
 
     }
@@ -189,6 +165,7 @@ export class SubMenu extends Component {
                         return <MenuItemList
                             key={key}
                             {...item.props}
+                            parent={this}
                             status={this.state.itemStatus}
                         ></MenuItemList>;
                     default:

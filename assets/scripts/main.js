@@ -8,6 +8,7 @@ import CheckBox from "./../../components/ui/checkBox/checkBox.jsx";
 import CheckBoxGroup from "./../../components/ui/checkBoxGroup/checkBoxGroup.jsx";
 import TextBox from "./../../components/ui/textBox/textBox.jsx";
 import TextArea from "./../../components/ui/textArea/textArea.jsx";
+import Switch from "./../../components/ui/switch/switch.jsx";
 import Select from "./../../components/ui/select/select.jsx";
 import { ListItem } from "./../../components/ui/comboBox/comboBox.jsx";
 import Form, { FormItem } from "./../../components/ui/form/form.jsx";
@@ -22,7 +23,8 @@ class Container extends Component {
         super(props)
         this.state = {
             date: new Date(),
-            formValue: {}
+            formValue: {},
+            switchStatus: "开"
         }
 
     }
@@ -58,6 +60,14 @@ class Container extends Component {
     }
     blurHandle(event) {
         // console.log("this is blur", event)
+    }
+    /**
+     * @desc switch 开关change事件
+     */
+    changeSwitchValue(event, vNode) {
+        this.setState({
+            switchStatus: vNode.value ? "开" : "关"
+        });
     }
     /**
      * @desc 表单提交
@@ -212,6 +222,7 @@ class Container extends Component {
                                 <li><a href="#e-input">计数器 InputNumber</a></li>
                                 <li><a href="#e-radio">单选框 Radio</a></li>
                                 <li><a href="#e-radio">单选框组 RadioGroup</a></li>
+                                <li><a href="#e-switch">开关 Switch</a></li>
                                 <li><a href="#e-select">下拉框 Select</a></li>
                                 <li><a href="#e-select">带模糊查询的下拉框 Suggest</a></li>
                                 <li><a href="#e-select">多选下拉框 MultiSelect</a></li>
@@ -298,6 +309,43 @@ class Container extends Component {
                                     </CheckBoxGroup>
                                     <span className="e-ph-1rem">{this.state.checkBoxGroupRefValue}</span>
                                     <br />
+                                </div>
+                                <h4 className="e-section-container-title" id="e-switch">开关 Switch</h4>
+                                <p className="e-section-intro"><b>开关</b>：开关选择器，表示开关状态／两种状态之间的切换。</p>
+                                <div className="e-section-demo">
+                                    <h5 className="e-section-demo-title">1.基本用法</h5>
+                                    <Switch
+                                        className="e-switch"
+                                        name="switchRef"
+                                        ref="switchRef"
+                                        defaultChekced
+                                        onChange={(event, vNode) => { this.changeSwitchValue(event, vNode) }}></Switch>
+                                    <span className="e-ph-1rem">{this.state.switchStatus}</span>
+                                    <h5 className="e-section-demo-title">1.不可用状态</h5>
+                                    <Switch
+                                        className="e-switch"
+                                        name="switchRef"
+                                        ref="switchRef"
+                                        disabled
+                                    >
+                                    </Switch>
+                                    <h5 className="e-section-demo-title">2.不同尺寸</h5>
+                                    <Switch
+                                        className="e-switch e-mr-1rem"
+                                        name="switchRef"
+                                        ref="switchRef"
+                                        defaultChekced
+                                        size="small"
+                                    >
+                                    </Switch>
+                                    <Switch
+                                        className="e-switch"
+                                        name="switchRef"
+                                        ref="switchRef"
+                                        defaultChekced
+                                        size="large"
+                                    >
+                                    </Switch>
                                 </div>
                                 <h4 className="e-section-container-title" id="e-input">输入框 Input</h4>
                                 <p className="e-section-intro"><b>输入框</b>：表单中文本域内容输入的组件。</p>

@@ -1,0 +1,39 @@
+@import "./../../common";
+.e-switch{
+    background: rgba(0, 0, 0, 0.25);
+    min-width: 44px;
+    height: 22px;
+    display: inline-block;
+    border-radius: 25%;
+    border-radius: 100px;
+    vertical-align: middle;
+    cursor: pointer;
+    position: relative;
+    transition: all ease .5s;
+    &:after{
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        color: #fff;
+        display: inline-block;
+        content: "";
+        margin-left: 2px;
+        background: #fff;
+        margin-top: 1px;
+    }
+    &.e-switch-checked{
+        background: #2196f3;
+        &:after{
+            margin-left: 22px;
+        }
+    } 
+    &.e-switch-small{
+        transform: scale(.8);
+    }
+    &.e-switch-large{
+        transform: scale(1.2);
+    }
+    &.e-switch-disabled{
+        background: rgba(0, 0, 0, .25);
+    }
+}

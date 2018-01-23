@@ -1,6 +1,6 @@
-import React, { Component } from "react"
-import Control from "./../control/control.jsx"
-import "./input.scss"
+import React, { Component } from "react";
+import Control from "./../control/control.jsx";
+import "./input.scss";
 /**
  * @desc 表示一个输入框基类
  */

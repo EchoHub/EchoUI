@@ -1,8 +1,14 @@
-界面组件:
+界面组件:（共 30 个， ✅ 18 个）
     通用：（共 2 个，✅ 1 个）
       - ui/button 按钮 ✅
       - ui/buttonGroup 按钮组
-    表单：(共 17 个， ✅ 12 个)
+    表单：(共 18 个， ✅ 13 个)
+      - ui/checkBox 多选框 ✅
+      - ui/checkBoxGroup 多选框组 ✅
+      - ui/radioBox 单选框 ✅
+      - ui/radioBoxGroup 单选框组 ✅
+      - ui/form ✅
+      - ui/formItem ✅
       - ui/input 输入框基类  ✅
       - ui/textBox 文本框  ✅
       - ui/textArea 文本域  ✅
@@ -13,15 +19,10 @@
       - ui/comboxBox 组合框 ✅
       - ui/listItem 列表项 ✅
       - ui/multiListBox 多选列表
-      - ui/checkBox 多选框 ✅
-      - ui/checkBoxGroup 多选框组 ✅
-      - ui/radioBox 单选框 ✅
-      - ui/radioBoxGroup 单选框组 ✅
-      - ui/form ✅
-      - ui/formItem ✅
+      - ui/switch 开关 ✅
       - ui/timePicker 时间选择框
     导航：(共 5 个， ✅  个)
-      - ui/navMenu 导航菜单
+      - ui/navMenu 导航菜单 
       - ui/tabs 标签页
       - ui/breadCrumbs 面包屑
       - ui/dropDown 拉下菜单
