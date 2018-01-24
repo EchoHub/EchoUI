@@ -50,7 +50,8 @@ export default class NavMenu extends Component {
 }
 NavMenu.defaultProps = {
     theme: "default",
-    inlineCollapsed: false
+    inlineCollapsed: false,
+    model: "vertical" // 预留 弹出模式（popup）、垂直模式(vertical)、水平模式(horizontal)
 }
 /**
  * @desc 菜单项

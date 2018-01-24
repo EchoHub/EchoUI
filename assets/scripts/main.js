@@ -525,7 +525,7 @@ class Container extends Component {
                                             </NavMenu>
                                         </div>
                                     </section>
-                                    <section>
+                                    {/* <section>
                                         <h5 className="e-section-demo-title">3.垂直菜单，子菜单为弹出形式</h5>
                                         <Switch className="e-mv-10"></Switch>
                                         <div className="e-flex">
@@ -559,7 +559,7 @@ class Container extends Component {
                                                 <MenuItem>导航四</MenuItem>
                                             </NavMenu>
                                         </div>
-                                    </section>
+                                    </section> */}
                                     <section>
                                         <h5 className="e-section-demo-title">4.换肤</h5>
                                         <Switch
@@ -604,7 +604,7 @@ class Container extends Component {
                                 <h4 className="e-section-container-title" id="e-tabs">标签页 Tabs</h4>
                                 <p className="e-section-intro"><b>标签页</b>： 分隔内容上有关联但属于不同类别的数据集合。</p>
                                 <div className="e-section-demo">
-
+                                    
                                 </div>
                                 <h4 className="e-section-container-title" id="e-breadcrumb">面包屑 BreadCrumb</h4>
                                 <p className="e-section-intro"><b>面包屑</b>：</p>
