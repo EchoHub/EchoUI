@@ -43,14 +43,28 @@ export function propsFilter(props, className) {
  * @desc 去重
  * @param {*} arr 
  */
-export function unique(arr){
-    var res=[];
-    for(var i=0,len=arr.length;i<len;i++){
+export function unique(arr) {
+    var res = [];
+    for (var i = 0, len = arr.length; i < len; i++) {
         var obj = arr[i];
-        for(var j=0,jlen = res.length;j<jlen;j++){
-            if(res[j]===obj) break;            
+        for (var j = 0, jlen = res.length; j < jlen; j++) {
+            if (res[j] === obj) break;
         }
-        if(jlen===j)res.push(obj);
+        if (jlen === j) res.push(obj);
     }
     return res;
+}
+
+/**
+ * @desc 向上寻找指定节点
+ */
+export function closest(el, selector) {
+    var matchesSelector = el.matches || el.webkitMatchesSelector || el.mozMatchesSelector || el.msMatchesSelector;
+    while (el) {
+        if (matchesSelector.call(el, selector)) {
+            break;
+        }
+        el = el.parentElement;
+    }
+    return el;
 }

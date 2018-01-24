@@ -11,19 +11,38 @@
     -webkit-user-select: none;
     -ms-user-select: none;
     user-select: none;
+    transition: width ease-in-out .4s;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
     .e-menuitem{
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
         line-height: 40px;
         color: rgba(0, 0, 0, 0.65);
-        padding-right: 16px;
-        padding-left: 20px;
+        // padding-right: 16px;
+        // padding-left: 20px;
         font-size: 14px;
         &-title{
             cursor: pointer;
             font-size: 15px;
             transition: all ease .4s;
+            overflow: hidden;
+            padding-left: 20px;
+            &:not(.selected):hover{
+                color: #2196f3;
+            }
+            &.selected{
+                background: #e6f7ff;
+                color: #2196f3;
+                border-right: 4px solid #2196f3;
+            }
             &-flag{
                 transition: all ease .3s;
                 float: right;
+                right: 16px;
+                position: relative;
             }
             &.active .e-menuitem-title-flag{
                 transform: rotate(180deg);
@@ -34,21 +53,29 @@
             }
         }
         &-flag {
+            padding-left: 20px;
             font-size: 13px;
             color: #bbb;
             line-height: 1.5;
         }
         &-list{
+            overflow: hidden;
             padding-left: 8px;
             overflow: hidden;
             display: none;
-            transition: height ease-in-out .4s;
+            transition: height ease-in-out .25s;
+            -moz-transition: height ease-in-out .25s;
+            -ms-transition: height ease-in-out .25s;
+            -o-transition: height ease-in-out .25s;
+            -webkit-transition: height ease-in-out .25s;
             position: relative;
-            &.e-navmenu-collapsable{
+            &.e-navmenu-list-collapsable{
                 display: block;
             }
-            &.e-navmenu-collapsing{
-                display: block;
+            .e-menuitem{
+                .e-menuitem-title{
+                    padding-left: 36px;
+                }
             }
         }
     }
@@ -63,6 +90,22 @@
         border-right: none;
         .e-menuitem{
             color: #fff;
+            &-title{
+                &.selected{
+                    background: #2196f3;
+                    color: #e6f7ff;
+                    border-right: 4px solid #e6f7ff;
+                }
+            }
+        }
+    }
+    &.e-navmenu-collapsable {
+        display: block;
+    }
+    &.e-navmenu-collapsed {
+        width: 60px;
+        .e-menuitem-title .e-menuitem-content, .e-menuitem-title .e-menuitem-title-flag, .e-menuitem-list{
+            display: none;
         }
     }
 }

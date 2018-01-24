@@ -1,33 +1,56 @@
 import React, { Component } from "react";
 import { findDOMNode } from "react-dom";
+import { closest } from "./../control/control.jsx";
 import "./navMenu.scss";
 
 export default class NavMenu extends Component {
     constructor(props) {
         super(props)
     }
+    componentWillReceiveProps(nextProps, nextState) {
+        // 主题切换
+        // if (nextProps.theme !== this.props.theme) {
+        //     findDOMNode(this).className = `e-navmenu${nextProps.className ? " " + nextProps.className : ""} ${nextProps.theme || ""}`;
+        // }
+        // 展开收起控制
+        if (nextProps.inlineCollapsed !== this.props.inlineCollapsed) {
+            this.setMenuCollapsed(nextProps.inlineCollapsed);
+        }
+    }
+    componentDidMount() {
+        this.setMenuCollapsed(this.props.inlineCollapsed)
+    }
+    // 设置 菜单展开收起
+    setMenuCollapsed(v) {
+        const _self = findDOMNode(this);
+        if (v) {
+            _self.classList.add("e-navmenu-collapsed")
+        } else {
+            _self.className = _self.className.replace(/e-navmenu-collapsed/, "");
+        }
+    }
     render() {
         const children = this.props.children;
         let newArr = [];
         for (const key in children) {
             const item = children[key];
-            newArr.push((() => {
-                switch (item.type && item.type.name) {
-                    case "MenuItem":
-                        return <MenuItem
-                            key={key}
-                            {...item.props}
-                            parent={this}
-                        ></MenuItem>;
-                    default:
-                        return item;
-                }
-            })())
+            newArr.push(
+                <MenuItem
+                    key={key}
+                    {...item.props}
+                    parent={this}
+                    inlineCollapsed={this.props.inlineCollapsed}
+                ></MenuItem>
+            );
         }
         return <div
             className={`e-navmenu${this.props.className ? " " + this.props.className : ""} ${this.props.theme || ""}`}
         >{newArr}</div>
     }
+}
+NavMenu.defaultProps = {
+    theme: "default",
+    inlineCollapsed: false
 }
 /**
  * @desc 菜单项
@@ -47,14 +70,17 @@ export class MenuItem extends Component {
     render() {
         const children = this.props.children;
         let newArr = [];
-        for (const key in children) {
-            const item = children[key];
+        for (const key in (typeof children === "object" ? children : [children])) {
+            // 如果为String类型 则为文本内容
+            const item = typeof children[key] === "string" ? children: children[key];
             newArr.push((() => {
                 switch (item.type && item.type.name) {
                     case "MenuItemTitle":
                         return <MenuItemTitle
                             key={key}
                             {...item.props}
+                            icon = {this.props.icon}
+                            inlineCollapsed = {this.props.inlineCollapsed}
                             parent={this}
                             itemStatus={this.state.itemStatus}
                         ></MenuItemTitle>;
@@ -65,11 +91,18 @@ export class MenuItem extends Component {
                             status={this.state.itemStatus}
                         ></MenuItemList>;
                     default:
-                        return item;
+                        return <MenuItemTitle
+                            key={key}
+                            {...item.props}
+                            icon = {this.props.icon}
+                            inlineCollapsed = {this.props.inlineCollapsed}
+                            disabled
+                        >{item}</MenuItemTitle>;
                 }
             })())
         }
-        return <div className="e-menuitem">{newArr}</div>
+        return <div className="e-menuitem">
+            {newArr}</div>
     }
 }
 
@@ -79,12 +112,35 @@ export class MenuItem extends Component {
 export class MenuItemTitle extends Component {
     constructor(props) {
         super(props);
+        this.state = {
+            hasSelected: false
+        }
+    }
+    goHandler() {
+        // true 表示为菜单栏 false说明为导航
+        if(this.props.disabled) {
+            const _self = findDOMNode(this);
+            const containerNode = closest(_self, ".e-navmenu");
+            for(const item of containerNode.querySelectorAll(".selected")) {
+                item.className = item.className.replace(/selected/, "")
+            }
+            _self.classList.add("selected");
+            this.setState({
+                hasSelected: true
+            });
+        }else {
+            this.props.parent.toggleMenuItemList(!this.props.itemStatus)
+        }
+
     }
     render() {
-        return <div className={`e-menuitem-title${this.props.itemStatus ? " active" : ""}`}
-            onClick={() => { this.props.parent.toggleMenuItemList(!this.props.itemStatus) }}>
-            {this.props.children}
-            <span className="icon iconfont e-menuitem-title-flag">&#xe695;</span>
+        return <div className={`e-menuitem-title${this.props.itemStatus ? " active" : ""}${this.state.hasSelected ? " selected": ""}`}
+            onClick={() => { this.goHandler() }}>
+            {this.props.icon ? <span className={`e-mr-4 icon iconfont ${this.props.icon}`}></span> :
+                this.props.inlineCollapsed ?
+                    <span className={`e-mr-4 icon iconfont icon-star`}></span> : null}
+            <span className="e-menuitem-content">{this.props.children}</span>
+            {!this.props.disabled ? <span className="icon iconfont e-menuitem-title-flag">&#xe695;</span> : null}
         </div>
     }
 }
@@ -112,21 +168,41 @@ export class MenuItemList extends Component {
     }
     componentDidMount() {
         this.setState({
-            _selfClass: this.props.status ? "e-navmenu-collapsable" : ""
+            _selfClass: this.props.status ? "e-navmenu-list-collapsable" : ""
         });
     }
     componentWillReceiveProps(nextProps, nextState) {
-        const _self = findDOMNode(this);
-        if (nextProps.status) {
-            this.setState({
-                _selfClass: "e-navmenu-collapsable"
-            });
-        } else {
-            this.setState({
-                _selfClass: ""
-            });
+        if (nextProps.status !== this.props.status) {
+            const _self = findDOMNode(this);
+            this.toggleCollapsed(nextProps.status, _self)
         }
-
+    }
+    componentDidMount() {
+        const _self = findDOMNode(this);
+        const props = this.props;
+        this.toggleCollapsed(props.status, _self)
+    }
+    toggleCollapsed(status, _self) {
+        if (status) {
+            _self.classList.add("e-navmenu-list-collapsable");
+            const realHeight = _self.offsetHeight;
+            _self.style.height = 0;
+            setTimeout(() => {
+                _self.style.height = realHeight + "px";
+                setTimeout(() => {
+                    _self.style.height = null;
+                }, 250);
+            }, 30);
+        } else {
+            _self.style.height = _self.offsetHeight + "px";
+            setTimeout(() => {
+                _self.style.height = 0;
+                setTimeout(() => {
+                    _self.className = "e-menuitem-list";
+                    _self.style.height = null;
+                }, 250);
+            }, 30);
+        }
     }
     render() {
         return <div className={`e-menuitem-list${" " + this.state._selfClass || ""}`}>{this.props.children}</div>

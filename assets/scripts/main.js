@@ -24,7 +24,9 @@ class Container extends Component {
         this.state = {
             date: new Date(),
             formValue: {},
-            switchStatus: "开"
+            switchStatus: "开",
+            switchTheme: "black",
+            inlineCollapsed: false
         }
 
     }
@@ -95,7 +97,22 @@ class Container extends Component {
             }
         })
     }
-
+    /**
+     * @desc navmenu 展开收起
+     */
+    collpaseNavMenuHandler() {
+        this.setState({
+            inlineCollapsed: !this.state.inlineCollapsed
+        });
+    }
+    /**
+     * @desc navmenu 换肤
+     */
+    changeSwitchTheme(event, vNode) {
+        this.setState({
+            switchTheme: vNode.value ? "black" : "default"
+        });
+    }
     /**
      * @desc message 全局提示
      */
@@ -318,10 +335,10 @@ class Container extends Component {
                                         className="e-switch"
                                         name="switchRef"
                                         ref="switchRef"
-                                        defaultChekced
+                                        defaultChecked
                                         onChange={(event, vNode) => { this.changeSwitchValue(event, vNode) }}></Switch>
                                     <span className="e-ph-1rem">{this.state.switchStatus}</span>
-                                    <h5 className="e-section-demo-title">1.不可用状态</h5>
+                                    <h5 className="e-section-demo-title">2.不可用状态</h5>
                                     <Switch
                                         className="e-switch"
                                         name="switchRef"
@@ -329,12 +346,20 @@ class Container extends Component {
                                         disabled
                                     >
                                     </Switch>
-                                    <h5 className="e-section-demo-title">2.不同尺寸</h5>
+                                    <h5 className="e-section-demo-title">3.带文字和图标</h5>
+                                    <Switch
+                                        className="e-switch"
+                                        name="switchRef"
+                                        ref="switchRef"
+                                        content={{ true: 1, false: 0 }}
+                                    >
+                                    </Switch>
+                                    <h5 className="e-section-demo-title">4.不同尺寸</h5>
                                     <Switch
                                         className="e-switch e-mr-1rem"
                                         name="switchRef"
                                         ref="switchRef"
-                                        defaultChekced
+                                        defaultChecked
                                         size="small"
                                     >
                                     </Switch>
@@ -342,7 +367,7 @@ class Container extends Component {
                                         className="e-switch"
                                         name="switchRef"
                                         ref="switchRef"
-                                        defaultChekced
+                                        defaultChecked
                                         size="large"
                                     >
                                     </Switch>
@@ -429,151 +454,169 @@ class Container extends Component {
                                 <h4 className="e-section-container-title" id="e-navmenu">导航菜单 NavMenu</h4>
                                 <p className="e-section-intro"><b>导航菜单</b>：为页面和功能提供导航的菜单列表。</p>
                                 <div className="e-section-demo">
-                                    <h5 className="e-section-demo-title">1.垂直菜单， 内嵌子菜单</h5>
-                                    <div className="e-flex">
-                                        <NavMenu>
-                                            <MenuItem show>
-                                                <MenuItemTitle>导航一</MenuItemTitle>
-                                                <MenuItemList>
-                                                    <MenuItemFlag>分栏一</MenuItemFlag>
-                                                    <MenuItem>菜单 1</MenuItem>
-                                                    <MenuItem>菜单 2</MenuItem>
-                                                    <MenuItemFlag>分栏二</MenuItemFlag>
-                                                    <MenuItem>菜单 1</MenuItem>
-                                                    <MenuItem>菜单 2</MenuItem>
-                                                    <SubMenu show>
-                                                        <MenuItemTitle>菜单</MenuItemTitle>
-                                                        <MenuItemList>
-                                                            <MenuItem>子菜单 1</MenuItem>
-                                                            <MenuItem>子菜单 2</MenuItem>
-                                                        </MenuItemList>
-                                                    </SubMenu>
-                                                </MenuItemList>
-                                            </MenuItem>
-                                            <MenuItem>
-                                                <MenuItemTitle>导航二</MenuItemTitle>
-                                                <MenuItemList>
-                                                    <MenuItem>子菜单 1</MenuItem>
-                                                    <MenuItem>子菜单 2</MenuItem>
-                                                </MenuItemList>
-                                            </MenuItem>
-                                            <MenuItem>导航三</MenuItem>
-                                            <MenuItem>导航四</MenuItem>
-                                        </NavMenu>
-                                    </div>
-                                    <h5 className="e-section-demo-title">2.折叠</h5>
-                                    <div className="e-flex">
-                                        <NavMenu>
-                                            <MenuItem show>
-                                                <MenuItemTitle>导航一</MenuItemTitle>
-                                                <MenuItemList>
-                                                    <MenuItemFlag>分栏一</MenuItemFlag>
-                                                    <MenuItem>菜单 1</MenuItem>
-                                                    <MenuItem>菜单 2</MenuItem>
-                                                    <MenuItemFlag>分栏二</MenuItemFlag>
-                                                    <MenuItem>菜单 1</MenuItem>
-                                                    <MenuItem>菜单 2</MenuItem>
-                                                    <SubMenu show>
-                                                        <MenuItemTitle>菜单</MenuItemTitle>
-                                                        <MenuItemList>
-                                                            <MenuItem>子菜单 1</MenuItem>
-                                                            <MenuItem>子菜单 2</MenuItem>
-                                                        </MenuItemList>
-                                                    </SubMenu>
-                                                </MenuItemList>
-                                            </MenuItem>
-                                            <MenuItem>
-                                                <MenuItemTitle>导航二</MenuItemTitle>
-                                                <MenuItemList>
-                                                    <MenuItem>子菜单 1</MenuItem>
-                                                    <MenuItem>子菜单 2</MenuItem>
-                                                </MenuItemList>
-                                            </MenuItem>
-                                            <MenuItem>导航三</MenuItem>
-                                            <MenuItem>导航四</MenuItem>
-                                        </NavMenu>
-                                    </div>
-                                    <h5 className="e-section-demo-title">3.垂直菜单，子菜单为弹出形式</h5>
-                                    <div className="e-flex">
-                                        <NavMenu>
-                                            <MenuItem show>
-                                                <MenuItemTitle>导航一</MenuItemTitle>
-                                                <MenuItemList>
-                                                    <MenuItemFlag>分栏一</MenuItemFlag>
-                                                    <MenuItem>菜单 1</MenuItem>
-                                                    <MenuItem>菜单 2</MenuItem>
-                                                    <MenuItemFlag>分栏二</MenuItemFlag>
-                                                    <MenuItem>菜单 1</MenuItem>
-                                                    <MenuItem>菜单 2</MenuItem>
-                                                    <SubMenu show>
-                                                        <MenuItemTitle>菜单</MenuItemTitle>
-                                                        <MenuItemList>
-                                                            <MenuItem>子菜单 1</MenuItem>
-                                                            <MenuItem>子菜单 2</MenuItem>
-                                                        </MenuItemList>
-                                                    </SubMenu>
-                                                </MenuItemList>
-                                            </MenuItem>
-                                            <MenuItem>
-                                                <MenuItemTitle>导航二</MenuItemTitle>
-                                                <MenuItemList>
-                                                    <MenuItem>子菜单 1</MenuItem>
-                                                    <MenuItem>子菜单 2</MenuItem>
-                                                </MenuItemList>
-                                            </MenuItem>
-                                            <MenuItem>导航三</MenuItem>
-                                            <MenuItem>导航四</MenuItem>
-                                        </NavMenu>
-                                    </div>
-                                    <h5 className="e-section-demo-title">4.换肤</h5>
-                                    <div className="e-flex">
-                                        <NavMenu theme="black">
-                                            <MenuItem show>
-                                                <MenuItemTitle>导航一</MenuItemTitle>
-                                                <MenuItemList>
-                                                    <MenuItemFlag>分栏一</MenuItemFlag>
-                                                    <MenuItem>菜单 1</MenuItem>
-                                                    <MenuItem>菜单 2</MenuItem>
-                                                    <MenuItemFlag>分栏二</MenuItemFlag>
-                                                    <MenuItem>菜单 1</MenuItem>
-                                                    <MenuItem>菜单 2</MenuItem>
-                                                    <SubMenu show>
-                                                        <MenuItemTitle>菜单</MenuItemTitle>
-                                                        <MenuItemList>
-                                                            <MenuItem>子菜单 1</MenuItem>
-                                                            <MenuItem>子菜单 2</MenuItem>
-                                                        </MenuItemList>
-                                                    </SubMenu>
-                                                </MenuItemList>
-                                            </MenuItem>
-                                            <MenuItem>
-                                                <MenuItemTitle>导航二</MenuItemTitle>
-                                                <MenuItemList>
-                                                    <MenuItem>子菜单 1</MenuItem>
-                                                    <MenuItem>子菜单 2</MenuItem>
-                                                </MenuItemList>
-                                            </MenuItem>
-                                            <MenuItem>导航三</MenuItem>
-                                            <MenuItem>导航四</MenuItem>
-                                        </NavMenu>
-                                    </div>
+                                    <section>
+                                        <h5 className="e-section-demo-title">1.垂直菜单， 内嵌子菜单</h5>
+                                        <div className="e-flex">
+                                            <NavMenu>
+                                                <MenuItem show>
+                                                    <MenuItemTitle>导航一</MenuItemTitle>
+                                                    <MenuItemList>
+                                                        <MenuItemFlag>分栏一</MenuItemFlag>
+                                                        <MenuItem>菜单 1</MenuItem>
+                                                        <MenuItem>菜单 2</MenuItem>
+                                                        <MenuItemFlag>分栏二</MenuItemFlag>
+                                                        <MenuItem>菜单 1</MenuItem>
+                                                        <MenuItem>菜单 2</MenuItem>
+                                                        <SubMenu show>
+                                                            <MenuItemTitle>菜单</MenuItemTitle>
+                                                            <MenuItemList>
+                                                                <MenuItem>子菜单 1</MenuItem>
+                                                                <MenuItem>子菜单 2</MenuItem>
+                                                            </MenuItemList>
+                                                        </SubMenu>
+                                                    </MenuItemList>
+                                                </MenuItem>
+                                                <MenuItem show>
+                                                    <MenuItemTitle>导航二</MenuItemTitle>
+                                                    <MenuItemList>
+                                                        <MenuItem>子菜单 1</MenuItem>
+                                                        <MenuItem>子菜单 2</MenuItem>
+                                                    </MenuItemList>
+                                                </MenuItem>
+                                                <MenuItem>导航三</MenuItem>
+                                                <MenuItem>导航四</MenuItem>
+                                            </NavMenu>
+                                        </div>
+                                    </section>
+                                    <section>
+                                        <h5 className="e-section-demo-title">2.垂直菜单，可折叠</h5>
+                                        <Button className="e-mv-10 icon iconfont icon-collapse e-button-primary" onClick={event => { this.collpaseNavMenuHandler() }}></Button>
+                                        <div className="e-flex">
+                                            <NavMenu
+                                                inlineCollapsed={this.state.inlineCollapsed}
+                                            >
+                                                <MenuItem icon={"icon-all"} show>
+                                                    <MenuItemTitle>导航一</MenuItemTitle>
+                                                    <MenuItemList>
+                                                        <MenuItemFlag>分栏一</MenuItemFlag>
+                                                        <MenuItem>菜单 1</MenuItem>
+                                                        <MenuItem>菜单 2</MenuItem>
+                                                        <MenuItemFlag>分栏二</MenuItemFlag>
+                                                        <MenuItem>菜单 1</MenuItem>
+                                                        <MenuItem>菜单 2</MenuItem>
+                                                        <SubMenu show>
+                                                            <MenuItemTitle>菜单</MenuItemTitle>
+                                                            <MenuItemList>
+                                                                <MenuItem>子菜单 1</MenuItem>
+                                                                <MenuItem>子菜单 2</MenuItem>
+                                                            </MenuItemList>
+                                                        </SubMenu>
+                                                    </MenuItemList>
+                                                </MenuItem>
+                                                <MenuItem icon={"icon-all"}>
+                                                    <MenuItemTitle>导航二</MenuItemTitle>
+                                                    <MenuItemList>
+                                                        <MenuItem>子菜单 1</MenuItem>
+                                                        <MenuItem>子菜单 2</MenuItem>
+                                                    </MenuItemList>
+                                                </MenuItem>
+                                                <MenuItem >导航三</MenuItem>
+                                                <MenuItem icon={"icon-all"}>导航四</MenuItem>
+                                            </NavMenu>
+                                        </div>
+                                    </section>
+                                    <section>
+                                        <h5 className="e-section-demo-title">3.垂直菜单，子菜单为弹出形式</h5>
+                                        <Switch className="e-mv-10"></Switch>
+                                        <div className="e-flex">
+                                            <NavMenu className="e-clearfix">
+                                                <MenuItem show>
+                                                    <MenuItemTitle>导航一</MenuItemTitle>
+                                                    <MenuItemList>
+                                                        <MenuItemFlag>分栏一</MenuItemFlag>
+                                                        <MenuItem>菜单 1</MenuItem>
+                                                        <MenuItem>菜单 2</MenuItem>
+                                                        <MenuItemFlag>分栏二</MenuItemFlag>
+                                                        <MenuItem>菜单 1</MenuItem>
+                                                        <MenuItem>菜单 2</MenuItem>
+                                                        <SubMenu show>
+                                                            <MenuItemTitle>菜单</MenuItemTitle>
+                                                            <MenuItemList>
+                                                                <MenuItem>子菜单 1</MenuItem>
+                                                                <MenuItem>子菜单 2</MenuItem>
+                                                            </MenuItemList>
+                                                        </SubMenu>
+                                                    </MenuItemList>
+                                                </MenuItem>
+                                                <MenuItem>
+                                                    <MenuItemTitle>导航二</MenuItemTitle>
+                                                    <MenuItemList>
+                                                        <MenuItem>子菜单 1</MenuItem>
+                                                        <MenuItem>子菜单 2</MenuItem>
+                                                    </MenuItemList>
+                                                </MenuItem>
+                                                <MenuItem>导航三</MenuItem>
+                                                <MenuItem>导航四</MenuItem>
+                                            </NavMenu>
+                                        </div>
+                                    </section>
+                                    <section>
+                                        <h5 className="e-section-demo-title">4.换肤</h5>
+                                        <Switch
+                                            className="e-mv-10"
+                                            defaultChecked
+                                            content={{ true: "黑色", false: "白色" }}
+                                            onChange={(event, vNode) => { this.changeSwitchTheme(event, vNode) }}
+                                        ></Switch>
+                                        <div className="e-flex">
+                                            <NavMenu className="e-clearfix" theme={this.state.switchTheme}>
+                                                <MenuItem show>
+                                                    <MenuItemTitle>导航一</MenuItemTitle>
+                                                    <MenuItemList>
+                                                        <MenuItemFlag>分栏一</MenuItemFlag>
+                                                        <MenuItem>菜单 1</MenuItem>
+                                                        <MenuItem>菜单 2</MenuItem>
+                                                        <MenuItemFlag>分栏二</MenuItemFlag>
+                                                        <MenuItem>菜单 1</MenuItem>
+                                                        <MenuItem>菜单 2</MenuItem>
+                                                        <SubMenu show>
+                                                            <MenuItemTitle>菜单</MenuItemTitle>
+                                                            <MenuItemList>
+                                                                <MenuItem>子菜单 1</MenuItem>
+                                                                <MenuItem>子菜单 2</MenuItem>
+                                                            </MenuItemList>
+                                                        </SubMenu>
+                                                    </MenuItemList>
+                                                </MenuItem>
+                                                <MenuItem>
+                                                    <MenuItemTitle>导航二</MenuItemTitle>
+                                                    <MenuItemList>
+                                                        <MenuItem>子菜单 1</MenuItem>
+                                                        <MenuItem>子菜单 2</MenuItem>
+                                                    </MenuItemList>
+                                                </MenuItem>
+                                                <MenuItem>导航三</MenuItem>
+                                                <MenuItem>导航四</MenuItem>
+                                            </NavMenu>
+                                        </div>
+                                    </section>
                                 </div>
-                                <h4 className="e-section-container-title" id="e-navmenu">标签页 Tabs</h4>
+                                <h4 className="e-section-container-title" id="e-tabs">标签页 Tabs</h4>
                                 <p className="e-section-intro"><b>标签页</b>： 分隔内容上有关联但属于不同类别的数据集合。</p>
                                 <div className="e-section-demo">
 
                                 </div>
-                                <h4 className="e-section-container-title" id="e-navmenu">面包屑 BreadCrumb</h4>
+                                <h4 className="e-section-container-title" id="e-breadcrumb">面包屑 BreadCrumb</h4>
                                 <p className="e-section-intro"><b>面包屑</b>：</p>
                                 <div className="e-section-demo">
 
                                 </div>
-                                <h4 className="e-section-container-title" id="e-navmenu">拉下菜单 DropDown</h4>
+                                <h4 className="e-section-container-title" id="e-dropdown">拉下菜单 DropDown</h4>
                                 <p className="e-section-intro"><b>拉下菜单</b>：</p>
                                 <div className="e-section-demo">
 
                                 </div>
-                                <h4 className="e-section-container-title" id="e-navmenu">步骤条 Steps</h4>
+                                <h4 className="e-section-container-title" id="e-steps">步骤条 Steps</h4>
                                 <p className="e-section-intro"><b>步骤条</b>：</p>
                                 <div className="e-section-demo">
 

@@ -32,7 +32,7 @@ $input-radius: .1rem;
 
 
 // public css
-.clear{
+.clear, .e-clearfix{
     clear: both;
 }
 .primary{
@@ -46,13 +46,6 @@ $input-radius: .1rem;
 }
 .error{
     color: $color-error;
-}
-.e-row{
-    clear: both;
-    display: block;
-}
-.e-col{
-    display: inline-block;
 }
 .e-mr-4{
     margin-right: 4px;
@@ -101,6 +94,17 @@ $input-radius: .1rem;
 }
 .e-text-center{
     text-align: center;
+}
+/* grid layout */
+.e-row{
+    clear: both;
+    display: block;
+}
+.e-col{
+    display: inline-block;
+}
+.e-col-12{
+    width: 50%;
 }
 ::-webkit-scrollbar, ::-webkit-scrollbar-track {
     width: 6px;

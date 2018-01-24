@@ -12,22 +12,26 @@ export default class Switch extends Component {
     }
     componentDidMount() {
         this.setState({
-            checked: this.props.defaultChekced ? true : false
+            checked: this.props.defaultChecked ? true : false
         });
     }
     render() {
         const newProps = Object.assign({}, this.props,
             {
-                className: `e-switch ${this.props.className || ""} ${this.props.sizeEnum[this.props.size] || ""} ${this.state.checked ? "e-switch-checked" : ""} ${this.props.disabled ? "e-switch-disabled": ""}`
+                className: `e-switch ${this.props.className || ""} ${this.props.sizeEnum[this.props.size] || ""} ${this.state.checked ? "e-switch-checked" : ""} ${this.props.disabled ? "e-switch-disabled" : ""}`
             }
         );
         return <span
             {...propsFilter(newProps) }
-            onClick = {event => { this.openCloseHandler(event) }}
-        ></span >
+            onClick={event => { this.openCloseHandler(event) }}
+        >
+            {
+                this.props.content? <span className={`e-switch-content ${this.state.checked ? "e-switch-content-left" : "e-switch-content-right"}`}>{this.props.content[this.state.checked]}</span> : null
+            }
+        </span >
     }
-    openCloseHandler(event){
-        if(!this.props.disabled) {
+    openCloseHandler(event) {
+        if (!this.props.disabled) {
             this.setState({
                 checked: !this.state.checked
             });
