@@ -16,6 +16,7 @@ import Form, { FormItem } from "./../../components/ui/form/form.jsx";
 import NavMenu, { MenuItem, MenuItemTitle, MenuItemList, MenuItemFlag, SubMenu } from "./../../components/ui/navMenu/navMenu.jsx";
 import BreadCrumb, { BreadCrumbItem } from "./../../components/ui/breadCrumb/breadCrumb.jsx";
 import DropDown, { DropDownItem } from "./../../components/ui/dropDown/dropDown.jsx";
+import Steps, { Step } from "./../../components/ui/steps/steps.jsx";
 import Alert from "./../../components/ui/alert/alert.jsx";
 import Message from "./../../components/ui/message/message.jsx";
 import { MessageBox } from "./../../components/ui/modal/modal.jsx";
@@ -276,28 +277,28 @@ class Container extends Component {
                                 <p className="e-section-intro"><b>按钮</b>：用户的即时操作，响应用户的点击行为的组件。 PS：主要分为正常、小型、大型三类按钮</p>
                                 <div className="e-section-demo">
                                     <div className="e-clear">
-                                        <Button className="e-mr-1rem e-button-default e-button-small">Default</Button>
-                                        <Button className="e-mr-1rem e-button-primary e-button-small">Primary</Button>
-                                        <Button className="e-mr-1rem e-button-success e-button-small">Success</Button>
-                                        <Button className="e-mr-1rem e-button-warning e-button-small">Warning</Button>
-                                        <Button className="e-mr-1rem e-button-error e-button-small">Error</Button>
-                                        <Button className="e-mr-1rem e-button-light e-button-small">Light</Button>
+                                        <Button className="e-m-4   e-button-default e-button-small">Default</Button>
+                                        <Button className="e-m-4   e-button-primary e-button-small">Primary</Button>
+                                        <Button className="e-m-4   e-button-success e-button-small">Success</Button>
+                                        <Button className="e-m-4   e-button-warning e-button-small">Warning</Button>
+                                        <Button className="e-m-4   e-button-error e-button-small">Error</Button>
+                                        <Button className="e-m-4   e-button-light e-button-small">Light</Button>
                                     </div>
-                                    <div className="e-clear e-mt-10">
-                                        <Button className="e-mr-1rem e-button-default">Default</Button>
-                                        <Button className="e-mr-1rem e-button-primary">Primary</Button>
-                                        <Button className="e-mr-1rem e-button-success">Success</Button>
-                                        <Button className="e-mr-1rem e-button-warning">Warning</Button>
-                                        <Button className="e-mr-1rem e-button-error">Error</Button>
-                                        <Button className="e-mr-1rem e-button-light">Light</Button>
+                                    <div className="e-clear">
+                                        <Button className="e-m-4   e-button-default">Default</Button>
+                                        <Button className="e-m-4   e-button-primary">Primary</Button>
+                                        <Button className="e-m-4   e-button-success">Success</Button>
+                                        <Button className="e-m-4   e-button-warning">Warning</Button>
+                                        <Button className="e-m-4   e-button-error">Error</Button>
+                                        <Button className="e-m-4   e-button-light">Light</Button>
                                     </div>
-                                    <div className="e-clear e-mt-10">
-                                        <Button className="e-mr-1rem e-button-default e-button-large">Default</Button>
-                                        <Button className="e-mr-1rem e-button-primary e-button-large">Primary</Button>
-                                        <Button className="e-mr-1rem e-button-success e-button-large">Success</Button>
-                                        <Button className="e-mr-1rem e-button-warning e-button-large">Warning</Button>
-                                        <Button className="e-mr-1rem e-button-error e-button-large">Error</Button>
-                                        <Button className="e-mr-1rem e-button-light e-button-large">Light</Button>
+                                    <div className="e-clear">
+                                        <Button className="e-m-4   e-button-default e-button-large">Default</Button>
+                                        <Button className="e-m-4   e-button-primary e-button-large">Primary</Button>
+                                        <Button className="e-m-4   e-button-success e-button-large">Success</Button>
+                                        <Button className="e-m-4   e-button-warning e-button-large">Warning</Button>
+                                        <Button className="e-m-4   e-button-error e-button-large">Error</Button>
+                                        <Button className="e-m-4   e-button-light e-button-large">Light</Button>
                                     </div>
                                 </div>
                             </section>
@@ -358,7 +359,7 @@ class Container extends Component {
                                     </Switch>
                                     <h5 className="e-section-demo-title">4.不同尺寸</h5>
                                     <Switch
-                                        className="e-switch e-mr-1rem"
+                                        className="e-switch e-m-4"
                                         name="switchRef"
                                         ref="switchRef"
                                         defaultChecked
@@ -925,9 +926,23 @@ class Container extends Component {
                                     </section>
                                 </div>
                                 <h4 className="e-section-container-title" id="e-steps">步骤条 Steps</h4>
-                                <p className="e-section-intro"><b>步骤条</b>：</p>
+                                <p className="e-section-intro"><b>步骤条</b>：引导用户按照流程完成任务的分步导航条。</p>
                                 <div className="e-section-demo">
-
+                                <section>
+                                        <h5 className="e-section-demo-title">1.基本用法</h5>
+                                        <div className="e-mh-10">
+                                            <Steps 
+                                                active={1}
+                                                space={200}
+                                                finish-status={"success"}
+                                            >
+                                                <Step title={"Step 1"}></Step>
+                                                <Step title={"Step 2"}></Step>
+                                                <Step title={"Step 3"}></Step>
+                                                <Step title={"Step 4"}></Step>
+                                            </Steps>
+                                        </div>
+                                    </section>
                                 </div>
                             </section>
                         </fieldset>
@@ -939,38 +954,38 @@ class Container extends Component {
                                 <div className="e-section-demo">
                                     <div className="e-clear">
                                         <div className="e-row">
-                                            <div className="e-col">
+                                            <div className="e-col  e-mv-10">
                                                 <Alert className="e-mr-10">Default Description</Alert>
                                             </div>
-                                            <div className="e-col">
+                                            <div className="e-col  e-mv-10">
                                                 <Alert className="e-mr-10" theme="primary">Primary Description</Alert>
                                             </div>
-                                            <div className="e-col">
+                                            <div className="e-col  e-mv-10">
                                                 <Alert className="e-mr-10" theme="success">Success Description</Alert>
                                             </div>
-                                            <div className="e-col">
+                                            <div className="e-col  e-mv-10">
                                                 <Alert className="e-mr-10" theme="error">Error Description</Alert>
                                             </div>
-                                            <div className="e-col">
+                                            <div className="e-col  e-mv-10">
                                                 <Alert className="e-mr-10" theme="warning">Warning Description</Alert>
                                             </div>
                                         </div>
                                     </div>
                                     <div className="e-clear e-mt-10">
                                         <div className="e-row">
-                                            <div className="e-col">
+                                            <div className="e-col  e-mv-10">
                                                 <Alert className="e-mr-10" title="Default Alert">Default Description</Alert>
                                             </div>
-                                            <div className="e-col">
+                                            <div className="e-col  e-mv-10">
                                                 <Alert className="e-mr-10" title="Primary Alert" theme="primary">Primary Description</Alert>
                                             </div>
-                                            <div className="e-col">
+                                            <div className="e-col  e-mv-10">
                                                 <Alert className="e-mr-10" title="Success Alert" theme="success">Success Description</Alert>
                                             </div>
-                                            <div className="e-col">
+                                            <div className="e-col  e-mv-10">
                                                 <Alert className="e-mr-10" title="Error Alert" theme="error">Error Description</Alert>
                                             </div>
-                                            <div className="e-col">
+                                            <div className="e-col  e-mv-10">
                                                 <Alert className="e-mr-10" title="Warning Alert" theme="warning">Warning Description</Alert>
                                             </div>
                                         </div>
@@ -978,38 +993,38 @@ class Container extends Component {
                                     </div>
                                     <div className="e-clear e-mt-10">
                                         <div className="e-row">
-                                            <div className="e-col">
+                                            <div className="e-col  e-mv-10">
                                                 <Alert className="e-mr-10" title="Default Alert" close>Default Description</Alert>
                                             </div>
-                                            <div className="e-col">
+                                            <div className="e-col  e-mv-10">
                                                 <Alert className="e-mr-10" title="Primary Alert" theme="primary" close>Primary Description</Alert>
                                             </div>
-                                            <div className="e-col">
+                                            <div className="e-col  e-mv-10">
                                                 <Alert className="e-mr-10" title="Success Alert" theme="success" close>Success Description</Alert>
                                             </div>
-                                            <div className="e-col">
+                                            <div className="e-col  e-mv-10">
                                                 <Alert className="e-mr-10" title="Error Alert" theme="error" close>Error Description</Alert>
                                             </div>
-                                            <div className="e-col">
+                                            <div className="e-col  e-mv-10">
                                                 <Alert className="e-mr-10" title="Warning Alert" theme="warning" close>Warning Description</Alert>
                                             </div>
                                         </div>
                                     </div>
                                     <div className="e-clear e-mt-10">
                                         <div className="e-row">
-                                            <div className="e-col">
+                                            <div className="e-col  e-mv-10">
                                                 <Alert className="e-mr-10" title="Default Alert" flag="default" close>Default Description</Alert>
                                             </div>
-                                            <div className="e-col">
+                                            <div className="e-col  e-mv-10">
                                                 <Alert className="e-mr-10" title="Primary Alert" flag="primary" theme="primary" close>Primary Description</Alert>
                                             </div>
-                                            <div className="e-col">
+                                            <div className="e-col  e-mv-10">
                                                 <Alert className="e-mr-10" title="Success Alert" flag="success" theme="success" close>Success Description</Alert>
                                             </div>
-                                            <div className="e-col">
+                                            <div className="e-col  e-mv-10">
                                                 <Alert className="e-mr-10" title="Error Alert" flag="error" theme="error" close>Error Description</Alert>
                                             </div>
-                                            <div className="e-col">
+                                            <div className="e-col  e-mv-10">
                                                 <Alert className="e-mr-10" title="Warning Alert" flag="warning" theme="warning" close>Warning Description</Alert>
                                             </div>
                                         </div>
@@ -1019,50 +1034,50 @@ class Container extends Component {
                                 <p className="e-section-intro"><b>全局提示</b>：各种类型的全局消息提示，默认出现在窗口的顶层中间位置。</p>
                                 <div className="e-section-demo">
                                     <div className="e-row">
-                                        <div className="e-col e-mr-1rem"><Button onClick={this.msgHandle.bind(null, "default")}>Default</Button></div>
-                                        <div className="e-col e-mr-1rem"><Button className="e-button-primary" onClick={this.msgHandle.bind(null, "primary")}>Primary</Button></div>
-                                        <div className="e-col e-mr-1rem"><Button className="e-button-success" onClick={this.msgHandle.bind(null, "success")}>Success</Button></div>
-                                        <div className="e-col e-mr-1rem"><Button className="e-button-warning" onClick={this.msgHandle.bind(null, "warning")}>Warning</Button></div>
-                                        <div className="e-col e-mr-1rem"><Button className="e-button-error" onClick={this.msgHandle.bind(null, "error")}>Error</Button></div>
+                                        <div className="e-col e-m-4"><Button onClick={this.msgHandle.bind(null, "default")}>Default</Button></div>
+                                        <div className="e-col e-m-4"><Button className="e-button-primary" onClick={this.msgHandle.bind(null, "primary")}>Primary</Button></div>
+                                        <div className="e-col e-m-4"><Button className="e-button-success" onClick={this.msgHandle.bind(null, "success")}>Success</Button></div>
+                                        <div className="e-col e-m-4"><Button className="e-button-warning" onClick={this.msgHandle.bind(null, "warning")}>Warning</Button></div>
+                                        <div className="e-col e-m-4"><Button className="e-button-error" onClick={this.msgHandle.bind(null, "error")}>Error</Button></div>
                                     </div>
                                 </div>
                                 <h4 className="e-section-container-title" id="e-modal">对话框 Modal</h4>
                                 <p className="e-section-intro"><b>消息提示</b>：各种类型的消息提示框，仅提供确认按钮关闭消息。</p>
                                 <div className="e-section-demo">
                                     <div className="e-row">
-                                        <div className="e-col e-mr-1rem"><Button className="e-button-default" onClick={this.modalHandle.bind(null, "alert", "default")}>Default Show</Button></div>
-                                        <div className="e-col e-mr-1rem"><Button className="e-button-primary" onClick={this.modalHandle.bind(null, "alert", "primary")}>Info Show</Button></div>
-                                        <div className="e-col e-mr-1rem"><Button className="e-button-success" onClick={this.modalHandle.bind(null, "alert", "success")}>Success Show</Button></div>
-                                        <div className="e-col e-mr-1rem"><Button className="e-button-warning" onClick={this.modalHandle.bind(null, "alert", "warning")}>Warning Show</Button></div>
-                                        <div className="e-col e-mr-1rem"><Button className="e-button-error" onClick={this.modalHandle.bind(null, "alert", "error")}>Error Show</Button></div>
+                                        <div className="e-col e-m-4"><Button className="e-button-default" onClick={this.modalHandle.bind(null, "alert", "default")}>Default Show</Button></div>
+                                        <div className="e-col e-m-4"><Button className="e-button-primary" onClick={this.modalHandle.bind(null, "alert", "primary")}>Info Show</Button></div>
+                                        <div className="e-col e-m-4"><Button className="e-button-success" onClick={this.modalHandle.bind(null, "alert", "success")}>Success Show</Button></div>
+                                        <div className="e-col e-m-4"><Button className="e-button-warning" onClick={this.modalHandle.bind(null, "alert", "warning")}>Warning Show</Button></div>
+                                        <div className="e-col e-m-4"><Button className="e-button-error" onClick={this.modalHandle.bind(null, "alert", "error")}>Error Show</Button></div>
                                     </div>
                                 </div>
                                 <p className="e-section-intro"><b>消息确认框</b>：各种类型的消息确认框，提供确认/取消按钮用于消息确认／取消。</p>
                                 <div className="e-section-demo">
                                     <div className="e-row">
-                                        <div className="e-col e-mr-1rem"><Button className="e-button-default" onClick={this.modalHandle.bind(null, "confirm", "default")}>Default Confirm</Button></div>
-                                        <div className="e-col e-mr-1rem"><Button className="e-button-primary" onClick={this.modalHandle.bind(null, "confirm", "primary")}>Info Confirm</Button></div>
-                                        <div className="e-col e-mr-1rem"><Button className="e-button-success" onClick={this.modalHandle.bind(null, "confirm", "success")}>Success Confirm</Button></div>
-                                        <div className="e-col e-mr-1rem"><Button className="e-button-warning" onClick={this.modalHandle.bind(null, "confirm", "warning")}>Warning Confirm</Button></div>
-                                        <div className="e-col e-mr-1rem"><Button className="e-button-error" onClick={this.modalHandle.bind(null, "confirm", "error")}>Error Confirm</Button></div>
+                                        <div className="e-col e-m-4"><Button className="e-button-default" onClick={this.modalHandle.bind(null, "confirm", "default")}>Default Confirm</Button></div>
+                                        <div className="e-col e-m-4"><Button className="e-button-primary" onClick={this.modalHandle.bind(null, "confirm", "primary")}>Info Confirm</Button></div>
+                                        <div className="e-col e-m-4"><Button className="e-button-success" onClick={this.modalHandle.bind(null, "confirm", "success")}>Success Confirm</Button></div>
+                                        <div className="e-col e-m-4"><Button className="e-button-warning" onClick={this.modalHandle.bind(null, "confirm", "warning")}>Warning Confirm</Button></div>
+                                        <div className="e-col e-m-4"><Button className="e-button-error" onClick={this.modalHandle.bind(null, "confirm", "error")}>Error Confirm</Button></div>
                                     </div>
                                 </div>
                                 <p className="e-section-intro"><b>其他设置</b>：无遮罩模式（No Mask）／可拖拽模式(Dragable)。</p>
                                 <div className="e-section-demo">
                                     <div className="e-row">
-                                        <div className="e-col e-mr-1rem"><Button className="e-button-default" onClick={this.modalHandle.bind(null, "alert", "default", false, false)}>No mask</Button></div>
-                                        <div className="e-col e-mr-1rem"><Button className="e-button-primary" onClick={this.modalHandle.bind(null, "confirm", "primary", true, true)}>Dragable</Button></div>
+                                        <div className="e-col e-m-4"><Button className="e-button-default" onClick={this.modalHandle.bind(null, "alert", "default", false, false)}>No mask</Button></div>
+                                        <div className="e-col e-m-4"><Button className="e-button-primary" onClick={this.modalHandle.bind(null, "confirm", "primary", true, true)}>Dragable</Button></div>
                                     </div>
                                 </div>
                                 <h4 className="e-section-container-title" id="e-notification">通知 Notification</h4>
                                 <p className="e-section-intro"><b>通知</b>：用于全局消息通知，悬浮出现在页面角。</p>
                                 <div className="e-section-demo">
                                     <div className="e-row">
-                                        <div className="e-col e-mr-1rem"><Button className="e-button-default" onClick={this.notificationHandle.bind(null, "default", false)}>Default Show</Button></div>
-                                        <div className="e-col e-mr-1rem"><Button className="e-button-primary" onClick={this.notificationHandle.bind(null, "info", false)}>Info Show</Button></div>
-                                        <div className="e-col e-mr-1rem"><Button className="e-button-success" onClick={this.notificationHandle.bind(null, "success", false)}>Success Show</Button></div>
-                                        <div className="e-col e-mr-1rem"><Button className="e-button-warning" onClick={this.notificationHandle.bind(null, "warning", true)}>Warning Show</Button></div>
-                                        <div className="e-col e-mr-1rem"><Button className="e-button-error" onClick={this.notificationHandle.bind(null, "error", true)}>Error Show</Button></div>
+                                        <div className="e-col e-m-4"><Button className="e-button-default" onClick={this.notificationHandle.bind(null, "default", false)}>Default Show</Button></div>
+                                        <div className="e-col e-m-4"><Button className="e-button-primary" onClick={this.notificationHandle.bind(null, "info", false)}>Info Show</Button></div>
+                                        <div className="e-col e-m-4"><Button className="e-button-success" onClick={this.notificationHandle.bind(null, "success", false)}>Success Show</Button></div>
+                                        <div className="e-col e-m-4"><Button className="e-button-warning" onClick={this.notificationHandle.bind(null, "warning", true)}>Warning Show</Button></div>
+                                        <div className="e-col e-m-4"><Button className="e-button-error" onClick={this.notificationHandle.bind(null, "error", true)}>Error Show</Button></div>
                                     </div>
                                 </div>
                             </section>

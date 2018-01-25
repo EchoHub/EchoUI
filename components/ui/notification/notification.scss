@@ -16,14 +16,19 @@
     -o-transition: right ease .5s;
     -webkit-transition: right ease .5s;
     display: table;
+    &-title{
+        font-size: 1.2rem;
+    }
     &-content {
         max-width: 400px;
         max-height: 280px;
         overflow: auto;
+        color: #333;
     }
     &-flag{
         display: table-cell;
         top: 6px;
+        padding-right: 10px;
         position: relative;
         .icon{
             font-size: 1.5rem;
