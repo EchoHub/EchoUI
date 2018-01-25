@@ -33,6 +33,7 @@
         transform-origin: top;
         z-index: 99;
         display: none;
+        // display: inherit;
         &.active{
             display: inherit;
             opacity: 1;

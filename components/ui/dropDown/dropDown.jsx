@@ -25,16 +25,14 @@ export default class DropDown extends Component {
             selectedKey: key,
             selectedName: name
         });
-        console.log(key)
-        console.log(name)
     }
     /**
      * @desc 展开/收起菜单
      */
     toggleMenu(value) {
-        this.setState({
-            show: value
-        });
+        // this.setState({
+        //     show: value
+        // });
         const _self_ul = findDOMNode(this).querySelector(".e-dropdown-list");
         _self_ul.classList.add("collapsing");
         if (value) {
@@ -148,13 +146,13 @@ export class SubMenu extends Component {
      * @param {*} value 
      */
     toggleMenu(type, value) {
-        this.setState({
+        !this.props.disabled && this.setState({
             show: value
         });
     }
     componentDidUpdate() {
         const _self = findDOMNode(this);
-        const dropDownNode = closest(_self, ".e-dropdown-list");
+        const dropDownNode = closest(_self, ".e-dropdown-item");
         const ulNode = _self.querySelector(".e-dropdown-submenu-ul");
         if (ulNode) {
             // _self.querySelector(".e-dropdown-submenu-ul").style.left = `${dropDownNode.offsetWidth}px`;
@@ -162,15 +160,18 @@ export class SubMenu extends Component {
             // _self.querySelector(".e-dropdown-submenu-ul").style.marginLeft = "10px";
         }
     }
+    setSelectedItemHandler(key, name) {
+        this.props.setSelectedItemHandler(key, name);
+    }
     render() {
         const props = this.props;
         return <li
-            className={`e-dropdown-item e-dropdown-submenu`}
+            className={`e-dropdown-item e-dropdown-submenu${this.props.disabled ? " disabled" : ""}`}
             onMouseEnter={() => { this.toggleMenu(1, true) }}
             onMouseLeave={() => { this.toggleMenu(0, false) }}
         >
             <span className="e-dropdown-submenu-title">
-                {this.props.name}
+                {props.name}
                 <i className="e-dropdown-submenu-title-icon icon iconfont icon-arrow-right"></i>
             </span>
             <div className="e-dropdown-submenu-ul-container">
@@ -184,7 +185,8 @@ export class SubMenu extends Component {
                                     key={i}
                                     name={subMenu.name}
                                     menu={subMenu.menu}
-                                    setSelectedItemHandler={this.setSelectedItemHandler}
+                                    disabled={subMenu.disabled}
+                                    setSelectedItemHandler={this.setSelectedItemHandler.bind(this)}
                                 ></SubMenu>;
                             } else {
                                 const item = d;
@@ -193,7 +195,7 @@ export class SubMenu extends Component {
                                     value={item.key}
                                     name={item.name}
                                     disabled={item.disabled || false}
-                                    setSelectedItemHandler={this.setSelectedItemHandler}
+                                    setSelectedItemHandler={this.setSelectedItemHandler.bind(this)}
                                 ></DropDownItem>;
                             }
                             // return <DropDownItem
@@ -226,5 +228,6 @@ export class SubMenu extends Component {
     }
 }
 SubMenu.defaultProps = {
-    menu: []
+    menu: [],
+    parent: null
 }
