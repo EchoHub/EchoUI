@@ -33,6 +33,19 @@ export default class DropDown extends Component {
         this.setState({
             show: value
         });
+        const _self_ul = findDOMNode(this).querySelector(".e-dropdown-list");
+        _self_ul.classList.add("collapsing");
+        if (value) {
+            setTimeout(() => {
+                _self_ul.classList.add("active");
+                _self_ul.className = _self_ul.className.replace(/\s+collapsing/, "");
+            }, 10);
+        } else {
+            _self_ul.className = _self_ul.className.replace(/\s+active/, "");
+            setTimeout(() => {
+                _self_ul.className = _self_ul.className.replace(/\s+collapsing/, "");
+            }, 300);
+        }
     }
     render() {
         const props = this.props;
@@ -77,13 +90,13 @@ export default class DropDown extends Component {
                 {props.children}
                 <i className="icon iconfont icon-arrow e-dropdown-arrow"></i>
             </a>
-            {
-                <ul className={`e-dropdown-list${this.state.show ? " active" : ""}`}>
-                    {
-                        this.state.show ? newArr : null
-                    }
-                </ul>
-            }
+            {/* <ul className={`e-dropdown-list ${this.state.show ? " active" : ""}`}> */}
+            <ul className="e-dropdown-list">
+                {/* {
+                    this.state.show ? newArr : null
+                } */}
+                {newArr}
+            </ul>
         </div>
     }
 }
@@ -142,8 +155,8 @@ export class SubMenu extends Component {
         const dropDownNode = closest(_self, ".e-dropdown-list");
         const ulNode = _self.querySelector(".e-dropdown-submenu-ul");
         if (ulNode) {
-            _self.querySelector(".e-dropdown-submenu-ul").style.left = `${dropDownNode.offsetWidth}px`;
-            // _self.querySelector(".e-dropdown-submenu-ul-container").style.left = `${dropDownNode.offsetWidth}px`;
+            // _self.querySelector(".e-dropdown-submenu-ul").style.left = `${dropDownNode.offsetWidth}px`;
+            _self.querySelector(".e-dropdown-submenu-ul-container").style.left = `${dropDownNode.offsetWidth}px`;
             // _self.querySelector(".e-dropdown-submenu-ul").style.marginLeft = "10px";
         }
     }
@@ -158,7 +171,7 @@ export class SubMenu extends Component {
                 {this.props.name}
                 <i className="e-dropdown-submenu-title-icon icon iconfont icon-arrow-right"></i>
             </span>
-            {/* <div className="e-dropdown-submenu-ul-container">
+            <div className="e-dropdown-submenu-ul-container">
                 <ul className="e-dropdown-submenu-ul e-ml-10" style={{ display: `${this.state.show ? "inherit" : "none"}` }}>
                     {
                         props.menu.length ? props.menu.map((d, i) => {
@@ -173,8 +186,8 @@ export class SubMenu extends Component {
                         ) : null
                     }
                 </ul>
-            </div> */}
-            <ul className="e-dropdown-submenu-ul" style={{ display: `${this.state.show ? "inherit" : "none"}` }}>
+            </div>
+            {/* <ul className="e-dropdown-submenu-ul" style={{ display: `${this.state.show ? "inherit" : "none"}` }}>
                 {
                     props.menu.length ? props.menu.map((d, i) => {
                         return <DropDownItem
@@ -187,7 +200,7 @@ export class SubMenu extends Component {
                     }
                     ) : null
                 }
-            </ul>
+            </ul> */}
         </li>
     }
 }

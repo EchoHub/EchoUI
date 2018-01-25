@@ -30,11 +30,18 @@
         -ms-transition: all ease-in-out .3s;
         -o-transition: all ease-in-out .3s;
         -webkit-transition: all ease-in-out .3s;
-        transform: scaleY(0);
         transform-origin: top;
         z-index: 99;
+        display: none;
         &.active{
+            display: inherit;
+            opacity: 1;
             transform: scaleY(1);
+        }
+        &.collapsing{
+            transform: scaleY(0);
+            opacity: 0;
+            display: inherit;
         }
         li{
             line-height: 30px;
@@ -79,10 +86,12 @@
         position: relative;
         &-title{
             padding: 4px 10px;
+            padding-right: 20px;
             text-overflow: ellipsis;
             white-space: nowrap;
             overflow: hidden;
             display: inherit;
+            position: relative;
             &:hover{
                 color: #2196f3;
                 background: rgba(33,150,243, .1);
@@ -93,33 +102,36 @@
                 position: relative;
                 top: 2px;
                 transform: scale(.8);
+                position: absolute;
+                right: 5px;
+                top: 6px;
             }
         }
-        .e-dropdown-submenu-ul{
-            position: absolute;
-            top: 0;
-            left: 100%;
-            padding: 0;
-            margin-left: 10px;
-            background: #fff;
-            box-shadow: 0 3px 8px rgba(0,0,0,.35);
-            border-radius: 4px;
-            list-style: none;
-            &:hover{
-                display: block;
-            }
-        }
-        // &-ul-container{
+        // .e-dropdown-submenu-ul{
         //     position: absolute;
         //     top: 0;
         //     left: 100%;
-        //     ul{
-        //         padding: 0;
-        //         background: #fff;
-        //         box-shadow: 0 3px 8px rgba(0,0,0,.35);
-        //         border-radius: 4px;
-        //         list-style: none;
+        //     padding: 0;
+        //     margin-left: 10px;
+        //     background: #fff;
+        //     box-shadow: 0 3px 8px rgba(0,0,0,.35);
+        //     border-radius: 4px;
+        //     list-style: none;
+        //     &:hover{
+        //         display: block;
         //     }
         // }
+        &-ul-container{
+            position: absolute;
+            top: 0;
+            left: 100%;
+            ul{
+                padding: 0;
+                background: #fff;
+                box-shadow: 0 3px 8px rgba(0,0,0,.35);
+                border-radius: 4px;
+                list-style: none;
+            }
+        }
     }
 }
