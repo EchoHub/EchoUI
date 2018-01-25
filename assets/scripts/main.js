@@ -701,7 +701,7 @@ class Container extends Component {
                                                             name: "1st submenu",
                                                             menu: [
                                                                 {
-                                                                    key: 1, name: "1st menu item", disabled:true
+                                                                    key: 1, name: "1st menu item", disabled: true
                                                                 },
                                                                 {
                                                                     key: 2, name: "2st submenu item"
@@ -722,7 +722,20 @@ class Container extends Component {
                                                             name: "3st submenu",
                                                             menu: [
                                                                 {
-                                                                    key: 1, name: "1st menu item"
+                                                                    subMenu: {
+                                                                        name: "3st submenu",
+                                                                        menu: [
+                                                                            {
+                                                                                key: 1, name: "1st menu item"
+                                                                            },
+                                                                            {
+                                                                                key: 2, name: "2st submenu item"
+                                                                            },
+                                                                            {
+                                                                                key: 3, name: "3st submenu item"
+                                                                            }
+                                                                        ]
+                                                                    }
                                                                 },
                                                                 {
                                                                     key: 2, name: "2st submenu item"

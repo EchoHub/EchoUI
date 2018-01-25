@@ -25,6 +25,8 @@ export default class DropDown extends Component {
             selectedKey: key,
             selectedName: name
         });
+        console.log(key)
+        console.log(name)
     }
     /**
      * @desc 展开/收起菜单
@@ -175,13 +177,32 @@ export class SubMenu extends Component {
                 <ul className="e-dropdown-submenu-ul e-ml-10" style={{ display: `${this.state.show ? "inherit" : "none"}` }}>
                     {
                         props.menu.length ? props.menu.map((d, i) => {
-                            return <DropDownItem
-                                key={i}
-                                value={d.key}
-                                name={d.name}
-                                disabled={d.disabled || false}
-                                setSelectedItemHandler={this.props.setSelectedItemHandler}
-                            ></DropDownItem>
+                            if (d.subMenu) {
+                                const subMenu = d.subMenu
+                                // 二级下拉
+                                return <SubMenu
+                                    key={i}
+                                    name={subMenu.name}
+                                    menu={subMenu.menu}
+                                    setSelectedItemHandler={this.setSelectedItemHandler}
+                                ></SubMenu>;
+                            } else {
+                                const item = d;
+                                return <DropDownItem
+                                    key={i}
+                                    value={item.key}
+                                    name={item.name}
+                                    disabled={item.disabled || false}
+                                    setSelectedItemHandler={this.setSelectedItemHandler}
+                                ></DropDownItem>;
+                            }
+                            // return <DropDownItem
+                            //     key={i}
+                            //     value={d.key}
+                            //     name={d.name}
+                            //     disabled={d.disabled || false}
+                            //     setSelectedItemHandler={this.props.setSelectedItemHandler}
+                            // ></DropDownItem>
                         }
                         ) : null
                     }
