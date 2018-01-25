@@ -5,18 +5,23 @@
     left: 50%;
     .e-modal{
         background: #fff;
-        min-width: 200px;
+        min-width: 320px;
         max-width: 80%;
+        min-height: 120px;
         position: relative;
         padding: 10px;
         top: 50%;
         left: 50%;
         float: left;
-        box-shadow: 0 0 6px rgba(0, 0, 0, 0.3);
-        border-radius: 6px;
+        box-shadow: 0 0 6px rgba(200, 200, 200, 0.3);
+        border-radius: 4px;
         &-title{
             border-bottom: 1px solid #666;
             padding-bottom: .5rem;
+            font-size: 20px;
+            .e-modal-icon{
+                margin-right: 4px;
+            }
             .info{
                 color: $color-primary;
             }
@@ -31,8 +36,9 @@
             }
         }
         &-content{
-            padding: .5rem 0;
+            padding: .5rem;
             color: #383838;
+            min-height: 36px;
         }
     }
     &.e-modal-mask{

@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { render } from "react-dom";
 import PropTypes from "prop-types";
 import "./../styles/main.scss";
+import Button from "./../../components/ui/button/button.jsx";
 import RadioBox from "./../../components/ui/radioBox/radioBox.jsx";
 import RadioBoxGroup from "./../../components/ui/radioBoxGroup/radioBoxGroup.jsx";
 import CheckBox from "./../../components/ui/checkBox/checkBox.jsx";
@@ -12,12 +13,13 @@ import Switch from "./../../components/ui/switch/switch.jsx";
 import Select from "./../../components/ui/select/select.jsx";
 import { ListItem } from "./../../components/ui/comboBox/comboBox.jsx";
 import Form, { FormItem } from "./../../components/ui/form/form.jsx";
-import Button from "./../../components/ui/button/button.jsx";
+import NavMenu, { MenuItem, MenuItemTitle, MenuItemList, MenuItemFlag, SubMenu } from "./../../components/ui/navMenu/navMenu.jsx";
+import BreadCrumb, { BreadCrumbItem } from "./../../components/ui/breadCrumb/breadCrumb.jsx";
+import DropDown, { DropDownItem } from "./../../components/ui/dropDown/dropDown.jsx";
 import Alert from "./../../components/ui/alert/alert.jsx";
 import Message from "./../../components/ui/message/message.jsx";
 import { MessageBox } from "./../../components/ui/modal/modal.jsx";
 import { Notice } from "./../../components/ui/notification/notification.jsx";
-import NavMenu, { MenuItem, MenuItemTitle, MenuItemList, MenuItemFlag, SubMenu } from "./../../components/ui/navMenu/navMenu.jsx";
 class Container extends Component {
     constructor(props) {
         super(props)
@@ -274,28 +276,28 @@ class Container extends Component {
                                 <p className="e-section-intro"><b>按钮</b>：用户的即时操作，响应用户的点击行为的组件。 PS：主要分为正常、小型、大型三类按钮</p>
                                 <div className="e-section-demo">
                                     <div className="e-clear">
-                                        <Button className="e-mr-1rem e-button-default e-button-small">默认</Button>
-                                        <Button className="e-mr-1rem e-button-primary e-button-small">正常</Button>
-                                        <Button className="e-mr-1rem e-button-success e-button-small">正常</Button>
-                                        <Button className="e-mr-1rem e-button-warning e-button-small">警告</Button>
-                                        <Button className="e-mr-1rem e-button-error e-button-small">错误</Button>
-                                        <Button className="e-mr-1rem e-button-light e-button-small">线条</Button>
+                                        <Button className="e-mr-1rem e-button-default e-button-small">Default</Button>
+                                        <Button className="e-mr-1rem e-button-primary e-button-small">Primary</Button>
+                                        <Button className="e-mr-1rem e-button-success e-button-small">Success</Button>
+                                        <Button className="e-mr-1rem e-button-warning e-button-small">Warning</Button>
+                                        <Button className="e-mr-1rem e-button-error e-button-small">Error</Button>
+                                        <Button className="e-mr-1rem e-button-light e-button-small">Light</Button>
                                     </div>
                                     <div className="e-clear e-mt-10">
-                                        <Button className="e-mr-1rem e-button-default">默认</Button>
-                                        <Button className="e-mr-1rem e-button-primary">正常</Button>
-                                        <Button className="e-mr-1rem e-button-success">成功</Button>
-                                        <Button className="e-mr-1rem e-button-warning">警告</Button>
-                                        <Button className="e-mr-1rem e-button-error">错误</Button>
-                                        <Button className="e-mr-1rem e-button-light">线条</Button>
+                                        <Button className="e-mr-1rem e-button-default">Default</Button>
+                                        <Button className="e-mr-1rem e-button-primary">Primary</Button>
+                                        <Button className="e-mr-1rem e-button-success">Success</Button>
+                                        <Button className="e-mr-1rem e-button-warning">Warning</Button>
+                                        <Button className="e-mr-1rem e-button-error">Error</Button>
+                                        <Button className="e-mr-1rem e-button-light">Light</Button>
                                     </div>
                                     <div className="e-clear e-mt-10">
-                                        <Button className="e-mr-1rem e-button-default e-button-large">默认</Button>
-                                        <Button className="e-mr-1rem e-button-primary e-button-large">正常</Button>
-                                        <Button className="e-mr-1rem e-button-success e-button-large">正常</Button>
-                                        <Button className="e-mr-1rem e-button-warning e-button-large">警告</Button>
-                                        <Button className="e-mr-1rem e-button-error e-button-large">错误</Button>
-                                        <Button className="e-mr-1rem e-button-light e-button-large">线条</Button>
+                                        <Button className="e-mr-1rem e-button-default e-button-large">Default</Button>
+                                        <Button className="e-mr-1rem e-button-primary e-button-large">Primary</Button>
+                                        <Button className="e-mr-1rem e-button-success e-button-large">Success</Button>
+                                        <Button className="e-mr-1rem e-button-warning e-button-large">Warning</Button>
+                                        <Button className="e-mr-1rem e-button-error e-button-large">Error</Button>
+                                        <Button className="e-mr-1rem e-button-light e-button-large">Light</Button>
                                     </div>
                                 </div>
                             </section>
@@ -604,17 +606,272 @@ class Container extends Component {
                                 <h4 className="e-section-container-title" id="e-tabs">标签页 Tabs</h4>
                                 <p className="e-section-intro"><b>标签页</b>： 分隔内容上有关联但属于不同类别的数据集合。</p>
                                 <div className="e-section-demo">
-                                    
+
                                 </div>
                                 <h4 className="e-section-container-title" id="e-breadcrumb">面包屑 BreadCrumb</h4>
-                                <p className="e-section-intro"><b>面包屑</b>：</p>
+                                <p className="e-section-intro"><b>面包屑</b>：显示当前页面在系统层级结构中的位置，并能向上返回。</p>
                                 <div className="e-section-demo">
-
+                                    <section>
+                                        <h5 className="e-section-demo-title">1.基本用法</h5>
+                                        <div className="e-mh-10">
+                                            <BreadCrumb >
+                                                <BreadCrumbItem path="#e-breadcrumb">首页</BreadCrumbItem>
+                                                <BreadCrumbItem path="#e-breadcrumb">一级标题</BreadCrumbItem>
+                                                <BreadCrumbItem path="#e-breadcrumb">二级标题</BreadCrumbItem>
+                                                <BreadCrumbItem>三级标题</BreadCrumbItem>
+                                            </BreadCrumb>
+                                        </div>
+                                        <h5 className="e-section-demo-title">2.自定义分隔符</h5>
+                                        <div className="e-mh-10">
+                                            <h6>例 1: separator 设置为 “ > ” ：</h6>
+                                            <BreadCrumb separator={">"}>
+                                                <BreadCrumbItem path="#e-breadcrumb">首页</BreadCrumbItem>
+                                                <BreadCrumbItem path="#e-breadcrumb">一级标题</BreadCrumbItem>
+                                                <BreadCrumbItem path="#e-breadcrumb">二级标题</BreadCrumbItem>
+                                                <BreadCrumbItem>三级标题</BreadCrumbItem>
+                                            </BreadCrumb>
+                                            <h6>例 2: separator 设置为 “ | ” ：</h6>
+                                            <BreadCrumb separator={"|"}>
+                                                <BreadCrumbItem path="#e-breadcrumb">首页</BreadCrumbItem>
+                                                <BreadCrumbItem path="#e-breadcrumb">一级标题</BreadCrumbItem>
+                                                <BreadCrumbItem path="#e-breadcrumb">二级标题</BreadCrumbItem>
+                                                <BreadCrumbItem>三级标题</BreadCrumbItem>
+                                            </BreadCrumb>
+                                        </div>
+                                        <h5 className="e-section-demo-title">3.自定义图标</h5>
+                                        <div className="e-mh-10">
+                                            <BreadCrumb>
+                                                <BreadCrumbItem icon={"icon-home"} path="#e-breadcrumb">首页</BreadCrumbItem>
+                                                <BreadCrumbItem icon={"icon-user"} path="#e-breadcrumb">一级标题</BreadCrumbItem>
+                                                <BreadCrumbItem icon={"icon-setting"} path="#e-breadcrumb">二级标题</BreadCrumbItem>
+                                                <BreadCrumbItem>三级标题</BreadCrumbItem>
+                                            </BreadCrumb>
+                                        </div>
+                                    </section>
                                 </div>
                                 <h4 className="e-section-container-title" id="e-dropdown">拉下菜单 DropDown</h4>
-                                <p className="e-section-intro"><b>拉下菜单</b>：</p>
+                                <p className="e-section-intro"><b>拉下菜单</b>：向下弹出的列表。当页面中操作项太多时，可以运用此组件将用户操作放到下拉菜单中。</p>
                                 <div className="e-section-demo">
-
+                                    <section>
+                                        <h5 className="e-section-demo-title">1.基本用法</h5>
+                                        <div className="e-mh-10">
+                                            <DropDown menu={
+                                                [
+                                                    {
+                                                        item: {
+                                                            key: 1, name: "1st menu item"
+                                                        }
+                                                    },
+                                                    {
+                                                        item: {
+                                                            key: 2, name: "2st menu item"
+                                                        }
+                                                    },
+                                                    {
+                                                        item: {
+                                                            key: 3, name: "3st menu item"
+                                                        }
+                                                    },
+                                                    {
+                                                        item: {
+                                                            key: 4, name: "4st menu item"
+                                                        }
+                                                    },
+                                                    {
+                                                        item: {
+                                                            key: 5, name: "5st menu item"
+                                                        }
+                                                    },
+                                                    {
+                                                        item: {
+                                                            key: 6, name: "6st menu item"
+                                                        }
+                                                    }
+                                                ]
+                                            }>
+                                                Hover me
+                                            </DropDown>
+                                        </div>
+                                        <h5 className="e-section-demo-title">2.多级菜单</h5>
+                                        <div className="e-mh-10">
+                                            <DropDown multiple menu={
+                                                [
+                                                    {
+                                                        subMenu: {
+                                                            name: "1st submenu",
+                                                            menu: [
+                                                                {
+                                                                    key: 1, name: "1st menu item", disabled:true
+                                                                },
+                                                                {
+                                                                    key: 2, name: "2st submenu item"
+                                                                },
+                                                                {
+                                                                    key: 3, name: "3st submenu item"
+                                                                }
+                                                            ]
+                                                        }
+                                                    },
+                                                    {
+                                                        item: {
+                                                            key: 2, name: "2st menu item"
+                                                        }
+                                                    },
+                                                    {
+                                                        subMenu: {
+                                                            name: "3st submenu",
+                                                            menu: [
+                                                                {
+                                                                    key: 1, name: "1st menu item"
+                                                                },
+                                                                {
+                                                                    key: 2, name: "2st submenu item"
+                                                                },
+                                                                {
+                                                                    key: 3, name: "3st submenu item"
+                                                                }
+                                                            ]
+                                                        }
+                                                    },
+                                                    {
+                                                        item: {
+                                                            key: 4, name: "4st menu item"
+                                                        }
+                                                    },
+                                                    {
+                                                        item: {
+                                                            key: 5, name: "5st menu item"
+                                                        }
+                                                    },
+                                                    {
+                                                        item: {
+                                                            key: 6, name: "6st menu item"
+                                                        }
+                                                    }
+                                                ]
+                                            }>
+                                                Hover me
+                                            </DropDown>
+                                        </div>
+                                        <h5 className="e-section-demo-title">3.状态 disabled 设置禁用状态</h5>
+                                        <div className="e-mh-10">
+                                            <DropDown menu={
+                                                [
+                                                    {
+                                                        item: {
+                                                            key: 1, name: "1st menu item"
+                                                        }
+                                                    },
+                                                    {
+                                                        item: {
+                                                            key: 2, name: "2st menu item"
+                                                        }
+                                                    },
+                                                    {
+                                                        item: {
+                                                            key: 3, name: "3st menu item", disabled: true
+                                                        }
+                                                    },
+                                                    {
+                                                        item: {
+                                                            key: 4, name: "4st menu item"
+                                                        }
+                                                    },
+                                                    {
+                                                        item: {
+                                                            key: 5, name: "5st menu item", disabled: true
+                                                        }
+                                                    },
+                                                    {
+                                                        item: {
+                                                            key: 6, name: "6st menu item"
+                                                        }
+                                                    }
+                                                ]
+                                            }>
+                                                Hover me
+                                            </DropDown>
+                                        </div>
+                                        <h5 className="e-section-demo-title">3.触发方式， Hover／Click 触发</h5>
+                                        <div className="e-mh-10">
+                                            <DropDown className="e-mr-10" menu={
+                                                [
+                                                    {
+                                                        item: {
+                                                            key: 1, name: "1st menu item"
+                                                        }
+                                                    },
+                                                    {
+                                                        item: {
+                                                            key: 2, name: "2st menu item"
+                                                        }
+                                                    },
+                                                    {
+                                                        item: {
+                                                            key: 3,
+                                                            name: "3st menu item",
+                                                            disabled: true
+                                                        }
+                                                    },
+                                                    {
+                                                        item: {
+                                                            key: 4, name: "4st menu item"
+                                                        }
+                                                    },
+                                                    {
+                                                        item: {
+                                                            key: 5,
+                                                            name: "5st menu item",
+                                                            disabled: true
+                                                        }
+                                                    },
+                                                    {
+                                                        item: {
+                                                            key: 6, name: "6st menu item"
+                                                        }
+                                                    }
+                                                ]
+                                            }>
+                                                Hover me
+                                            </DropDown>
+                                            <DropDown type="click" menu={
+                                                [
+                                                    {
+                                                        item: {
+                                                            key: 1, name: "1st menu item"
+                                                        }
+                                                    },
+                                                    {
+                                                        item: {
+                                                            key: 2, name: "2st menu item"
+                                                        }
+                                                    },
+                                                    {
+                                                        item: {
+                                                            key: 3, name: "3st menu item"
+                                                        }
+                                                    },
+                                                    {
+                                                        item: {
+                                                            key: 4, name: "4st menu item"
+                                                        }
+                                                    },
+                                                    {
+                                                        item: {
+                                                            key: 5, name: "5st menu item"
+                                                        }
+                                                    },
+                                                    {
+                                                        item: {
+                                                            key: 6, name: "6st menu item"
+                                                        }
+                                                    }
+                                                ]
+                                            }>
+                                                Click me
+                                            </DropDown>
+                                        </div>
+                                    </section>
                                 </div>
                                 <h4 className="e-section-container-title" id="e-steps">步骤条 Steps</h4>
                                 <p className="e-section-intro"><b>步骤条</b>：</p>
@@ -711,11 +968,11 @@ class Container extends Component {
                                 <p className="e-section-intro"><b>全局提示</b>：各种类型的全局消息提示，默认出现在窗口的顶层中间位置。</p>
                                 <div className="e-section-demo">
                                     <div className="e-row">
-                                        <div className="e-col e-mr-1rem"><Button onClick={this.msgHandle.bind(null, "default")}>默认提示</Button></div>
-                                        <div className="e-col e-mr-1rem"><Button className="e-button-primary" onClick={this.msgHandle.bind(null, "primary")}>常用提示</Button></div>
-                                        <div className="e-col e-mr-1rem"><Button className="e-button-success" onClick={this.msgHandle.bind(null, "success")}>成功提示</Button></div>
-                                        <div className="e-col e-mr-1rem"><Button className="e-button-warning" onClick={this.msgHandle.bind(null, "warning")}>警告提示</Button></div>
-                                        <div className="e-col e-mr-1rem"><Button className="e-button-error" onClick={this.msgHandle.bind(null, "error")}>错误提示</Button></div>
+                                        <div className="e-col e-mr-1rem"><Button onClick={this.msgHandle.bind(null, "default")}>Default</Button></div>
+                                        <div className="e-col e-mr-1rem"><Button className="e-button-primary" onClick={this.msgHandle.bind(null, "primary")}>Primary</Button></div>
+                                        <div className="e-col e-mr-1rem"><Button className="e-button-success" onClick={this.msgHandle.bind(null, "success")}>Success</Button></div>
+                                        <div className="e-col e-mr-1rem"><Button className="e-button-warning" onClick={this.msgHandle.bind(null, "warning")}>Warning</Button></div>
+                                        <div className="e-col e-mr-1rem"><Button className="e-button-error" onClick={this.msgHandle.bind(null, "error")}>Error</Button></div>
                                     </div>
                                 </div>
                                 <h4 className="e-section-container-title" id="e-modal">对话框 Modal</h4>

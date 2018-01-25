@@ -1,0 +1,36 @@
+@import "./../../common";
+.e-breadcrumb{
+    &-item{
+        display: inline-block;
+        font-size: 12px;
+        opacity: .7;
+        .e-breadcrumb-icon{
+            font-size: 12px;
+            margin-right: 4px;
+        }
+        &-content a{
+            text-decoration: none;
+            color: #666;
+            &:hover{
+                text-decoration: underline;
+                color: #2196f3;
+            }
+        }
+        &-separator{
+            margin: 0 .5rem;
+            color: rgba(0, 0, 0, 0.45);
+        }
+    }
+    &-item:last-child {
+        opacity: 1;
+        .e-breadcrumb-item-content a:hover{
+            cursor: default;
+            color: inherit;
+            text-decoration: none;
+        }
+        text-decoration: none;
+        .e-breadcrumb-item-separator{
+           display: none;
+        }
+    }
+}
