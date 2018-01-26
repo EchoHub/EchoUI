@@ -29,7 +29,9 @@ class Container extends Component {
             formValue: {},
             switchStatus: "开",
             switchTheme: "black",
-            inlineCollapsed: false
+            inlineCollapsed: false,
+            curStep: 2,
+            isFinishStep: false
         }
 
     }
@@ -114,6 +116,27 @@ class Container extends Component {
     changeSwitchTheme(event, vNode) {
         this.setState({
             switchTheme: vNode.value ? "black" : "default"
+        });
+    }
+    /**
+     * @desc 步骤条
+     * @param type 0 pre 1 next
+     */
+    stepNextHandler(type) {
+        this.setState({
+            isFinishStep: type === 1 && this.state.curStep === 4 ? true : false
+        });
+        this.setState({
+            curStep: type ?
+                (
+                    this.state.curStep === 4 ?
+                        4 : this.state.curStep + 1
+                )
+                :
+                (
+                    this.state.curStep === 1 ?
+                        1 : this.state.isFinishStep ? this.state.curStep : this.state.curStep - 1
+                )
         });
     }
     /**
@@ -928,18 +951,62 @@ class Container extends Component {
                                 <h4 className="e-section-container-title" id="e-steps">步骤条 Steps</h4>
                                 <p className="e-section-intro"><b>步骤条</b>：引导用户按照流程完成任务的分步导航条。</p>
                                 <div className="e-section-demo">
-                                <section>
+                                    <section>
                                         <h5 className="e-section-demo-title">1.基本用法</h5>
                                         <div className="e-mh-10">
-                                            <Steps 
-                                                active={1}
-                                                space={200}
-                                                finish-status={"success"}
+                                            <h6>简单的步骤条：</h6>
+                                            <Steps
+                                                active={this.state.curStep}
+                                                // space={200}
+                                                finishStatus={this.state.isFinishStep}
                                             >
                                                 <Step title={"Step 1"}></Step>
                                                 <Step title={"Step 2"}></Step>
                                                 <Step title={"Step 3"}></Step>
                                                 <Step title={"Step 4"}></Step>
+                                            </Steps>
+                                            <Button className="e-button-primary e-mv-10" onClick={() => { this.stepNextHandler(0) }}>上一步</Button>
+                                            <Button className="e-button-primary e-m-10" onClick={() => { this.stepNextHandler(1) }}>下一步</Button>
+                                        </div>
+                                        <h5 className="e-section-demo-title">2.有描述的步骤条</h5>
+                                        <div className="e-mh-10">
+                                            <h6>每一个步骤都有相应的步骤描述：</h6>
+                                            <Steps
+                                                active={2}
+                                                // space={200}
+                                                finishStatus={this.state.isFinishStep}
+                                            >
+                                                <Step title={"Step 1"} description={"This is Step 1 Description"}></Step>
+                                                <Step title={"Step 2"} description={"This is Step 2 Description"}></Step>
+                                                <Step title={"Step 3"} description={"This is Step 3 Description"}></Step>
+                                                <Step title={"Step 4"} description={"..."}></Step>
+                                            </Steps>
+                                        </div>
+                                        <h5 className="e-section-demo-title">3.自定义图标的步骤条</h5>
+                                        <div className="e-mh-10">
+                                            <h6>每一个步骤都可以自定义图标（目前只支持组件库本身提供的icon class）：</h6>
+                                            <Steps
+                                                active={2}
+                                                space={200}
+                                                finishStatus={this.state.isFinishStep}
+                                            >
+                                                <Step icon={"icon-user"} title={"BaseInfo"} description={"ba la ba la ...ba la ba la ...ba la ba la ...ba la ba la ...ba la ba la ...ba la ba la ...ba la ba la ..."}></Step>
+                                                <Step icon={"icon-car"} title={"CarInfo"} description={"ba la ba la ..."}></Step>
+                                                <Step icon={"icon-home"} title={"HouseInfo"} description={"ba la ba la ..."}></Step>
+                                                <Step icon={"icon-family"} title={"FamilyInfo"} description={"ba la ba la ..."}></Step>
+                                            </Steps>
+                                        </div>
+                                        <h5 className="e-section-demo-title">4.垂直步骤条</h5>
+                                        <div className="e-mh-10">
+                                            <h6>垂直方向的步骤条：</h6>
+                                            <Steps
+                                                active={2}
+                                                finishStatus={this.state.isFinishStep}
+                                            >
+                                                <Step icon={"icon-user"} title={"BaseInfo"} description={"ba la ba la ..."}></Step>
+                                                <Step icon={"icon-car"} title={"CarInfo"} description={"ba la ba la ..."}></Step>
+                                                <Step icon={"icon-home"} title={"HouseInfo"} description={"ba la ba la ..."}></Step>
+                                                <Step icon={"icon-family"} title={"FamilyInfo"} description={"ba la ba la ..."}></Step>
                                             </Steps>
                                         </div>
                                     </section>

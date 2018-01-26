@@ -108,6 +108,12 @@
                 top: 6px;
             }
         }
+        &.disabled{
+            .e-dropdown-submenu-title:hover{
+                color: #bbb;
+                cursor: not-allowed;
+            }
+        }
         // .e-dropdown-submenu-ul{
         //     position: absolute;
         //     top: 0;

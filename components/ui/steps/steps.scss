@@ -1,0 +1,67 @@
+@import "./../../common";
+.e-steps{
+    display: flex;
+    white-space: nowrap;
+    .e-step{
+        display: inline-block;
+        user-select: none;
+        &-line{
+            position: relative;
+            width: 100%;
+            height: 2px;
+            display: inline-block;
+            left: -12px;
+            top: -3px;
+            background: #ddd;
+        }
+        &-icon{
+            width: 24px;
+            height: 24px;
+            line-height: 24px;
+            display: inline-flex;
+            justify-content: center;
+            border-radius: 50%;
+            border: 2px solid;
+            position: relative;
+            z-index: 1;
+            background: #fff;
+        }
+        &-processing{
+            .e-step-line{
+                background: #ddd;
+            }
+        }
+        &-finish{
+            color: $color-success;
+            border-color: $color-success;
+            .e-step-line{
+                &.finish{
+                    background: $color-success;
+                }
+            }
+
+        }
+        &-unfinish{
+            color: #ddd;
+            border-color: #ddd;
+            .e-step-line{
+                background: #ddd;
+            }
+        }
+        &-title{
+            clear: both;
+            display: block;
+        }
+        &-description{
+            max-width: 220px;
+            display: inline-block;
+            white-space: normal;
+            font-size: 13px;
+        }
+    }
+    .e-step:last-child{
+        .e-step-line{
+            display: none;
+        }
+    }
+}
