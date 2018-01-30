@@ -45,7 +45,7 @@ export default class Steps extends Component {
                 }
             }
         }
-        return <div className="e-steps">
+        return <div className={`e-steps ${this.props.type}`}>
             {newArr}
         </div>
     }
@@ -77,7 +77,7 @@ export class Step extends Component {
         const props = this.props;
         const space = props.space;
         const _self = findDOMNode(this);
-        if (!props.islast) {
+        if (!props.islast && findDOMNode(this.props.parent).className.indexOf(" vertical") < 0) {
             if (space < 1) {
                 _self.style.flexBasis = space * 100 + "%";
             } else {
@@ -96,11 +96,13 @@ export class Step extends Component {
             <span className={`e-step-line  ${props.status === 1 ?
                 (props.index + 2 <= props.active || props.finishStatus) ?
                     "finish" : "" : ""}`}></span>
-            <span className="e-step-title" style={{ maxWidth: `${props.space < 1 ? undefined : props.space + "px"}` }}>{props.title}</span>
-            {
-                props.description !== undefined ?
-                    <span className="e-step-description" style={{ maxWidth: `${props.space < 1 ? undefined : props.space + "px"}` }}>{props.description}</span> : null
-            }
+            <div className="e-step-container">
+                <span className="e-step-title" style={{ maxWidth: `${props.space < 1 ? undefined : props.space + "px"}` }}>{props.title}</span>
+                {
+                    props.description !== undefined ?
+                        <span className="e-step-description" style={{ maxWidth: `${props.space < 1 ? undefined : props.space + "px"}` }}>{props.description}</span> : null
+                }
+            </div>
         </div>
     }
 }

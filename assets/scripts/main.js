@@ -974,7 +974,6 @@ class Container extends Component {
                                             <Steps
                                                 active={2}
                                                 // space={200}
-                                                finishStatus={this.state.isFinishStep}
                                             >
                                                 <Step title={"Step 1"} description={"This is Step 1 Description"}></Step>
                                                 <Step title={"Step 2"} description={"This is Step 2 Description"}></Step>
@@ -988,7 +987,6 @@ class Container extends Component {
                                             <Steps
                                                 active={2}
                                                 space={200}
-                                                finishStatus={this.state.isFinishStep}
                                             >
                                                 <Step icon={"icon-user"} title={"BaseInfo"} description={"ba la ba la ...ba la ba la ...ba la ba la ...ba la ba la ...ba la ba la ...ba la ba la ...ba la ba la ..."}></Step>
                                                 <Step icon={"icon-car"} title={"CarInfo"} description={"ba la ba la ..."}></Step>
@@ -1000,8 +998,8 @@ class Container extends Component {
                                         <div className="e-mh-10">
                                             <h6>垂直方向的步骤条：</h6>
                                             <Steps
-                                                active={2}
-                                                finishStatus={this.state.isFinishStep}
+                                                active={3}
+                                                type={"vertical"}
                                             >
                                                 <Step icon={"icon-user"} title={"BaseInfo"} description={"ba la ba la ..."}></Step>
                                                 <Step icon={"icon-car"} title={"CarInfo"} description={"ba la ba la ..."}></Step>

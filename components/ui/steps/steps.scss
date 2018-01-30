@@ -5,6 +5,7 @@
     .e-step{
         display: inline-block;
         user-select: none;
+        position: relative;
         &-line{
             position: relative;
             width: 100%;
@@ -62,6 +63,43 @@
     .e-step:last-child{
         .e-step-line{
             display: none;
+        }
+    }
+    &.vertical{
+        min-width: 200px;
+        display: block;
+        .e-step{
+            display: block;
+            clear: both;
+            min-height: 120px;
+            &-icon{
+                float: left;
+            }
+            &-line{
+                // transform: rotate(90deg);
+                // -moz-transform: rotate(90deg);
+                // -ms-transform: rotate(90deg);
+                // -o-transform: rotate(90deg);
+                // -webkit-transform: rotate(90deg);
+                // transform-origin: left;
+                // -moz-transform-origin: left;
+                // -ms-transform-origin: left;
+                // -o-transform-origin: left;
+                // -webkit-transform-origin: left;
+                height: 100%;
+                width: 2px;
+                left: 14px;
+                top: 0;
+                z-index: 0;
+                position: absolute;
+            }   
+            &-container{
+                float: left;
+                position: relative;
+                top: 0;
+                left: 0;
+                margin-left: 10px;
+            }
         }
     }
 }

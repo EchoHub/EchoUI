@@ -1,4 +1,4 @@
-界面组件:（共 36 个， ✅ 22 个）
+界面组件:（共 36 个， ✅ 23 个）
     通用：（共 2 个，✅ 1 个）
       - ui/button 按钮 ✅
       - ui/buttonGroup 按钮组
@@ -21,12 +21,12 @@
       - ui/multiListBox 多选列表
       - ui/switch 开关 ✅
       - ui/timePicker 时间选择框
-    导航：(共 5 个， ✅ 3 个)
+    导航：(共 5 个， ✅ 4 个)
       - ui/navMenu 导航菜单 ✅
       - ui/tabs 标签页
       - ui/breadCrumbs 面包屑 ✅
       - ui/dropDown 拉下菜单 ✅
-      - ui/steps 步骤条
+      - ui/steps 步骤条 ✅
     浮层：(共 5 个，✅ 5 个)
       - ui/alert 警告 ✅
       - ui/toolTip ✅
