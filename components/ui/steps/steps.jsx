@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { findDOMNode } from "react-dom";
+import { unique } from "./../control/control.jsx";
 import "./steps.scss";
 
 export default class Steps extends Component {
@@ -45,7 +46,7 @@ export default class Steps extends Component {
                 }
             }
         }
-        return <div className={`e-steps ${this.props.type}`}>
+        return <div className={unique(`e-steps ${props.className} ${props.type}`.split(" ")).join(" ")}>
             {newArr}
         </div>
     }

@@ -14,6 +14,7 @@ import Select from "./../../components/ui/select/select.jsx";
 import { ListItem } from "./../../components/ui/comboBox/comboBox.jsx";
 import Form, { FormItem } from "./../../components/ui/form/form.jsx";
 import NavMenu, { MenuItem, MenuItemTitle, MenuItemList, MenuItemFlag, SubMenu } from "./../../components/ui/navMenu/navMenu.jsx";
+import Tabs, { Tab } from "./../../components/ui/tabs/tabs.jsx";
 import BreadCrumb, { BreadCrumbItem } from "./../../components/ui/breadCrumb/breadCrumb.jsx";
 import DropDown, { DropDownItem } from "./../../components/ui/dropDown/dropDown.jsx";
 import Steps, { Step } from "./../../components/ui/steps/steps.jsx";
@@ -630,7 +631,15 @@ class Container extends Component {
                                 <h4 className="e-section-container-title" id="e-tabs">标签页 Tabs</h4>
                                 <p className="e-section-intro"><b>标签页</b>： 分隔内容上有关联但属于不同类别的数据集合。</p>
                                 <div className="e-section-demo">
-
+                                    <section>
+                                        <h5 className="e-section-demo-title">1.基本用法：</h5>
+                                        <Tabs className="e-tabs-basic">
+                                            <Tab name="tab1" label={"tab1"}>Tab1 Content</Tab>
+                                            <Tab name="tab2" label={"tab2"}>Tab2 Content</Tab>
+                                            <Tab name="tab3" label={"tab3"}>Tab3 Content</Tab>
+                                            <Tab name="tab4" label={"tab4"}>Tab4 Content</Tab>
+                                        </Tabs>
+                                    </section>
                                 </div>
                                 <h4 className="e-section-container-title" id="e-breadcrumb">面包屑 BreadCrumb</h4>
                                 <p className="e-section-intro"><b>面包屑</b>：显示当前页面在系统层级结构中的位置，并能向上返回。</p>
@@ -973,7 +982,7 @@ class Container extends Component {
                                             <h6>每一个步骤都有相应的步骤描述：</h6>
                                             <Steps
                                                 active={2}
-                                                // space={200}
+                                            // space={200}
                                             >
                                                 <Step title={"Step 1"} description={"This is Step 1 Description"}></Step>
                                                 <Step title={"Step 2"} description={"This is Step 2 Description"}></Step>
