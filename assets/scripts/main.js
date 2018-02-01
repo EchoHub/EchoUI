@@ -633,11 +633,40 @@ class Container extends Component {
                                 <div className="e-section-demo">
                                     <section>
                                         <h5 className="e-section-demo-title">1.基本用法：</h5>
-                                        <Tabs className="e-tabs-basic">
-                                            <Tab name="tab1" label={"tab1"}>Tab1 Content</Tab>
-                                            <Tab name="tab2" label={"tab2"}>Tab2 Content</Tab>
-                                            <Tab name="tab3" label={"tab3"}>Tab3 Content</Tab>
-                                            <Tab name="tab4" label={"tab4"}>Tab4 Content</Tab>
+                                        <Tabs className="e-tabs-basic" active={1}>
+                                            <Tab name="tab1" label={"tab1"}>Tab1 Content  选项卡1 内容区域</Tab>
+                                            <Tab name="tab2" label={"tab2"}>Tab2 Content  选项卡2 内容区域</Tab>
+                                            <Tab name="tab3" label={"tab3"}>Tab3 Content  选项卡3 内容区域</Tab>
+                                            <Tab name="tab4" label={"tab4"}>Tab4 Content  选项卡4 内容区域</Tab>
+                                        </Tabs>
+                                        <h5 className="e-section-demo-title">2.设置滚动（isScroll）：</h5>
+                                        <Tabs className="e-tabs-basic" active={1} width={450} isScroll={true}>
+                                            <Tab name="tab1" label={"tab1"}>Tab1 Content  选项卡1 内容区域</Tab>
+                                            <Tab name="tab2" label={"tab2"}>Tab2 Content  选项卡2 内容区域</Tab>
+                                            <Tab name="tab3" label={"tab3"}>Tab3 Content  选项卡3 内容区域</Tab>
+                                            <Tab name="tab4" label={"tab4"}>Tab4 Content  选项卡4 内容区域</Tab>
+                                            <Tab name="tab5" label={"tab5"}>Tab5 Content  选项卡5 内容区域</Tab>
+                                            <Tab name="tab6" label={"tab6"}>Tab6 Content  选项卡6 内容区域</Tab>
+                                            <Tab name="tab7" label={"tab7"}>Tab7 Content  选项卡7 内容区域</Tab>
+                                            <Tab name="tab8" label={"tab8"}>Tab8 Content  选项卡8 内容区域</Tab>
+                                        </Tabs>
+                                        <h5 className="e-section-demo-title">3.设置主题（theme: line、border、card）：</h5>
+                                        <Tabs className="e-tabs-basic" active={1} width={550} isScroll={true} theme={"border"}>
+                                            <Tab name="tab1" label={"border1"}>Tab1 Content  边框主题</Tab>
+                                            <Tab name="tab2" label={"border2"}>Tab2 Content  边框主题</Tab>
+                                            <Tab name="tab3" label={"border3"}>Tab3 Content  边框主题</Tab>
+                                            <Tab name="tab4" label={"border4"}>Tab4 Content  边框主题</Tab>
+                                            <Tab name="tab5" label={"border5"}>Tab5 Content  边框主题</Tab>
+                                            <Tab name="tab6" label={"border6"}>Tab6 Content  边框主题</Tab>
+                                            <Tab name="tab7" label={"border7"}>Tab7 Content  边框主题</Tab>
+                                            <Tab name="tab8" label={"border8"}>Tab8 Content  边框主题</Tab>
+                                        </Tabs>
+                                        <Tabs className="e-tabs-basic e-mv-10" active={1} width={450} isScroll={true} theme={"card"}>
+                                            <Tab name="tab1" label={"card1"}>Tab1 Content  卡片主题</Tab>
+                                            <Tab name="tab2" label={"card2"}>Tab2 Content  卡片主题</Tab>
+                                            <Tab name="tab3" label={"card3"}>Tab3 Content  卡片主题</Tab>
+                                            <Tab name="tab4" label={"card4"}>Tab4 Content  卡片主题</Tab>
+                                            <Tab name="tab5" label={"card5"}>Tab5 Content  卡片主题</Tab>
                                         </Tabs>
                                     </section>
                                 </div>
