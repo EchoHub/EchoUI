@@ -79,7 +79,7 @@ export default class Tabs extends Component {
             isScroll: tabWidthTotal > tablistWidth ? true : false,
             active: i,
             tabBarStyle: {
-                transform: `translateX(${_offsetLeft + (this.props.isScroll || this.state.isScroll ? 12 : 0)}px)`,
+                transform: `translateX(${_offsetLeft + (tabWidthTotal >= tablistWidth? (this.props.isScroll || this.state.isScroll ? 12 : 0) : 0)}px)`,
                 width: _width
             }
         });
@@ -105,7 +105,6 @@ export default class Tabs extends Component {
     deleteHandler(i) {
         let index = 1;
         let newTabList = [], newChildren = []
-        console.log(i)
         for (const item of this.state.children) {
             if (index !== i) {
                 newTabList.push({
@@ -114,8 +113,10 @@ export default class Tabs extends Component {
                 });
                 newChildren.push(item);
             }
-            i++;
+            index++;
         }
+        console.log(newTabList)
+        this.setBarPosition(newTabList.length < 2 ? 1: i)
         this.setState({
             tabList: newTabList,
             children: newChildren
@@ -172,7 +173,7 @@ export default class Tabs extends Component {
                                 {
                                     props.editable ? <i
                                         className="e-tabs-item-delete icon iconfont icon-close"
-                                        onClick={() => { this.deleteHandler(i) }}
+                                        onClick={() => { this.deleteHandler(i + 1) }}
                                     ></i> : null
                                 }
                                 {d.label}
