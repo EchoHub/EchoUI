@@ -651,6 +651,7 @@ class Container extends Component {
                                             <Tab name="tab8" label={"tab8"}>Tab8 Content  选项卡8 内容区域</Tab>
                                         </Tabs>
                                         <h5 className="e-section-demo-title">3.设置主题（theme: line、border、card）：</h5>
+                                        <h6 className="e-section-demo-title e-ml-10">边框类型（有滚动/无滚动）：</h6>
                                         <Tabs className="e-tabs-basic" active={1} width={550} isScroll={true} theme={"border"}>
                                             <Tab name="tab1" label={"border1"}>Tab1 Content  边框主题</Tab>
                                             <Tab name="tab2" label={"border2"}>Tab2 Content  边框主题</Tab>
@@ -661,12 +662,48 @@ class Container extends Component {
                                             <Tab name="tab7" label={"border7"}>Tab7 Content  边框主题</Tab>
                                             <Tab name="tab8" label={"border8"}>Tab8 Content  边框主题</Tab>
                                         </Tabs>
+                                        <Tabs className="e-tabs-basic" active={3} theme={"border"}>
+                                            <Tab name="tab1" label={"border1"}>Tab1 Content  边框主题</Tab>
+                                            <Tab name="tab2" label={"border2"}>Tab2 Content  边框主题</Tab>
+                                            <Tab name="tab3" label={"border3"}>Tab3 Content  边框主题</Tab>
+                                            <Tab name="tab4" label={"border4"}>Tab4 Content  边框主题</Tab>
+                                            <Tab name="tab5" label={"border5"}>Tab5 Content  边框主题</Tab>
+                                            <Tab name="tab6" label={"border6"}>Tab6 Content  边框主题</Tab>
+                                            <Tab name="tab7" label={"border7"}>Tab7 Content  边框主题</Tab>
+                                            <Tab name="tab8" label={"border8"}>Tab8 Content  边框主题</Tab>
+                                        </Tabs>
+                                        <h6 className="e-section-demo-title e-ml-10">卡片类型（有滚动/无滚动）：</h6>
                                         <Tabs className="e-tabs-basic e-mv-10" active={1} width={450} isScroll={true} theme={"card"}>
                                             <Tab name="tab1" label={"card1"}>Tab1 Content  卡片主题</Tab>
                                             <Tab name="tab2" label={"card2"}>Tab2 Content  卡片主题</Tab>
                                             <Tab name="tab3" label={"card3"}>Tab3 Content  卡片主题</Tab>
                                             <Tab name="tab4" label={"card4"}>Tab4 Content  卡片主题</Tab>
                                             <Tab name="tab5" label={"card5"}>Tab5 Content  卡片主题</Tab>
+                                        </Tabs>
+                                        <Tabs className="e-tabs-basic e-mv-10" active={3} width={550} theme={"card"}>
+                                            <Tab name="tab1" label={"card1"}>Tab1 Content  卡片主题</Tab>
+                                            <Tab name="tab2" label={"card2"}>Tab2 Content  卡片主题</Tab>
+                                            <Tab name="tab3" label={"card3"}>Tab3 Content  卡片主题</Tab>
+                                            <Tab name="tab4" label={"card4"}>Tab4 Content  卡片主题</Tab>
+                                            <Tab name="tab5" label={"card5"}>Tab5 Content  卡片主题</Tab>
+                                        </Tabs>
+                                        <h5 className="e-section-demo-title">4.动态新增删除标签页：</h5>
+                                        <h6 className="e-section-demo-title e-ml-10">增减标签页按钮只能在选项卡样式的标签页下使用：</h6>
+                                        <Tabs className="e-tabs-basic" active={1} width={550} theme={"border"} editable>
+                                            <Tab name="tab1" label={"border1"}>Tab1 Content  边框主题</Tab>
+                                            <Tab name="tab2" label={"border2"}>Tab2 Content  边框主题</Tab>
+                                        </Tabs>
+                                        <h6 className="e-section-demo-title e-ml-10">自定义增加标签页触发器：</h6>
+                                        <Button className="e-button-primary">Add Tab</Button>
+                                        <Tabs className="e-tabs-basic e-mv-10" active={1} width={550} isScroll={true} theme={"border"} editable>
+                                            <Tab name="tab1" label={"border1"}>Tab1 Content  边框主题</Tab>
+                                            <Tab name="tab2" label={"border2"}>Tab2 Content  边框主题</Tab>
+                                            <Tab name="tab3" label={"border3"}>Tab3 Content  边框主题</Tab>
+                                            <Tab name="tab4" label={"border4"}>Tab4 Content  边框主题</Tab>
+                                            <Tab name="tab5" label={"border5"}>Tab5 Content  边框主题</Tab>
+                                            <Tab name="tab6" label={"border6"}>Tab6 Content  边框主题</Tab>
+                                            <Tab name="tab7" label={"border7"}>Tab7 Content  边框主题</Tab>
+                                            <Tab name="tab8" label={"border8"}>Tab8 Content  边框主题</Tab>
                                         </Tabs>
                                     </section>
                                 </div>

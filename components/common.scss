@@ -80,6 +80,9 @@ $input-radius: .1rem;
 .e-m-10{
     margin: 10px;
 }
+.e-mh-12{
+    margin: 0 12px;
+}
 .e-mh-20{
     margin: 0 20px;
 }
@@ -126,6 +129,7 @@ $input-radius: .1rem;
 }
 ::-webkit-scrollbar, ::-webkit-scrollbar-track {
     width: 6px;
+    height: 0px;
     background: #e0e0e0;
 }
 ::-webkit-scrollbar-thumb {

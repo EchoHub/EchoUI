@@ -12,7 +12,8 @@ export default class Tabs extends Component {
             isScrollable: props.isScroll,
             initStyle: {
                 width: "100%"
-            }
+            },
+            children: []
         }
     }
     componentDidMount() {
@@ -37,7 +38,8 @@ export default class Tabs extends Component {
         }
         this.setState({
             active: props.active,
-            tabList: tabList
+            tabList: tabList,
+            children: props.children
         });
         const timer = setTimeout(() => {
             this.setBarPosition(props.active);
@@ -63,8 +65,10 @@ export default class Tabs extends Component {
             if (index === i) {
                 let tabListTranslateX = 0;
                 if (item.offsetLeft + item.offsetWidth > tablistWidth) {
-                    tabListTranslateX = item.offsetLeft + item.offsetWidth - 20 - tablistWidth
-                    header.style.transform = `translateX(-${tabListTranslateX}px)`
+                    tabListTranslateX = item.offsetLeft + item.offsetWidth - 12 - tablistWidth;
+                    header.style.transform = `translateX(-${tabListTranslateX}px)`;
+                } else {
+                    header.style.transform = `translateX(0)`;
                 }
                 _offsetLeft = item.offsetLeft - tabListTranslateX;
                 _width = item.offsetWidth + "px";
@@ -75,7 +79,7 @@ export default class Tabs extends Component {
             isScroll: tabWidthTotal > tablistWidth ? true : false,
             active: i,
             tabBarStyle: {
-                transform: `translateX(${_offsetLeft}px)`,
+                transform: `translateX(${_offsetLeft + (this.props.isScroll || this.state.isScroll ? 12 : 0)}px)`,
                 width: _width
             }
         });
@@ -84,7 +88,7 @@ export default class Tabs extends Component {
      * @desc 滚动条 向右
      */
     preHandler(i) {
-        const curStep = i > 1 ? i - 1: 1
+        const curStep = i > 1 ? i - 1 : 1
         this.setBarPosition(curStep)
     }
     /**
@@ -95,11 +99,33 @@ export default class Tabs extends Component {
         const curStep = i < total ? i + 1 : total
         this.setBarPosition(curStep)
     }
+    /**
+     * @desc 删除指定选项卡
+     */
+    deleteHandler(i) {
+        let index = 1;
+        let newTabList = [], newChildren = []
+        console.log(i)
+        for (const item of this.state.children) {
+            if (index !== i) {
+                newTabList.push({
+                    label: item.props.label,
+                    name: `tab-${item.props.name !== undefined ? item.props.name : index}`,
+                });
+                newChildren.push(item);
+            }
+            i++;
+        }
+        this.setState({
+            tabList: newTabList,
+            children: newChildren
+        });
+    }
     render() {
         const props = this.props;
         let newArr = [], index = 1;
-        if (props.children.length) {
-            for (const item of props.children) {
+        if (this.state.children.length) {
+            for (const item of this.state.children) {
                 switch (item.type && item.type.name) {
                     case "Tab":
                         newArr.push(<Tab
@@ -107,6 +133,7 @@ export default class Tabs extends Component {
                             key={index}
                             active={index === this.state.active}
                             id={`panel-${item.props.name !== undefined ? item.props.name : index}`}
+                            editable={props.editable}
                         ></Tab>);
                         index++;
                         break;
@@ -116,7 +143,10 @@ export default class Tabs extends Component {
             }
 
         }
-        return <div className={unique(`e-tabs ${props.className}`.split(" ")).join(" ")} style={{ width: props.width ? props.width + "px" : null }}>
+        return <div
+            className={unique(`e-tabs ${props.className} ${props.theme}`.split(" ")).join(" ")}
+            style={{ width: props.width ? props.width + "px" : null }}
+        >
             <div className="e-tabs-tablist">
                 {
                     this.state.isScroll ? <div
@@ -130,10 +160,23 @@ export default class Tabs extends Component {
                         onClick={() => { this.nextHandler(this.state.active) }}
                     ></div> : null
                 }
-                <div className={`e-tabs-header ${this.state.isScroll ? "e-mh-20" : ""}`}>
+                <div className={`e-tabs-header ${this.state.isScroll ? "e-mh-12" : ""}`}>
                     {
                         this.state.tabList.length ? this.state.tabList.map((d, i) =>
-                            <div key={i} id={d.name} className={`e-tabs-item ${this.state.active === (i + 1) ? "active" : ""}`} onClick={() => { this.changeTabHandler(i + 1) }}>{d.label}</div>
+                            <div
+                                key={i}
+                                id={d.name}
+                                className={`e-tabs-item ${this.state.active === (i + 1) ? "active" : ""}`}
+                                onClick={() => { this.changeTabHandler(i + 1) }}
+                            >
+                                {
+                                    props.editable ? <i
+                                        className="e-tabs-item-delete icon iconfont icon-close"
+                                        onClick={() => { this.deleteHandler(i) }}
+                                    ></i> : null
+                                }
+                                {d.label}
+                            </div>
                         ) : null
                     }
                 </div>
@@ -151,13 +194,15 @@ export default class Tabs extends Component {
  * @param isScroll 是否有滚动
  * @param width  设置 选项卡宽度
  * @param theme 主题 line 线型、 card 卡片型、border 边框型
+ * @param editable 是否可编辑（动态新增、删除标签页）
  */
 Tabs.defaultProps = {
     className: "e-tabs",
     active: 1,
     isScroll: false,
     width: 0,
-    theme: "line"
+    theme: "line",
+    editable: false
 }
 
 export class Tab extends Component {
@@ -166,7 +211,9 @@ export class Tab extends Component {
     }
     render() {
         const props = this.props;
-        return <div className={`e-tab ${props.active ? "active" : ""}`}>{props.children}</div>
+        return <div className={`e-tab ${props.active ? "active" : ""}`}>
+            {props.children}
+        </div>
     }
 }
 /**

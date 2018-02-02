@@ -3,33 +3,68 @@
     position: relative;
     overflow: hidden;
     &-tablist{
-        border-bottom: 2px solid #ddd;
+        // border-bottom: 1px solid #ddd;
         line-height: 30px;
         white-space: nowrap;
         position: relative;
         .e-tabs-item{
+            text-align: center;
+            border-bottom: 1px solid #ddd;
             cursor: pointer;
             min-width: 100px;
             display: inline-block;
-            margin-right: 10px;
+            // margin-right: 10px;
             position: relative;
             z-index: 1;
-            top: 2px;
+            top: 1px;
+            color: #000;
+            transition: all ease-in-out .4s;
+            -moz-transition: all ease-in-out .4s;
+            -ms-transition: all ease-in-out .4s;
+            -o-transition: all ease-in-out .4s;
+            -webkit-transition: all ease-in-out .4s;
+            &-delete{
+                display: inline-block;
+                position: absolute;
+                right: 4px;
+                top: 0;
+                font-size: 12px;
+                transform: scale(0.6);
+                cursor: pointer;
+                width: 12px;
+                height: 12px;
+                font-weight: bolder;
+                &:hover{
+                    border-radius: 50%;
+                    background: #ddd;
+                    transform: scale(.5);
+                    color: #fff;
+                    padding: 8px;
+                    top: -2px;
+                    right: -5px;
+                    &:before{
+                        top: -8px;
+                        position: relative;
+                    }
+                }
+            }
             &.active{
                 // border-bottom: 2px solid #2196f3;
+                color: #2196f3;
             }
             &:hover{
                 color: #2196f3;
             }
         }
         .e-tabs-pre{
+            border: 1px solid #fff;
             display: inline-block;
             left: 0;
             position: absolute;
             font-size: 12px;
             line-height: 30px;
             cursor: pointer;
-            z-index: 2;
+            z-index: 3;
             background: #fff;
             transition: all ease-in-out .3s;
             -moz-transition: all ease-in-out .3s;
@@ -52,13 +87,15 @@
             }
         }
         .e-tabs-next{
+            border: 1px solid #fff;
             display: inline-block;
             right: 0;
+            top: 1px;
             position: absolute;
             font-size: 12px;
             line-height: 30px;
             cursor: pointer;
-            z-index: 2;
+            z-index: 3;
             background: #fff;
             transition: all ease-in-out .3s;
             -moz-transition: all ease-in-out .3s;
@@ -80,6 +117,10 @@
                 }
             }
         }
+        .e-tabs-header{
+            // overflow-x: auto;
+            // overflow-y: hidden;
+        }
     }
     &-bar{
         transition: transform ease-in-out .3s;
@@ -91,12 +132,57 @@
         position: relative;
         z-index: 2;
         background: #2196f3;
-        top: -2px;
+        top: -1px;
+    }
+    &-content{
+        padding: 10px;
     }
     .e-tab{
         display: none;
         &.active{
             display: inherit;
+        }
+    }
+    &.border, &.card{
+        .e-tabs-item{
+            border-top: 1px solid #e4e7ed;
+            border-left: 1px solid #e4e7ed;
+            border-bottom: 1px solid #e4e7ed;
+            background: #fff;
+            &.active{
+                border-bottom: 1px solid #fff;
+            }
+        }
+        .e-tabs-bar{
+            background: #fff;
+            top: 0;
+        }
+    }
+    &.border{
+        .e-tabs-item:last-child{
+            border-right: 1px solid #ddd;
+        }
+    }
+    &.card{
+        box-shadow: 0 0 6px rgba(0,0,0,.25);
+        border-radius: 3px;
+        .e-tabs-item{
+            border-top: none;
+            border-left: none;
+            border-right: none;
+            top: 0;
+            background: #e4e7ed;
+            color: #909399;
+            &.active{
+                background: #fff;
+                color: #2196f3;
+            }
+        }
+        .e-tabs-next{
+            top: 0;
+        }
+        .e-tabs-header{
+            background: #e4e7ed;
         }
     }
 }
