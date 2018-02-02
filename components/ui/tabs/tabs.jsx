@@ -65,7 +65,7 @@ export default class Tabs extends Component {
             if (index === i) {
                 let tabListTranslateX = 0;
                 if (item.offsetLeft + item.offsetWidth > tablistWidth) {
-                    tabListTranslateX = item.offsetLeft + item.offsetWidth - 12 - tablistWidth;
+                    tabListTranslateX = item.offsetLeft + item.offsetWidth - 12 + 56 - tablistWidth;
                     header.style.transform = `translateX(-${tabListTranslateX}px)`;
                 } else {
                     header.style.transform = `translateX(0)`;
@@ -104,23 +104,48 @@ export default class Tabs extends Component {
      */
     deleteHandler(i) {
         let index = 1;
-        let newTabList = [], newChildren = []
+        let newTabList = [], newChildren = [];
         for (const item of this.state.children) {
             if (index !== i) {
                 newTabList.push({
                     label: item.props.label,
-                    name: `tab-${item.props.name !== undefined ? item.props.name : index}`,
+                    name: `tab-${item.props.name !== undefined ? item.props.name : new Date().getTime()}`,
                 });
                 newChildren.push(item);
             }
             index++;
         }
-        console.log(newTabList)
-        this.setBarPosition(newTabList.length < 2 ? 1: i)
         this.setState({
             tabList: newTabList,
             children: newChildren
         });
+        setTimeout(() => {
+            this.setBarPosition(newTabList.length < 2 ? 1: i)
+        }, 10);
+    }
+    /**
+     * @desc 新建一个选项卡
+     */
+    createTabHandler(name, label) {
+        const index = this.state.children.length;
+        let tabList = this.state.tabList;
+        let children = this.state.children;
+        this.setState({
+            tabList: this.state.tabList.concat([{
+                label: label? label : `tab-${new Date().getTime()}`,
+                name: `tab-${name !== undefined ? name : new Date().getTime()}`,
+            }]),
+            children: this.state.children.concat([<Tab
+                name={`tab-${name !== undefined ? name : new Date().getTime()}`}
+                label={label? label : `tab-${index}`}
+                id={`panel-${name !== undefined ? name : new Date().getTime()}`}
+                editable={this.props.editable}
+                content={`panel-content-${name !== undefined ? name : new Date().getTime()}`}
+            ></Tab>])
+        });
+        setTimeout(() => {
+            this.setBarPosition(index + 1);
+        }, 10);
     }
     render() {
         const props = this.props;
@@ -161,7 +186,7 @@ export default class Tabs extends Component {
                         onClick={() => { this.nextHandler(this.state.active) }}
                     ></div> : null
                 }
-                <div className={`e-tabs-header ${this.state.isScroll ? "e-mh-12" : ""}`}>
+                <div className={`e-tabs-header ${this.state.isScroll ? "e-mh-12" : ""} ${props.editable ? "editable" : ""}`}>
                     {
                         this.state.tabList.length ? this.state.tabList.map((d, i) =>
                             <div
@@ -179,6 +204,9 @@ export default class Tabs extends Component {
                                 {d.label}
                             </div>
                         ) : null
+                    }
+                    {
+                        props.editable ?  <div className="e-tabs-item-add icon iconfont icon-create" onClick={() => { this.createTabHandler() }}></div> : null
                     }
                 </div>
             </div>
@@ -213,14 +241,16 @@ export class Tab extends Component {
     render() {
         const props = this.props;
         return <div className={`e-tab ${props.active ? "active" : ""}`}>
-            {props.children}
+            {props.content !== "" ? props.content : props.children}
         </div>
     }
 }
 /**
  * @param name 选项卡的唯一表示符 必填项
+ * @param 内容
  */
 Tab.defaultProps = {
     className: "e-tab",
+    content: "",
     name: `tab-${new Date().getTime()}`
 }
