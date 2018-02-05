@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { render } from "react-dom";
 import PropTypes from "prop-types";
 import "./../styles/main.scss";
-import Button from "./../../components/ui/button/button.jsx";
+import Button, { ButtonGroup } from "./../../components/ui/button/button.jsx";
 import RadioBox from "./../../components/ui/radioBox/radioBox.jsx";
 import RadioBoxGroup from "./../../components/ui/radioBoxGroup/radioBoxGroup.jsx";
 import CheckBox from "./../../components/ui/checkBox/checkBox.jsx";
@@ -33,7 +33,8 @@ class Container extends Component {
             inlineCollapsed: false,
             curStep: 2,
             isFinishStep: false,
-            tabIndex: -1
+            tabIndex: -1,
+            tabPosition: "top"
         }
 
     }
@@ -126,6 +127,15 @@ class Container extends Component {
     createNewTab() {
         const defineTabsRef = this.refs.defineTabsRef;
         defineTabsRef.tabIndex += 1;
+    }
+    /**
+     * @desc 设置选项卡的位置
+     * @param type top、left、right、bottom
+     */
+    setTabPosition(type) {
+        this.setState({
+            tabPosition: type
+        });
     }
     /**
      * @desc 步骤条
@@ -719,6 +729,24 @@ class Container extends Component {
                                             <Tab name="tab6" label={"border6"}>Tab6 Content  边框主题</Tab>
                                             <Tab name="tab7" label={"border7"}>Tab7 Content  边框主题</Tab>
                                             <Tab name="tab8" label={"border8"}>Tab8 Content  边框主题</Tab>
+                                        </Tabs>
+                                        <h6 className="e-section-demo-title e-ml-10">标签位置（tabPosition：top、right、left、bottom）：</h6>
+                                        <ButtonGroup className="e-mt-10" activeIndex={1}>
+                                            <Button onClick={() => { this.setTabPosition("top") }}>top</Button>
+                                            <Button onClick={() => { this.setTabPosition("right") }}>right</Button>
+                                            <Button onClick={() => { this.setTabPosition("left") }}>left</Button>
+                                            <Button onClick={() => { this.setTabPosition("bottom") }}>bottom</Button>
+                                        </ButtonGroup>
+                                        <Tabs
+                                            className="e-tabs-basic e-mv-10"
+                                            active={1} width={550}
+                                            theme={"line"}
+                                            tabPosition={this.state.tabPosition}
+                                        >
+                                            <Tab name="tab1" label={"用户管理"}>用户管理</Tab>
+                                            <Tab name="tab2" label={"配置管理"}>配置管理</Tab>
+                                            <Tab name="tab3" label={"角色管理"}>角色管理</Tab>
+                                            <Tab name="tab4" label={"其他设置"}>其他设置</Tab>
                                         </Tabs>
                                     </section>
                                 </div>

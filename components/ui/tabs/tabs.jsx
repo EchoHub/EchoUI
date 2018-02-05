@@ -13,8 +13,14 @@ export default class Tabs extends Component {
             initStyle: {
                 width: "100%"
             },
-            children: []
+            children: [],
+            tabPosition: "top"
         }
+    }
+    componentWillReceiveProps(nextProps, nextState) {
+        nextProps && nextProps.tabPosition !== this.props.tabPosition && this.setState({
+            tabPosition: nextProps.tabPosition
+        });
     }
     componentDidMount() {
         let newArr = [], tabList = [], index = 1;
@@ -40,7 +46,8 @@ export default class Tabs extends Component {
             active: props.active,
             tabList: tabList,
             children: props.children,
-            tabIndex: props.children.length
+            tabIndex: props.children.length,
+            tabPosition: props.tabPosition
         });
         const timer = setTimeout(() => {
             this.setBarPosition(props.active);
@@ -121,7 +128,6 @@ export default class Tabs extends Component {
             children: newChildren,
             tabIndex: this.state.tabList.length - 1
         });
-        console.log(i)
         setTimeout(() => {
             this.setBarPosition(i < 2 ? 1 : i - 1)
         }, 10);
@@ -236,6 +242,7 @@ export default class Tabs extends Component {
  * @param width  设置 选项卡宽度
  * @param theme 主题 line 线型、 card 卡片型、border 边框型
  * @param editable 是否可编辑（动态新增、删除标签页）
+ * @param tabPosition 选项卡位置 top、left、right、bottom
  */
 Tabs.defaultProps = {
     className: "e-tabs",
@@ -243,7 +250,8 @@ Tabs.defaultProps = {
     isScroll: false,
     width: 0,
     theme: "line",
-    editable: false
+    editable: false,
+    tabPosition: "top"
 }
 
 export class Tab extends Component {
