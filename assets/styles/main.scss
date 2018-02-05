@@ -27,6 +27,7 @@ body{
             overflow:visible;
             margin: 20px 0 0 20px;
             border-right: 1px solid #ddd;
+            overflow: auto;
             .e-main-aside-nav-title{
                 color: rgba(0, 0, 0, .6);
                 .e-aside-nav-title-tip{
@@ -55,9 +56,6 @@ body{
                         opacity: .8;
                     }
                 }
-            }
-            &:hover {
-                overflow: auto;
             }
         }
     }

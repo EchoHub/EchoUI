@@ -39,7 +39,8 @@ export default class Tabs extends Component {
         this.setState({
             active: props.active,
             tabList: tabList,
-            children: props.children
+            children: props.children,
+            tabIndex: props.children.length
         });
         const timer = setTimeout(() => {
             this.setBarPosition(props.active);
@@ -79,7 +80,7 @@ export default class Tabs extends Component {
             isScroll: tabWidthTotal > tablistWidth ? true : false,
             active: i,
             tabBarStyle: {
-                transform: `translateX(${_offsetLeft + (tabWidthTotal >= tablistWidth? (this.props.isScroll || this.state.isScroll ? 12 : 0) : 0)}px)`,
+                transform: `translateX(${_offsetLeft + (tabWidthTotal >= tablistWidth ? (this.props.isScroll || this.state.isScroll ? 12 : 0) : 0)}px)`,
                 width: _width
             }
         });
@@ -109,7 +110,7 @@ export default class Tabs extends Component {
             if (index !== i) {
                 newTabList.push({
                     label: item.props.label,
-                    name: `tab-${item.props.name !== undefined ? item.props.name : new Date().getTime()}`,
+                    name: `tab-${item.props.name}`,
                 });
                 newChildren.push(item);
             }
@@ -117,10 +118,12 @@ export default class Tabs extends Component {
         }
         this.setState({
             tabList: newTabList,
-            children: newChildren
+            children: newChildren,
+            tabIndex: this.state.tabList.length - 1
         });
+        console.log(i)
         setTimeout(() => {
-            this.setBarPosition(newTabList.length < 2 ? 1: i)
+            this.setBarPosition(i < 2 ? 1 : i - 1)
         }, 10);
     }
     /**
@@ -132,16 +135,17 @@ export default class Tabs extends Component {
         let children = this.state.children;
         this.setState({
             tabList: this.state.tabList.concat([{
-                label: label? label : `tab-${new Date().getTime()}`,
+                label: label ? label : `tab-${new Date().getTime()}`,
                 name: `tab-${name !== undefined ? name : new Date().getTime()}`,
             }]),
             children: this.state.children.concat([<Tab
                 name={`tab-${name !== undefined ? name : new Date().getTime()}`}
-                label={label? label : `tab-${index}`}
+                label={label ? label : `tab-${new Date().getTime()}`}
                 id={`panel-${name !== undefined ? name : new Date().getTime()}`}
                 editable={this.props.editable}
                 content={`panel-content-${name !== undefined ? name : new Date().getTime()}`}
-            ></Tab>])
+            ></Tab>]),
+            tabIndex: this.state.tabList.length + 1
         });
         setTimeout(() => {
             this.setBarPosition(index + 1);
@@ -206,7 +210,7 @@ export default class Tabs extends Component {
                         ) : null
                     }
                     {
-                        props.editable ?  <div className="e-tabs-item-add icon iconfont icon-create" onClick={() => { this.createTabHandler() }}></div> : null
+                        props.editable ? <div className="e-tabs-item-add icon iconfont icon-create" onClick={() => { this.createTabHandler() }}></div> : null
                     }
                 </div>
             </div>
@@ -215,6 +219,14 @@ export default class Tabs extends Component {
                 {newArr}
             </div>
         </div>
+    }
+
+    get tabIndex() {
+        return this.state.tabIndex
+    }
+
+    set tabIndex(v) {
+        v && this.createTabHandler()
     }
 }
 /**

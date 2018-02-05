@@ -32,7 +32,8 @@ class Container extends Component {
             switchTheme: "black",
             inlineCollapsed: false,
             curStep: 2,
-            isFinishStep: false
+            isFinishStep: false,
+            tabIndex: -1
         }
 
     }
@@ -118,6 +119,13 @@ class Container extends Component {
         this.setState({
             switchTheme: vNode.value ? "black" : "default"
         });
+    }
+    /**
+     * @desc 创建一个新的选项卡
+     */
+    createNewTab() {
+        const defineTabsRef = this.refs.defineTabsRef;
+        defineTabsRef.tabIndex += 1;
     }
     /**
      * @desc 步骤条
@@ -694,8 +702,15 @@ class Container extends Component {
                                             <Tab name="tab2" label={"border2"}>Tab2 Content  边框主题</Tab>
                                         </Tabs>
                                         <h6 className="e-section-demo-title e-ml-10">自定义增加标签页触发器：</h6>
-                                        <Button className="e-button-primary">Add Tab</Button>
-                                        <Tabs className="e-tabs-basic e-mv-10" active={1} width={550} isScroll={true} theme={"border"} editable>
+                                        <Button className="e-button-primary" onClick={() => { this.createNewTab() }}>Add Tab</Button>
+                                        <Tabs
+                                            ref="defineTabsRef"
+                                            className="e-tabs-basic e-mv-10"
+                                            active={1} width={550}
+                                            isScroll={true}
+                                            theme={"border"}
+                                            editable
+                                        >
                                             <Tab name="tab1" label={"border1"}>Tab1 Content  边框主题</Tab>
                                             <Tab name="tab2" label={"border2"}>Tab2 Content  边框主题</Tab>
                                             <Tab name="tab3" label={"border3"}>Tab3 Content  边框主题</Tab>
@@ -793,7 +808,7 @@ class Container extends Component {
                                         </div>
                                         <h5 className="e-section-demo-title">2.多级菜单</h5>
                                         <div className="e-mh-10">
-                                            <DropDown multiple menu={
+                                            <DropDown menu={
                                                 [
                                                     {
                                                         subMenu: {
@@ -825,7 +840,7 @@ class Container extends Component {
                                                                         name: "3st submenu",
                                                                         menu: [
                                                                             {
-                                                                                key: 1, name: "1st menu item"
+                                                                                key: 1, name: "1st menu item", disabled: true
                                                                             },
                                                                             {
                                                                                 key: 2, name: "2st submenu item"
