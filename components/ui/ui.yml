@@ -1,7 +1,7 @@
-界面组件:（共 36 个， ✅ 23 个）
-    通用：（共 2 个，✅ 1 个）
+界面组件:（共 35 个， ✅ 27 个）
+    通用：（共 2 个，✅ 2 个）
       - ui/button 按钮 ✅
-      - ui/buttonGroup 按钮组
+      - ui/buttonGroup 按钮组 ✅
     表单：(共 18 个， ✅ 13 个)
       - ui/checkBox 多选框 ✅
       - ui/checkBoxGroup 多选框组 ✅
@@ -21,9 +21,9 @@
       - ui/multiListBox 多选列表
       - ui/switch 开关 ✅
       - ui/timePicker 时间选择框
-    导航：(共 5 个， ✅ 4 个)
+    导航：(共 5 个， ✅ 5 个)
       - ui/navMenu 导航菜单 ✅
-      - ui/tabs 标签页
+      - ui/tabs 标签页 ✅
       - ui/breadCrumbs 面包屑 ✅
       - ui/dropDown 拉下菜单 ✅
       - ui/steps 步骤条 ✅
@@ -33,12 +33,12 @@
       - ui/message 消息提示 ✅
       - ui/modal 对话框 ✅
       - ui/Notification 通知 ✅
-    其他：(共 6 个，✅ 个)
-      - ui/card 卡片
-      - ui/collapse 折叠面板
+    其他：(共 5 个，✅ 2 个)
+      - ui/card 卡片 ✅
+      - ui/collapse 折叠面板 ✅
       - ui/badge 微章
       - ui/carousel 跑马灯
-      - ui/timeline 时间轴
+      # - ui/timeline 时间轴
       - ui/tree 树形控件
 # 设计排版:
 #   通用:

@@ -1,0 +1,52 @@
+@import "./../../common";
+.e-carousel{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    position: relative;
+    &_container{
+        transition: transform ease-in-out .3s;
+        -moz-transition: -moz-transform ease-in-out .3s;
+        -ms-transition: -ms-transform ease-in-out .3s;
+        -o-transition: -o-transform ease-in-out .3s;
+        -webkit-transition: -webkit-transform ease-in-out .3s;
+    }
+    &_item{
+        display: inline-block;
+        width: 100%;
+        background: #99a9bf;
+        &:nth-child(even) {
+            background: #d3dce6;
+        }
+    }
+    &_stepbar{
+        position: absolute;
+        bottom: 0;
+        text-align: center;
+        z-index: 9;
+        width: 100%;
+        .e-carousel_indicators{
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            .e-carousel_indicator{
+                display: inline-block;
+                padding: 12px 4px; 
+                cursor: pointer;
+                .e-carousel_button{
+                    transition: all ease-in-out .3s;
+                    width: 30px;
+                    height: 2px;
+                    background: #fff;
+                    opacity: .6;
+                    display: inline-block;
+                }
+                &:hover, &.active{
+                    .e-carousel_button{
+                        opacity: 1;
+                    }
+                }
+            }
+        }
+    }
+}

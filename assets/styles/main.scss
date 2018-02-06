@@ -131,6 +131,26 @@ body{
         border: 1px solid #666;
         color: #666;
     }
+    .e-badge_a{
+        width: 36px;
+        height: 36px;
+        background: #eee;
+        display: inline-block;
+    }
+    .e-carousel_example{
+        width: 100%;
+        line-height: 225px;
+        // background: #99a9bf;
+        margin: 0;
+        text-align: center;
+    }
+    .e-section-demo{
+        .e-carousel_item:nth-child(even){
+            .e-carousel_example{
+                // background: #d3dce6;
+            }
+        }
+    }
 }
 
 .e-flex{

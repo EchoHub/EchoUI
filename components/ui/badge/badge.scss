@@ -1,0 +1,27 @@
+@import "./../../common";
+.e-badge{
+    position: relative;
+    display: inline-block;
+    min-width: 1rem;
+    &_count{
+        font-size: 12px;
+        position: absolute;
+        right: -6px;
+        top: -6px;
+        background: #2196f3;
+        color: #fff;
+        border-radius: 50%;
+        min-width: 1rem;
+        min-height: 1rem;
+        text-align: center;
+        text-decoration: none;
+        font-style: normal;
+        padding: 0 1px;
+        &.multiple{
+            right: -10px;
+            top: -6px;
+            padding: 0 4px;
+            border-radius: 60px;
+        }
+    }
+}

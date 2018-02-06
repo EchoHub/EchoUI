@@ -1,0 +1,52 @@
+@import "./../../common";
+.e-collapse{
+    &_item{
+        &_head{
+            height: 48px;
+            line-height: 48px;
+            border-top: 1px solid #ebeef5;
+            border-bottom: 1px solid #ebeef5;
+            position: relative;
+            font-size: 13px;
+            color: #303133;
+            padding-left: 8px;
+            cursor: pointer;
+            &_arrow{
+                float: right;
+                font-size: 13px;
+                color: #71849b;
+                transform: rotate(-90deg);
+                -moz-transform: rotate(-90deg);
+                -ms-transform: rotate(-90deg);
+                -o-transform: rotate(-90deg);
+                -webkit-transform: rotate(-90deg);
+                transition: transform ease-in-out .3s;
+                -moz-transition: -moz-transform ease-in-out .3s;
+                -ms-transition: -ms-transform ease-in-out .3s;
+                -o-transition: -o-transform ease-in-out .3s;
+                -webkit-transition: -webkit-transform ease-in-out .3s;
+            }
+            &.active{
+                .e-collapse_item_head_arrow{
+                    transform: rotate(0);
+                    -moz-transform: rotate(0);
+                    -ms-transform: rotate(0);
+                    -o-transform: rotate(0);
+                    -webkit-transform: rotate(0);
+                }
+            }
+        }
+        &_content{
+            display: none;
+            transition: all ease .3s;
+            overflow: hidden;
+            padding: 10px 8px;
+            font-size: 13px;
+        }
+        &:not(:last-child) {
+            .e-collapse_item_head{
+                border-bottom: none;
+            }
+        }
+    }
+}

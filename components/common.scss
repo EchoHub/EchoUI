@@ -35,6 +35,12 @@ $input-radius: .1rem;
 .clear, .e-clearfix{
     clear: both;
 }
+.float-left, .e-float-left{
+    float: left;
+}
+.float-right, .e-float-right{
+    float: right;
+}
 .primary{
     color: $color-primary;
 }
@@ -82,6 +88,12 @@ $input-radius: .1rem;
 }
 .e-mh-12{
     margin: 0 12px;
+}
+.e-ml-20{
+    margin-left: 20px;
+}
+.e-mr-20{
+    margin-right: 20px;
 }
 .e-mh-20{
     margin: 0 20px;

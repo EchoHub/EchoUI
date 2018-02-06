@@ -13,6 +13,7 @@ export default class Tabs extends Component {
             initStyle: {
                 width: "100%"
             },
+            _define: false,
             children: [],
             tabPosition: "top"
         }
@@ -196,7 +197,9 @@ export default class Tabs extends Component {
                         onClick={() => { this.nextHandler(this.state.active) }}
                     ></div> : null
                 }
-                <div className={`e-tabs-header ${this.state.isScroll ? "e-mh-12" : ""} ${props.editable ? "editable" : ""}`}>
+                <div
+                    className={`e-tabs-header ${this.state.isScroll ? "e-mh-12" : ""} ${props.editable ? "editable" : ""}`}
+                >
                     {
                         this.state.tabList.length ? this.state.tabList.map((d, i) =>
                             <div
@@ -216,12 +219,20 @@ export default class Tabs extends Component {
                         ) : null
                     }
                     {
-                        props.editable ? <div className="e-tabs-item-add icon iconfont icon-create" onClick={() => { this.createTabHandler() }}></div> : null
+                        props.editable ? <div
+                            className="e-tabs-item-add icon iconfont icon-create"
+                            onClick={() => { this.createTabHandler() }}
+                        ></div> : null
                     }
                 </div>
             </div>
-            <div className="e-tabs-bar" style={this.state.tabBarStyle}></div>
-            <div className="e-tabs-content e-mt-10">
+            <div
+                className="e-tabs-bar"
+                style={this.state.tabBarStyle}
+            ></div>
+            <div
+                className="e-tabs-content e-mt-10"
+            >
                 {newArr}
             </div>
         </div>
@@ -230,7 +241,9 @@ export default class Tabs extends Component {
     get tabIndex() {
         return this.state.tabIndex
     }
-
+    /**
+     * @desc 自定义增加标签页触发器
+     */
     set tabIndex(v) {
         v && this.createTabHandler()
     }
@@ -260,8 +273,14 @@ export class Tab extends Component {
     }
     render() {
         const props = this.props;
-        return <div className={`e-tab ${props.active ? "active" : ""}`}>
-            {props.content !== "" ? props.content : props.children}
+        return <div
+            className={`e-tab ${props.active ? "active" : ""}`}
+        >
+            {
+                props.content !== "" ?
+                    props.content :
+                    props.children
+            }
         </div>
     }
 }

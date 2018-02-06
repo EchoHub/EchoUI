@@ -2,26 +2,30 @@ import React, { Component } from "react";
 import { render } from "react-dom";
 import PropTypes from "prop-types";
 import "./../styles/main.scss";
+import Alert from "./../../components/ui/alert/alert.jsx";
 import Button, { ButtonGroup } from "./../../components/ui/button/button.jsx";
-import RadioBox from "./../../components/ui/radioBox/radioBox.jsx";
-import RadioBoxGroup from "./../../components/ui/radioBoxGroup/radioBoxGroup.jsx";
+import Badge from "./../../components/ui/badge/badge.jsx";
+import BreadCrumb, { BreadCrumbItem } from "./../../components/ui/breadCrumb/breadCrumb.jsx";
 import CheckBox from "./../../components/ui/checkBox/checkBox.jsx";
 import CheckBoxGroup from "./../../components/ui/checkBoxGroup/checkBoxGroup.jsx";
-import TextBox from "./../../components/ui/textBox/textBox.jsx";
-import TextArea from "./../../components/ui/textArea/textArea.jsx";
-import Switch from "./../../components/ui/switch/switch.jsx";
-import Select from "./../../components/ui/select/select.jsx";
-import { ListItem } from "./../../components/ui/comboBox/comboBox.jsx";
-import Form, { FormItem } from "./../../components/ui/form/form.jsx";
-import NavMenu, { MenuItem, MenuItemTitle, MenuItemList, MenuItemFlag, SubMenu } from "./../../components/ui/navMenu/navMenu.jsx";
-import Tabs, { Tab } from "./../../components/ui/tabs/tabs.jsx";
-import BreadCrumb, { BreadCrumbItem } from "./../../components/ui/breadCrumb/breadCrumb.jsx";
+import Card from "./../../components/ui/card/card.jsx";
+import Collapse, { CollapseItem } from "./../../components/ui/collapse/collapse.jsx";
+import Carousel, { CarouselItem } from "./../../components/ui/carousel/carousel.jsx";
 import DropDown, { DropDownItem } from "./../../components/ui/dropDown/dropDown.jsx";
-import Steps, { Step } from "./../../components/ui/steps/steps.jsx";
-import Alert from "./../../components/ui/alert/alert.jsx";
+import Form, { FormItem } from "./../../components/ui/form/form.jsx";
+import { ListItem } from "./../../components/ui/comboBox/comboBox.jsx";
 import Message from "./../../components/ui/message/message.jsx";
 import { MessageBox } from "./../../components/ui/modal/modal.jsx";
 import { Notice } from "./../../components/ui/notification/notification.jsx";
+import NavMenu, { MenuItem, MenuItemTitle, MenuItemList, MenuItemFlag, SubMenu } from "./../../components/ui/navMenu/navMenu.jsx";
+import RadioBox from "./../../components/ui/radioBox/radioBox.jsx";
+import RadioBoxGroup from "./../../components/ui/radioBoxGroup/radioBoxGroup.jsx";
+import Switch from "./../../components/ui/switch/switch.jsx";
+import Select from "./../../components/ui/select/select.jsx";
+import Steps, { Step } from "./../../components/ui/steps/steps.jsx";
+import TextBox from "./../../components/ui/textBox/textBox.jsx";
+import TextArea from "./../../components/ui/textArea/textArea.jsx";
+import Tabs, { Tab } from "./../../components/ui/tabs/tabs.jsx";
 class Container extends Component {
     constructor(props) {
         super(props)
@@ -307,6 +311,15 @@ class Container extends Component {
                                 <li><a href="#e-modal">对话框 Modal</a></li>
                                 <li><a href="#e-notification">通知提醒框 Notification</a></li>
                                 <li><a href="#e-tooltip">文字提示 ToolTip</a></li>
+                            </ul>
+                            <div className="e-main-aside-nav-subtitle">其他 <span className="e-aside-nav-title-tip">Others</span></div>
+                            <ul className="e-main-aside">
+                                <li><a href="#e-card">卡片 Card</a></li>
+                                <li><a href="#e-collapse">折叠面板 Collapse</a></li>
+                                <li><a href="#e-badge">徽章 Badge</a></li>
+                                <li><a href="#e-carousel">跑马灯 Carousel</a></li>
+                                {/* <li><a href="#e-timeline">时间轴 TimeLine</a></li> */}
+                                <li><a href="#e-tree">树形控件 Tree</a></li>
                             </ul>
                         </div>
                     </div>
@@ -698,12 +711,9 @@ class Container extends Component {
                                             <Tab name="tab4" label={"card4"}>Tab4 Content  卡片主题</Tab>
                                             <Tab name="tab5" label={"card5"}>Tab5 Content  卡片主题</Tab>
                                         </Tabs>
-                                        <Tabs className="e-tabs-basic e-mv-10" active={3} width={550} theme={"card"}>
+                                        <Tabs className="e-tabs-basic e-mv-10" active={2} width={550} theme={"card"}>
                                             <Tab name="tab1" label={"card1"}>Tab1 Content  卡片主题</Tab>
                                             <Tab name="tab2" label={"card2"}>Tab2 Content  卡片主题</Tab>
-                                            <Tab name="tab3" label={"card3"}>Tab3 Content  卡片主题</Tab>
-                                            <Tab name="tab4" label={"card4"}>Tab4 Content  卡片主题</Tab>
-                                            <Tab name="tab5" label={"card5"}>Tab5 Content  卡片主题</Tab>
                                         </Tabs>
                                         <h5 className="e-section-demo-title">4.动态新增删除标签页：</h5>
                                         <h6 className="e-section-demo-title e-ml-10">增减标签页按钮只能在选项卡样式的标签页下使用：</h6>
@@ -730,7 +740,7 @@ class Container extends Component {
                                             <Tab name="tab7" label={"border7"}>Tab7 Content  边框主题</Tab>
                                             <Tab name="tab8" label={"border8"}>Tab8 Content  边框主题</Tab>
                                         </Tabs>
-                                        <h6 className="e-section-demo-title e-ml-10">标签位置（tabPosition：top、right、left、bottom）：</h6>
+                                        {/* <h6 className="e-section-demo-title e-ml-10">标签位置（tabPosition：top、right、left、bottom）：</h6>
                                         <ButtonGroup className="e-mt-10" activeIndex={1}>
                                             <Button onClick={() => { this.setTabPosition("top") }}>top</Button>
                                             <Button onClick={() => { this.setTabPosition("right") }}>right</Button>
@@ -747,7 +757,7 @@ class Container extends Component {
                                             <Tab name="tab2" label={"配置管理"}>配置管理</Tab>
                                             <Tab name="tab3" label={"角色管理"}>角色管理</Tab>
                                             <Tab name="tab4" label={"其他设置"}>其他设置</Tab>
-                                        </Tabs>
+                                        </Tabs> */}
                                     </section>
                                 </div>
                                 <h4 className="e-section-container-title" id="e-breadcrumb">面包屑 BreadCrumb</h4>
@@ -1261,6 +1271,254 @@ class Container extends Component {
                                         <div className="e-col e-m-4"><Button className="e-button-success" onClick={this.notificationHandle.bind(null, "success", false)}>Success Show</Button></div>
                                         <div className="e-col e-m-4"><Button className="e-button-warning" onClick={this.notificationHandle.bind(null, "warning", true)}>Warning Show</Button></div>
                                         <div className="e-col e-m-4"><Button className="e-button-error" onClick={this.notificationHandle.bind(null, "error", true)}>Error Show</Button></div>
+                                    </div>
+                                </div>
+                            </section>
+                        </fieldset>
+                        <fieldset className="e-fieldset">
+                            <legend className="e-container-subsubtitle">其他 Others</legend>
+                            <section className="e-section-container">
+                                <h4 className="e-section-container-title" id="e-card">卡片 Card</h4>
+                                <p className="e-section-intro"><b>卡片</b>：将信息聚合在卡片容器中展示。</p>
+                                <div className="e-section-demo">
+                                    <div className="e-clear">
+                                        <section>
+                                            <h5 className="e-section-demo-title">1.基本用法：包含标题、Tip、操作按钮、内容</h5>
+                                            <Card
+                                                className="e-mv-10"
+                                                width={480}
+                                                title="Card name"
+                                                tip={`${new Date().toString()}`}
+                                                button={
+                                                    {
+                                                        name: "click",
+                                                        handler: () => { new Message().success("click handler ...") }
+                                                    }
+                                                }
+                                                content={`Card content ...`}
+                                            ></Card>
+                                            <h5 className="e-section-demo-title">2.简单卡片：只有内容</h5>
+                                            <Card
+                                                className="e-mv-10"
+                                                width={480}
+                                            >
+                                                <p>Card list ...</p>
+                                                <p>Card list ...</p>
+                                                <p>Card list ...</p>
+                                                <p>Card list ...</p>
+                                            </Card>
+                                            <h5 className="e-section-demo-title">3.自定义卡片：可以根据场景进行自定义布局</h5>
+                                            <Card
+                                                className="e-mv-10"
+                                                width={480}
+                                                theme={"define"}
+                                            >
+                                                <div className="e-m-20">
+                                                    <Steps
+                                                        active={this.state.curStep}
+                                                        finishStatus={this.state.isFinishStep}
+                                                    >
+                                                        <Step title={"Step 1"}></Step>
+                                                        <Step title={"Step 2"}></Step>
+                                                        <Step title={"Step 3"}></Step>
+                                                        <Step title={"Step 4"}></Step>
+                                                    </Steps>
+                                                    <Button className="e-button-primary e-mv-10" onClick={() => { this.stepNextHandler(0) }}>上一步</Button>
+                                                    <Button className="e-button-primary e-m-10" onClick={() => { this.stepNextHandler(1) }}>下一步</Button>
+                                                </div>
+                                            </Card>
+                                        </section>
+                                    </div>
+                                </div>
+                                <h4 className="e-section-container-title" id="e-collapse">折叠面板 Collapse</h4>
+                                <p className="e-section-intro"><b>折叠面板</b>：通过折叠面板收纳内容区域。</p>
+                                <div className="e-section-demo">
+                                    <div className="e-clear">
+                                        <section>
+                                            <h5 className="e-section-demo-title">1.基本用法：可同时展开多个面板，面板之间不影响</h5>
+                                            <Collapse
+                                                className="e-mv-10"
+                                                width={800}
+                                            >
+                                                <CollapseItem
+                                                    title="富强 Prosperity"
+                                                >中国特色社会主义....</CollapseItem>
+                                                <CollapseItem
+                                                    title="民主 Democracy"
+                                                >中国特色社会主义....</CollapseItem>
+                                                <CollapseItem
+                                                    title="文明 Civilization"
+                                                >中国特色社会主义....</CollapseItem>
+                                                <CollapseItem
+                                                    title="和谐 Harmonious"
+                                                >中国特色社会主义....</CollapseItem>
+                                            </Collapse>
+                                            <h5 className="e-section-demo-title">2.手风琴：每次只能打开一个面板</h5>
+                                            <Collapse
+                                                className="e-mv-10"
+                                                width={800}
+                                                accordion
+                                            >
+                                                <CollapseItem
+                                                    title="富强 Prosperity"
+                                                >
+                                                    <p>中国特色社会主义....</p>
+                                                    <p>中国特色社会主义....</p>
+                                                    <p>中国特色社会主义....</p>
+                                                    <p>中国特色社会主义....</p>
+                                                    <p>中国特色社会主义....</p>
+                                                </CollapseItem>
+                                                <CollapseItem
+                                                    title="民主 Democracy"
+                                                >
+                                                    <p>中国特色社会主义....</p>
+                                                    <p>中国特色社会主义....</p>
+                                                    <p>中国特色社会主义....</p>
+                                                    <p>中国特色社会主义....</p>
+                                                    <p>中国特色社会主义....</p>
+                                                </CollapseItem>
+                                                <CollapseItem
+                                                    title="文明 Civilization"
+                                                >
+                                                    <p>中国特色社会主义....</p>
+                                                    <p>中国特色社会主义....</p>
+                                                    <p>中国特色社会主义....</p>
+                                                    <p>中国特色社会主义....</p>
+                                                    <p>中国特色社会主义....</p>
+                                                </CollapseItem>
+                                                <CollapseItem
+                                                    title="和谐 Harmonious"
+                                                >
+                                                    <p>中国特色社会主义....</p>
+                                                    <p>中国特色社会主义....</p>
+                                                    <p>中国特色社会主义....</p>
+                                                    <p>中国特色社会主义....</p>
+                                                    <p>中国特色社会主义....</p>
+                                                </CollapseItem>
+                                            </Collapse>
+                                            <h5 className="e-section-demo-title">3.自定义面板标题：可以通过自定义设置（icon）对面板标题添加图标</h5>
+                                            <Collapse
+                                                className="e-mv-10"
+                                                width={800}
+                                            >
+                                                <CollapseItem
+                                                    title="富强 Prosperity"
+                                                    icon="icon-home"
+                                                >中国特色社会主义....</CollapseItem>
+                                                <CollapseItem
+                                                    title="民主 Democracy"
+                                                    icon="icon-star"
+                                                >中国特色社会主义....</CollapseItem>
+                                                <CollapseItem
+                                                    title="文明 Civilization"
+                                                    icon="icon-star"
+                                                >中国特色社会主义....</CollapseItem>
+                                                <CollapseItem
+                                                    title="和谐 Harmonious"
+                                                    icon="icon-star"
+                                                >中国特色社会主义....</CollapseItem>
+                                            </Collapse>
+                                        </section>
+                                    </div>
+                                </div>
+                                <h4 className="e-section-container-title" id="e-collapse">微章 Badge</h4>
+                                <p className="e-section-intro"><b>微章</b>：图标右上角的圆形徽标数字。</p>
+                                <div className="e-section-demo">
+                                    <div className="e-clear">
+                                        <section>
+                                            <h5 className="e-section-demo-title">1.基本用法：可包裹在任意元素上</h5>
+                                            <Badge
+                                                className="e-mr-20"
+                                                count={5}
+                                                color="blue"
+                                            >
+                                                <a href="javascript:;" className="e-badge_a"></a>
+                                            </Badge>
+                                            <Badge
+                                                className="e-mr-20"
+                                                count={100}
+                                                color="white"
+                                            >
+                                                <a href="javascript:;" className="e-badge_a"></a>
+                                            </Badge>
+                                            <Badge
+                                                className="e-mr-20"
+                                                count={5}
+                                                color="red"
+                                            >
+                                                <a href="javascript:;" className="e-badge_a"></a>
+                                            </Badge>
+                                            <Badge
+                                                className="e-mr-20"
+                                                count={1000}
+                                                color="green"
+                                            >
+                                                <a href="javascript:;" className="e-badge_a"></a>
+                                            </Badge>
+                                            <Badge
+                                                className="e-mr-20"
+                                                count={10}
+                                                color="green"
+                                            >
+                                                <Button className="e-float-left">button</Button>
+                                            </Badge>
+
+                                            <BreadCrumb>
+                                                <BreadCrumbItem icon={"icon-home"} path="#e-breadcrumb">首页</BreadCrumbItem>
+                                                <BreadCrumbItem icon={"icon-user"} path="#e-breadcrumb">一级标题</BreadCrumbItem>
+                                                <BreadCrumbItem icon={"icon-setting"} path="#e-breadcrumb">二级标题</BreadCrumbItem>
+                                                <BreadCrumbItem>
+                                                    <Badge
+                                                        count={5}
+                                                        color="red"
+                                                    >
+                                                        <span className="e-mr-10">三级标题</span>
+                                                    </Badge>
+                                                </BreadCrumbItem>
+                                            </BreadCrumb>
+                                            <h5 className="e-section-demo-title">2.单独用法：不包裹任何元素</h5>
+                                            <Badge
+                                                className="e-mr-20"
+                                                count={5}
+                                                color="blue"
+                                            >
+                                            </Badge>
+                                            <Badge
+                                                className="e-mr-20"
+                                                count={100}
+                                                color="white"
+                                            >
+                                            </Badge>
+                                            <Badge
+                                                className="e-ml-20"
+                                                count={1000}
+                                                color="green"
+                                            >
+                                            </Badge>
+                                        </section>
+                                    </div>
+                                </div>
+                                <h4 className="e-section-container-title" id="e-collapse">跑马灯 Carousel</h4>
+                                <p className="e-section-intro"><b>跑马灯</b>：在有限空间内，循环播放同一类型的图片、文字等内容</p>
+                                <div className="e-section-demo">
+                                    <div className="e-clear">
+                                        <section>
+                                            <h5 className="e-section-demo-title">1.基本用法：</h5>
+                                            <Carousel width={400}>
+                                                <CarouselItem>
+                                                    <h2 className="e-carousel_example">1</h2>
+                                                </CarouselItem>
+                                                <CarouselItem>
+                                                    <h2 className="e-carousel_example">2</h2>
+                                                </CarouselItem>
+                                                <CarouselItem>
+                                                    <h2 className="e-carousel_example">3</h2>
+                                                </CarouselItem>
+                                                <CarouselItem>
+                                                    <h2 className="e-carousel_example">4</h2>
+                                                </CarouselItem>
+                                            </Carousel>
+                                        </section>
                                     </div>
                                 </div>
                             </section>
