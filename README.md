@@ -16,9 +16,9 @@ EchoUI = UI组件 + 常用工具类
 ## 开发
 
 ## 运行
-    -- 1. 安装node
+    -- 1. node 环境安装
     -- 2. cnpm i 安装依赖
-    -- 3. npm run server 项目运行
+    -- 3. npm run server 项目运行 
 ## 协议
 EchoUI 完全开源免费，可用于商业项目。
 但不得基于本库开发新的 UI 框架再对外发布或销售。
