@@ -53,6 +53,15 @@ $input-radius: .1rem;
 .error{
     color: $color-error;
 }
+.e-m-auto{
+    margin: auto;
+}
+.e-mh-auto{
+    margin: 0 auto;
+}
+.e-mv-auto{
+    margin: auto 0;
+}
 .e-mr-4{
     margin-right: 4px;
 }
@@ -138,6 +147,9 @@ $input-radius: .1rem;
 }
 .e-col-12{
     width: 50%;
+}
+.e-col-24{
+    width: 100%;
 }
 ::-webkit-scrollbar, ::-webkit-scrollbar-track {
     width: 6px;

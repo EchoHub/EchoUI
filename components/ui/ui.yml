@@ -1,4 +1,4 @@
-界面组件:（共 35 个， ✅ 27 个）
+界面组件:（共 35 个， ✅ 29 个）
     通用：（共 2 个，✅ 2 个）
       - ui/button 按钮 ✅
       - ui/buttonGroup 按钮组 ✅
@@ -33,11 +33,11 @@
       - ui/message 消息提示 ✅
       - ui/modal 对话框 ✅
       - ui/Notification 通知 ✅
-    其他：(共 5 个，✅ 2 个)
+    其他：(共 5 个，✅ 4 个)
       - ui/card 卡片 ✅
       - ui/collapse 折叠面板 ✅
-      - ui/badge 微章
-      - ui/carousel 跑马灯
+      - ui/badge 微章 ✅
+      - ui/carousel 跑马灯 ✅
       # - ui/timeline 时间轴
       - ui/tree 树形控件
 # 设计排版:

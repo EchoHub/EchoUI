@@ -26,6 +26,7 @@ import Steps, { Step } from "./../../components/ui/steps/steps.jsx";
 import TextBox from "./../../components/ui/textBox/textBox.jsx";
 import TextArea from "./../../components/ui/textArea/textArea.jsx";
 import Tabs, { Tab } from "./../../components/ui/tabs/tabs.jsx";
+import Tree, { TreeNode } from "./../../components/ui/tree/tree.jsx";
 class Container extends Component {
     constructor(props) {
         super(props)
@@ -319,7 +320,7 @@ class Container extends Component {
                                 <li><a href="#e-badge">徽章 Badge</a></li>
                                 <li><a href="#e-carousel">跑马灯 Carousel</a></li>
                                 {/* <li><a href="#e-timeline">时间轴 TimeLine</a></li> */}
-                                <li><a href="#e-tree">树形控件 Tree</a></li>
+                                <li><a href="#e-tree">树 Tree</a></li>
                             </ul>
                         </div>
                     </div>
@@ -1421,7 +1422,7 @@ class Container extends Component {
                                         </section>
                                     </div>
                                 </div>
-                                <h4 className="e-section-container-title" id="e-collapse">微章 Badge</h4>
+                                <h4 className="e-section-container-title" id="e-badge">微章 Badge</h4>
                                 <p className="e-section-intro"><b>微章</b>：图标右上角的圆形徽标数字。</p>
                                 <div className="e-section-demo">
                                     <div className="e-clear">
@@ -1498,26 +1499,104 @@ class Container extends Component {
                                         </section>
                                     </div>
                                 </div>
-                                <h4 className="e-section-container-title" id="e-collapse">跑马灯 Carousel</h4>
+                                <h4 className="e-section-container-title" id="e-carousel">跑马灯 Carousel</h4>
                                 <p className="e-section-intro"><b>跑马灯</b>：在有限空间内，循环播放同一类型的图片、文字等内容</p>
                                 <div className="e-section-demo">
                                     <div className="e-clear">
                                         <section>
-                                            <h5 className="e-section-demo-title">1.基本用法：</h5>
-                                            <Carousel width={400}>
-                                                <CarouselItem>
-                                                    <h2 className="e-carousel_example">1</h2>
-                                                </CarouselItem>
-                                                <CarouselItem>
-                                                    <h2 className="e-carousel_example">2</h2>
-                                                </CarouselItem>
-                                                <CarouselItem>
-                                                    <h2 className="e-carousel_example">3</h2>
-                                                </CarouselItem>
-                                                <CarouselItem>
-                                                    <h2 className="e-carousel_example">4</h2>
-                                                </CarouselItem>
-                                            </Carousel>
+                                            <h5 className="e-section-demo-title">1.基本用法：通过theme设置主题（basic 基本、fade 渐显）</h5>
+                                            <div className="e-row">
+                                                <div className="e-col e-col-12">
+                                                    <Carousel width={400}>
+                                                        <CarouselItem>
+                                                            <h2 className="e-carousel_example">1</h2>
+                                                        </CarouselItem>
+                                                        <CarouselItem>
+                                                            <h2 className="e-carousel_example">2</h2>
+                                                        </CarouselItem>
+                                                        <CarouselItem>
+                                                            <h2 className="e-carousel_example">3</h2>
+                                                        </CarouselItem>
+                                                        <CarouselItem>
+                                                            <h2 className="e-carousel_example">4</h2>
+                                                        </CarouselItem>
+                                                    </Carousel>
+                                                </div>
+                                                <div className="e-col e-col-12">
+                                                    <Carousel
+                                                        width={400}
+                                                        theme={"fade"}
+                                                    >
+                                                        <CarouselItem>
+                                                            <h2 className="e-carousel_example">1</h2>
+                                                        </CarouselItem>
+                                                        <CarouselItem>
+                                                            <h2 className="e-carousel_example">2</h2>
+                                                        </CarouselItem>
+                                                        <CarouselItem>
+                                                            <h2 className="e-carousel_example">3</h2>
+                                                        </CarouselItem>
+                                                        <CarouselItem>
+                                                            <h2 className="e-carousel_example">4</h2>
+                                                        </CarouselItem>
+                                                    </Carousel>
+                                                </div>
+                                            </div>
+                                            <h5 className="e-section-demo-title">2.自动播放：通过auto设置自动播放，duration设置切换间隔时间</h5>
+                                            <div className="e-row">
+                                                <div className="e-mt-10 e-col e-col-12">
+                                                    <Carousel
+                                                        width={400}
+                                                        auto
+                                                        duration={3000}
+                                                    >
+                                                        <CarouselItem>
+                                                            <h2 className="e-carousel_example">1</h2>
+                                                        </CarouselItem>
+                                                        <CarouselItem>
+                                                            <h2 className="e-carousel_example">2</h2>
+                                                        </CarouselItem>
+                                                        <CarouselItem>
+                                                            <h2 className="e-carousel_example">3</h2>
+                                                        </CarouselItem>
+                                                        <CarouselItem>
+                                                            <h2 className="e-carousel_example">4</h2>
+                                                        </CarouselItem>
+                                                    </Carousel>
+                                                </div>
+                                                <div className="e-mt-10 e-col e-col-12">
+                                                    <Carousel
+                                                        width={400}
+                                                        auto
+                                                        duration={3000}
+                                                        theme={"fade"}
+                                                    >
+                                                        <CarouselItem>
+                                                            <h2 className="e-carousel_example">1</h2>
+                                                        </CarouselItem>
+                                                        <CarouselItem>
+                                                            <h2 className="e-carousel_example">2</h2>
+                                                        </CarouselItem>
+                                                        <CarouselItem>
+                                                            <h2 className="e-carousel_example">3</h2>
+                                                        </CarouselItem>
+                                                        <CarouselItem>
+                                                            <h2 className="e-carousel_example">4</h2>
+                                                        </CarouselItem>
+                                                    </Carousel>
+                                                </div>
+                                            </div>
+                                        </section>
+                                    </div>
+                                </div>
+                                <h4 className="e-section-container-title" id="e-carousel">树 Tree</h4>
+                                <p className="e-section-intro"><b>树</b>：树形菜单</p>
+                                <div className="e-section-demo">
+                                    <div className="e-clear">
+                                        <section>
+                                            <h5 className="e-section-demo-title">1.基本用法：树形结构的菜单</h5>
+                                            <Tree
+                                            ></Tree>
                                         </section>
                                     </div>
                                 </div>
