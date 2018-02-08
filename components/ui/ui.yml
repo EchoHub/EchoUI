@@ -27,7 +27,7 @@
       - ui/breadCrumbs 面包屑 ✅
       - ui/dropDown 拉下菜单 ✅
       - ui/steps 步骤条 ✅
-    浮层：(共 5 个，✅ 5 个)
+    通知：(共 5 个，✅ 5 个)
       - ui/alert 警告 ✅
       - ui/toolTip ✅
       - ui/message 消息提示 ✅

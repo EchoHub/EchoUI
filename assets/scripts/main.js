@@ -1596,6 +1596,86 @@ class Container extends Component {
                                         <section>
                                             <h5 className="e-section-demo-title">1.基本用法：树形结构的菜单</h5>
                                             <Tree
+                                                data = {
+                                                    [
+                                                        {
+                                                            id: 1,
+                                                            label: "一级 1",
+                                                            children: [
+                                                                {
+                                                                    id: 11,
+                                                                    label: "二级 1-1",
+                                                                    children: [
+                                                                        {
+                                                                            id: 111,
+                                                                            label: "三级 1-1-1", 
+                                                                        },
+                                                                        {
+                                                                            id: 112,
+                                                                            label: "三级 1-1-2", 
+                                                                        }
+                                                                    ]
+                                                                },
+                                                                {
+                                                                    id: 12,
+                                                                    label: "二级 1-2",
+                                                                    children: [
+                                                                        {
+                                                                            id: 111,
+                                                                            label: "三级 1-1-1", 
+                                                                        },
+                                                                        {
+                                                                            id: 112,
+                                                                            label: "三级 1-1-2", 
+                                                                        },
+                                                                        {
+                                                                            id: 113,
+                                                                            label: "三级 1-1-3", 
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            id: 2,
+                                                            label: "一级 2",
+                                                            children: [
+                                                                {
+                                                                    id: 11,
+                                                                    label: "二级 1-1",
+                                                                    children: [
+                                                                        {
+                                                                            id: 111,
+                                                                            label: "三级 1-1-1", 
+                                                                        },
+                                                                        {
+                                                                            id: 112,
+                                                                            label: "三级 1-1-2", 
+                                                                        }
+                                                                    ]
+                                                                },
+                                                                {
+                                                                    id: 12,
+                                                                    label: "二级 1-2"
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            id: 3,
+                                                            label: "一级 3",
+                                                            children: [
+                                                                {
+                                                                    id: 11,
+                                                                    label: "二级 1-1"
+                                                                },
+                                                                {
+                                                                    id: 12,
+                                                                    label: "二级 1-2"
+                                                                }
+                                                            ]
+                                                        }
+                                                    ]
+                                                }
                                             ></Tree>
                                         </section>
                                     </div>

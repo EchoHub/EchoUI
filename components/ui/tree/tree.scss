@@ -1,4 +1,21 @@
 @import "./../../common";
 .e-tree{
-    
+    font-size: 14px;
+    color: #606266;
+    &_node{
+        line-height: 2;
+        cursor: pointer;
+        &.active{
+            background: #f0f7ff;
+        }
+        &:hover{
+            background: #f5f7fa;
+        }
+    }
+    &_group{
+        display: none;
+    }
+    & > &_group{
+        display: block;
+    }
 }
