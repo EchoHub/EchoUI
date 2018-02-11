@@ -26,11 +26,19 @@ export default class CheckBox extends Component {
         return params
     }
     componentWillReceiveProps(nextProps) {
-        if(nextProps) {
-            for(const v of nextProps.dataValue) {
-                v === nextProps.value && this.setState({
-                    isCheck: true
-                });
+        if (nextProps) {
+            if (nextProps.dataValue && nextProps.dataValue.length) {
+                for (const v of nextProps.dataValue) {
+                    if (v === nextProps.value) {
+                        this.setState({
+                            isCheck: true
+                        });
+                        return;
+                    }
+                    this.setState({
+                        isCheck: false
+                    });
+                }
             }
         }
     }
@@ -38,29 +46,37 @@ export default class CheckBox extends Component {
      * @desc checkbox change事件
      * @param event event
      */
-    changeCheckBoxHandle(event) {
-        const nodeRef = this.refs[this.props["name"]].refs[this.props["name"]]
+    changeCheckBoxHandle(ref, event) {
+        if (this.state.nodeOwnProperty["disabled"]) return;
+        const nodeRef = this.refs[ref].refs[ref]
         const checked = nodeRef.checked
         this.setState({
             isCheck: !checked,
-        })
-        this.props.setCheckBoxValueHandle(!checked, nodeRef.value)
+        });
+        const props = this.props;
+        props.setCheckBoxValueHandle && props.setCheckBoxValueHandle(!checked, nodeRef.value);
+        props.onClick && props.onClick(event, this);
+        props.onChange && props.onChange(event, this);
     }
     render() {
-        return <div className={`e-checkbox ${this.props.className.replace(/e-checkbox/g, "")} 
+        const props = this.props;
+        const ref = props["name"] || `e-checkbox-${new Date().getTime()}`;
+        return <div className={`e-checkbox ${props.className.replace(/e-checkbox/g, "")} 
+            ${this.state.nodeOwnProperty["disabled"] ? "disabled" : ""}
             ${this.state.isCheck ? "active" : ""}`}>
             <span
                 className="e-checkbox-inner"
-                onClick={this.changeCheckBoxHandle.bind(this)}></span>
+                onClick={this.changeCheckBoxHandle.bind(this, ref)}
+            ></span>
             <Input
-                ref={this.props["name"]}
+                ref={ref}
                 {...this.state.nodeOwnProperty}
                 checked={this.state.isCheck}
-                inputRef={this.props["name"]}
-                dataType={this.props.dataType}
-                // dataValue={this.props.dataValue}
+                inputRef={ref}
+                dataType={props.dataType}
+            // dataValue={this.props.dataValue}
             />
-            <span className="e-checkbox-content">{this.props.children}</span>
+            <span className="e-checkbox-content">{props.children}</span>
         </div>
     }
 

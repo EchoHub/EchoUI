@@ -59,4 +59,13 @@
         outline: none;
         z-index: -1;
     }
+    &.disabled{
+        .e-checkbox-inner{
+            cursor: not-allowed;
+            background: #efefef;
+            &:hover{
+                border-color: #dcdfe6;
+            }
+        }
+    }
 }
