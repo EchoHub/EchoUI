@@ -26,6 +26,36 @@ Tree.defaultProps = {
 export class TreeGroup extends Component {
     constructor(props) {
         super(props);
+        this.state = {
+            children: props.data,
+            allSelect: false,
+            selectedId: -1
+        }
+    }
+    /**
+     * @desc 更新树群组选项状态
+     * @param {*} id 当前TreeNode的id
+     * @param {*} _treeNodeChecked  选中状态
+     * @param _parent 父级
+     */
+    updateTreeGroup(id, _treeNodeChecked) {
+        let newChildren = [];
+        const props = this.props;
+        if(!props.data.length) return;
+        for(const item of this.state.children) {
+            item["checked"] = (typeof item.id === "number" ? +id: id) === item.id ? _treeNodeChecked: (item.checked || false);
+            newChildren.push(item);
+        }
+        let allSelect = true;
+        for(const item of newChildren) {
+            !item.checked && (allSelect = false);
+        }
+        this.setState({
+            children: newChildren
+        });
+        allSelect && (props.parent.setState({
+            selectedId: props.parentId
+        }));
     }
     renderTreeNode(data, level) {
         if (!data || !data.length) return null;
@@ -36,14 +66,17 @@ export class TreeGroup extends Component {
                 key={index}
                 handleCheckChange={props.handleCheckChange}
                 {...item}
+                checked={item.id === this.state.selectedId ? true: item.checked}
                 value={item.id}
                 label={item.label}
                 showCheckBox={props.showCheckBox}
+                parent={this}
                 style={
                     {
                         padding: `0 ${8 * (level || 0)}px`
                     }
                 }
+                updateTreeGroup={(value, checked) => { this.updateTreeGroup(value, checked) }}
                 children={item.children || []}
             >
             </TreeNode>);
@@ -53,6 +86,8 @@ export class TreeGroup extends Component {
                     showCheckBox={props.showCheckBox}
                     handleCheckChange={props.handleCheckChange}
                     data={item.children}
+                    parentId={item.id} // 当前树群的根节点（treenode）id
+                    parent={this}
                     level={level + 1}
                 ></TreeGroup>);
             }
@@ -73,6 +108,8 @@ export class TreeNode extends Component {
      * @desc 选择框change事件
      */
     handleCheckChange(event, vNode) {
+        const checked = vNode.checked;
+        this.props.updateTreeGroup(vNode.value, checked);
         this.props.handleCheckChange && this.props.handleCheckChange(event, vNode);
     }
     toggleHandler(children) {
@@ -115,6 +152,8 @@ export class TreeNode extends Component {
             ></i> : null}
             {props.showCheckBox ? <CheckBox
                 disabled={props.disabled}
+                value={props.id}
+                checked={props.checked}
                 onChange={(event, vNode) => { this.handleCheckChange(event, vNode) }}
             ></CheckBox> : null}
             <span

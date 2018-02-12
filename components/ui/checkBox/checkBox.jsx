@@ -1,4 +1,5 @@
 import React, { Component } from "react"
+import { findDOMNode } from "react-dom"
 import Input from "./../input/input.jsx"
 import "./checkBox.scss"
 /**
@@ -9,7 +10,8 @@ export default class CheckBox extends Component {
         super(props)
         this.state = {
             nodeOwnProperty: this.filterPropsHandle(props),
-            isCheck: false
+            isCheck: false,
+            ref: ""
         };
     }
     filterPropsHandle(props) {
@@ -40,7 +42,14 @@ export default class CheckBox extends Component {
                     });
                 }
             }
+            this.checked = nextProps.checked || false;
         }
+    }
+    componentDidMount() {
+        const ref = this.props["name"] || `e-checkbox-${new Date().getTime()}`;
+        this.setState({
+            ref: ref
+        });
     }
     /**
      * @desc checkbox change事件
@@ -60,19 +69,19 @@ export default class CheckBox extends Component {
     }
     render() {
         const props = this.props;
-        const ref = props["name"] || `e-checkbox-${new Date().getTime()}`;
+
         return <div className={`e-checkbox ${props.className.replace(/e-checkbox/g, "")} 
             ${this.state.nodeOwnProperty["disabled"] ? "disabled" : ""}
             ${this.state.isCheck ? "active" : ""}`}>
             <span
                 className="e-checkbox-inner"
-                onClick={this.changeCheckBoxHandle.bind(this, ref)}
+                onClick={this.changeCheckBoxHandle.bind(this, this.state.ref)}
             ></span>
             <Input
-                ref={ref}
+                ref={this.state.ref}
                 {...this.state.nodeOwnProperty}
                 checked={this.state.isCheck}
-                inputRef={ref}
+                inputRef={this.state.ref}
                 dataType={props.dataType}
             // dataValue={this.props.dataValue}
             />
@@ -83,14 +92,20 @@ export default class CheckBox extends Component {
     /**
      * @desc 获取checkbox值
      */
-    // get value() {
-    //     return this.props.dataValue
-    // }
+    get value() {
+        return this.refs[this.state.ref].value
+    }
+    /**
+     * @desc 获取checkbox值
+     */
+    get checked() {
+        return this.refs[this.state.ref].checked
+    }
 
     set checked(v) {
-        v && this.setState({
-            isCheck: v
-        })
+        this.setState({
+            isCheck: v || false
+        });
     }
 }
 CheckBox.defaultProps = {
