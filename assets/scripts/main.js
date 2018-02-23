@@ -1589,7 +1589,7 @@ class Container extends Component {
                                         </section>
                                     </div>
                                 </div>
-                                <h4 className="e-section-container-title" id="e-carousel">树 Tree</h4>
+                                <h4 className="e-section-container-title" id="e-tree">树 Tree</h4>
                                 <p className="e-section-intro"><b>树</b>：树形菜单</p>
                                 <div className="e-section-demo">
                                     <div className="e-clear">
@@ -1842,14 +1842,21 @@ class Container extends Component {
                                                             label: "一级 3",
                                                             children: [
                                                                 {
-                                                                    id: 11,
+                                                                    id: 1133,
                                                                     label: "二级 1-1",
-                                                                    disabled: true
+                                                                    disabled: true,
+                                                                    checked: true
                                                                 },
                                                                 {
                                                                     id: 12,
                                                                     label: "二级 1-2"
-                                                                }
+                                                                },
+                                                                {
+                                                                    id: 13,
+                                                                    label: "二级 1-3",
+                                                                    disabled: true,
+                                                                    checked: false
+                                                                },
                                                             ]
                                                         }
                                                     ]

@@ -41,14 +41,19 @@ export default class CheckBox extends Component {
                         isCheck: false
                     });
                 }
+            }else {
+                this.setState({
+                    isCheck: nextProps.checked || false
+                });
             }
-            this.checked = nextProps.checked || false;
         }
     }
     componentDidMount() {
-        const ref = this.props["name"] || `e-checkbox-${new Date().getTime()}`;
+        const props = this.props;
+        const ref = props["name"] || `e-checkbox-${new Date().getTime()}`;
         this.setState({
-            ref: ref
+            ref: ref,
+            isCheck: props.checked !== undefined ? props.checked : this.state.isCheck
         });
     }
     /**
@@ -69,7 +74,6 @@ export default class CheckBox extends Component {
     }
     render() {
         const props = this.props;
-
         return <div className={`e-checkbox ${props.className.replace(/e-checkbox/g, "")} 
             ${this.state.nodeOwnProperty["disabled"] ? "disabled" : ""}
             ${this.state.isCheck ? "active" : ""}`}>

@@ -41,21 +41,30 @@ export class TreeGroup extends Component {
     updateTreeGroup(id, _treeNodeChecked) {
         let newChildren = [];
         const props = this.props;
-        if(!props.data.length) return;
-        for(const item of this.state.children) {
-            item["checked"] = (typeof item.id === "number" ? +id: id) === item.id ? _treeNodeChecked: (item.checked || false);
-            newChildren.push(item);
+        if (!props.data.length) return;
+        for (const item of this.state.children) {
+            if ((typeof item.id === "number" ? +id : id) === item.id) {
+                item["checked"] = _treeNodeChecked;
+                // 判断是否有子集
+                if (item.children && item.children.length) {
+                    for (const _item of item.children) {
+                        _item.checked = _item.disabled ? _item.checked : _treeNodeChecked;
+                    }
+                }
+            } else {
+                item["checked"] = (item.checked || false);
+            }
         }
         let allSelect = true;
-        for(const item of newChildren) {
+        for (const item of newChildren) {
             !item.checked && (allSelect = false);
         }
         this.setState({
             children: newChildren
         });
-        allSelect && (props.parent.setState({
-            selectedId: props.parentId
-        }));
+        props.parent && props.parent.setState({
+            selectedId: allSelect ? props.parentId : -1
+        });
     }
     renderTreeNode(data, level) {
         if (!data || !data.length) return null;
@@ -66,7 +75,7 @@ export class TreeGroup extends Component {
                 key={index}
                 handleCheckChange={props.handleCheckChange}
                 {...item}
-                checked={item.id === this.state.selectedId ? true: item.checked}
+                checked={item.id === this.state.selectedId ? true : item.checked}
                 value={item.id}
                 label={item.label}
                 showCheckBox={props.showCheckBox}
@@ -97,7 +106,11 @@ export class TreeGroup extends Component {
     }
     render() {
         const props = this.props;
-        return <div className="e-tree_group">{this.renderTreeNode(props.data, props.level || 0)}</div>
+        return <div
+            className="e-tree_group"
+        >
+            {this.renderTreeNode(props.data, props.level || 0)}
+        </div>
     }
 }
 export class TreeNode extends Component {
@@ -109,8 +122,9 @@ export class TreeNode extends Component {
      */
     handleCheckChange(event, vNode) {
         const checked = vNode.checked;
-        this.props.updateTreeGroup(vNode.value, checked);
-        this.props.handleCheckChange && this.props.handleCheckChange(event, vNode);
+        const props = this.props;
+        props.updateTreeGroup(vNode.value, checked);
+        props.handleCheckChange && props.handleCheckChange(event, vNode);
     }
     toggleHandler(children) {
         if (this.props.disabled) return
@@ -122,19 +136,18 @@ export class TreeNode extends Component {
         }
         _t.className.indexOf("e-selected") > -1 ?
             _t.className = _t.className.replace(/e-selected/, "") :
-            _group.className.indexOf("collapsed") > 0 ?
-                "" :
-                _t.classList.add("e-selected");
+            _t.classList.add("e-selected");
         for (const node of _group.children) {
             node.className.indexOf(".e-tree_node") > -1 && node !== _t && (node.className = node.className.replace(/active/, ""));
         }
-        _group.className.indexOf("collapsed") > 0 ? _group.className = _group.className.replace(/collapsed/, "") : _group.classList.add("collapsed");
-        if (_t.className.indexOf("active") > -1) {
-            _t.className = _t.className.replace(/active/, "");
-        } else {
+        _t.className.indexOf("active") > -1 ?
+            _t.className = _t.className.replace(/active/, "") :
             _t.classList.add("active");
-        }
         if (_t.nextElementSibling && children.length) {
+            const nextNode = _t.nextElementSibling;
+            nextNode.className.indexOf("collapsed") > 0 ?
+                nextNode.className = nextNode.className.replace(/collapsed/, "") :
+                nextNode.classList.add("collapsed");
             const display = _t.nextElementSibling.style.display;
             _t.nextElementSibling.style.display = display.indexOf("block") > -1 ? "none" : "block";
         }

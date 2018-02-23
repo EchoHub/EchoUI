@@ -63,6 +63,9 @@
         .e-checkbox-inner{
             cursor: not-allowed;
             background: #efefef;
+            &:after{
+                border-color:#bbb;
+            }
             &:hover{
                 border-color: #dcdfe6;
             }
