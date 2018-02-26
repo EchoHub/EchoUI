@@ -3,178 +3,149 @@ import { findDOMNode } from "react-dom";
 import { unique, closest } from "./../control/control.jsx";
 import CheckBox from "./../checkBox/checkBox.jsx";
 import "./tree.scss";
-
 export default class Tree extends Component {
     constructor(props) {
         super(props);
     }
+    /**
+     * @desc 获取选中的节点
+     */
+    getCheckedNodes() {
+
+    }
+    setCheckedNode(_checkedNode) {
+
+    }
     render() {
         const props = this.props;
+        let node = [], index = 1;
+        if (props.children && props.children.length) {
+            for (const item of props.children) {
+                switch (item.type && item.type.name) {
+                    case "TreeNode":
+                        const _i_props = item.props;
+                        node.push(<TreeNode
+                            ref={`treenode-${index}`}
+                            {...item.props}
+                            key={"treenode" + index}
+                            setCheckedNode={this.setCheckedNode}
+                            checked={props.checked}
+                            title={_i_props.title}
+                            level={0}
+                            showCheckBox={props.showCheckBox}
+                            parent={this}
+                        >
+                            {_i_props.children}
+                        </TreeNode>)
+                        break;
+                    default:
+                        break;
+                }
+                index++;
+            }
+        }
         return <div className={unique(`e-tree ${props.className}`.split(" ")).join(" ")}>
-            <TreeGroup
-                showCheckBox={props.showCheckBox}
-                handleCheckChange={props.handleCheckChange}
-                data={props.data}
-            ></TreeGroup>
+            {node}
         </div>
     }
 }
 Tree.defaultProps = {
     className: "e-tree",
-    data: []
+    allChecked: false // 是否全选
 }
-export class TreeGroup extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            children: props.data,
-            allSelect: false,
-            selectedId: -1
-        }
-    }
-    /**
-     * @desc 更新树群组选项状态
-     * @param {*} id 当前TreeNode的id
-     * @param {*} _treeNodeChecked  选中状态
-     * @param _parent 父级
-     */
-    updateTreeGroup(id, _treeNodeChecked) {
-        let newChildren = [];
-        const props = this.props;
-        if (!props.data.length) return;
-        for (const item of this.state.children) {
-            if ((typeof item.id === "number" ? +id : id) === item.id) {
-                item["checked"] = _treeNodeChecked;
-                // 判断是否有子集
-                if (item.children && item.children.length) {
-                    for (const _item of item.children) {
-                        _item.checked = _item.disabled ? _item.checked : _treeNodeChecked;
-                    }
-                }
-            } else {
-                item["checked"] = (item.checked || false);
-            }
-        }
-        let allSelect = true;
-        for (const item of newChildren) {
-            !item.checked && (allSelect = false);
-        }
-        this.setState({
-            children: newChildren
-        });
-        props.parent && props.parent.setState({
-            selectedId: allSelect ? props.parentId : -1
-        });
-    }
-    renderTreeNode(data, level) {
-        if (!data || !data.length) return null;
-        let children = [], index = 1;
-        const props = this.props;
-        for (const item of data) {
-            children.push(<TreeNode
-                key={index}
-                handleCheckChange={props.handleCheckChange}
-                {...item}
-                checked={item.id === this.state.selectedId ? true : item.checked}
-                value={item.id}
-                label={item.label}
-                showCheckBox={props.showCheckBox}
-                parent={this}
-                style={
-                    {
-                        padding: `0 ${8 * (level || 0)}px`
-                    }
-                }
-                updateTreeGroup={(value, checked) => { this.updateTreeGroup(value, checked) }}
-                children={item.children || []}
-            >
-            </TreeNode>);
-            if (item.children) {
-                children.push(<TreeGroup
-                    key={`${index}-${index}`}
-                    showCheckBox={props.showCheckBox}
-                    handleCheckChange={props.handleCheckChange}
-                    data={item.children}
-                    parentId={item.id} // 当前树群的根节点（treenode）id
-                    parent={this}
-                    level={level + 1}
-                ></TreeGroup>);
-            }
-            index++;
-        }
-        return children;
-    }
-    render() {
-        const props = this.props;
-        return <div
-            className="e-tree_group"
-        >
-            {this.renderTreeNode(props.data, props.level || 0)}
-        </div>
-    }
-}
+
 export class TreeNode extends Component {
     constructor(props) {
         super(props);
+        this.state = {
+            show: false,
+            nodeState: false, // 当前节点下的子集是否全部被选中
+            checked: props.checked
+        }
     }
-    /**
-     * @desc 选择框change事件
-     */
+    toggleHandler(event) {
+        const arrow = this.refs.arrow;
+        if (arrow) {
+            !arrow.style.transform ?
+                arrow.style.transform = "rotate(90deg)" :
+                arrow.removeAttribute("style")
+            this.setState({
+                show: !this.state.show
+            });
+        }
+    }
     handleCheckChange(event, vNode) {
-        const checked = vNode.checked;
-        const props = this.props;
-        props.updateTreeGroup(vNode.value, checked);
-        props.handleCheckChange && props.handleCheckChange(event, vNode);
-    }
-    toggleHandler(children) {
-        if (this.props.disabled) return
-        const _t = findDOMNode(this);
-        const _group = closest(_t, ".e-tree_group");
-        const _tree = closest(_t, ".e-tree");
-        for (const node of _tree.querySelectorAll(".e-tree_node")) {
-            node !== _t && (node.className = node.className.replace(/e-selected/, ""));
+        this.setState({
+            checked: vNode.checked
+        });
+        const refs = this.props.parent.refs;
+        for(const key in refs) {
+            if(findDOMNode(refs[key]).className.indexOf("e-treenode") > -1) {
+                console.log(refs[key] === this)
+            }
         }
-        _t.className.indexOf("e-selected") > -1 ?
-            _t.className = _t.className.replace(/e-selected/, "") :
-            _t.classList.add("e-selected");
-        for (const node of _group.children) {
-            node.className.indexOf(".e-tree_node") > -1 && node !== _t && (node.className = node.className.replace(/active/, ""));
-        }
-        _t.className.indexOf("active") > -1 ?
-            _t.className = _t.className.replace(/active/, "") :
-            _t.classList.add("active");
-        if (_t.nextElementSibling && children.length) {
-            const nextNode = _t.nextElementSibling;
-            nextNode.className.indexOf("collapsed") > 0 ?
-                nextNode.className = nextNode.className.replace(/collapsed/, "") :
-                nextNode.classList.add("collapsed");
-            const display = _t.nextElementSibling.style.display;
-            _t.nextElementSibling.style.display = display.indexOf("block") > -1 ? "none" : "block";
+    } 
+    componentWillReceiveProps(nextProps, nextState) {
+        if (nextProps) {
+            this.setState({
+                checked: nextProps.checked
+            });
         }
     }
     render() {
         const props = this.props;
-        const children = props.children;
-        return <div
-            className="e-tree_node"
-            style={props.style}
-        >
-            {children.length ? <i
-                className="e-tree_node_arrow e-mr-4 icon echoicon e-icon-more"
-                onClick={event => { this.toggleHandler(children); }}
-            ></i> : null}
-            {props.showCheckBox ? <CheckBox
-                disabled={props.disabled}
-                value={props.id}
-                checked={props.checked}
-                onChange={(event, vNode) => { this.handleCheckChange(event, vNode) }}
-            ></CheckBox> : null}
-            <span
-                onClick={event => { this.toggleHandler(children); }}
-            >{props.label}</span>
+        const children = props.children ? props.children.length ? props.children : [props.children] : [];
+        let node = [], index = 1;
+        if (children.length) {
+            for (const item of children) {
+                switch (item.type && item.type.name) {
+                    case "TreeNode":
+                        const _i_props = item.props;
+                        node.push(<TreeNode
+                            ref={`treenode-${index}`}
+                            {...item.props}
+                            key={"treenode" + index}
+                            setCheckedNode={this.setCheckedNode}
+                            checked={this.state.checked}
+                            defaultChecked={props.disabled !== undefined ? props.defaultChecked : undefined}
+                            title={_i_props.title}
+                            level={props.level + 1}
+                            showCheckBox={props.showCheckBox}
+                            disabled={props.disabled !== undefined ? props.disabled : item.props.disabled}
+                            parent={this}
+                        >
+                            {_i_props.children}
+                        </TreeNode>);
+                        break;
+                    default:
+                        node.push(item);
+                        break;
+                }
+                index++;
+            }
+        }
+        return <div className={unique(`e-tree_node ${props.className}`.split(" ")).join(" ")}>
+            <div
+                className="e-tree_node_title"
+                style={{
+                    paddingLeft: `${props.level * 20 + (!children.length ? 5 : 0)}px`
+                }}
+            >
+                {children.length ? <i ref="arrow"
+                    className="e-tree_node_arrow e-mr-4 icon echoicon e-icon-more"
+                    onClick={() => { this.toggleHandler(); }}
+                ></i> : null}
+                {props.showCheckBox ? <CheckBox
+                    disabled={props.disabled}
+                    checked={props.disabled ? props.defaultChecked : this.state.checked}
+                    onChange={(event, vNode) => { this.handleCheckChange(event, vNode) }}
+                ></CheckBox> : null}
+                <span onClick={() => { this.toggleHandler(); }}>{props.title}</span>
+            </div>
+            <div className={`e-tree_node_children${this.state.show ? " open" : ""}`}>{node}</div>
         </div>
     }
 }
 TreeNode.defaultProps = {
-    showCheckBox: false
+    className: "e-treenode"
 }

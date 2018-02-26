@@ -2,11 +2,11 @@
 .e-tree{
     font-size: 14px;
     color: #606266;
-    &_node_title{
+    &_node{
         line-height: 2;
         cursor: pointer;
         user-select: none;
-        .e-tree_node_arrow {
+        &_arrow {
             transition: transform ease-in-out .3s;
             display: inline-block;
         }
@@ -17,10 +17,16 @@
             background: #f5f7fa;
         }
     }
-    &_node_children {
+    &_group{
         display: none;
-        &.open{
-            display: inherit;
+        &.collapsed{
+            display: block;
         }
+        .e-tree_node.active .e-tree_node_arrow {
+            transform: rotate(90deg);
+        }
+    }
+    & > &_group{
+        display: block;
     }
 }
