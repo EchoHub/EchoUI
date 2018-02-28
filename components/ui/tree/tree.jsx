@@ -6,6 +6,9 @@ import "./tree.scss";
 export default class Tree extends Component {
     constructor(props) {
         super(props);
+        this.state = {
+            checked: null
+        }
     }
     /**
      * @desc 获取选中的节点
@@ -29,7 +32,7 @@ export default class Tree extends Component {
                             {...item.props}
                             key={"treenode" + index}
                             setCheckedNode={this.setCheckedNode}
-                            checked={props.checked}
+                            checked={this.state.checked !== null ? this.state.checked : props.checked}
                             title={_i_props.title}
                             level={0}
                             showCheckBox={props.showCheckBox}
@@ -60,6 +63,7 @@ export class TreeNode extends Component {
         this.state = {
             show: false,
             nodeState: false, // 当前节点下的子集是否全部被选中
+            childrenChekcedList: [],
             checked: props.checked
         }
     }
@@ -75,16 +79,38 @@ export class TreeNode extends Component {
         }
     }
     handleCheckChange(event, vNode) {
-        this.setState({
-            checked: vNode.checked
-        });
         const refs = this.props.parent.refs;
-        for(const key in refs) {
-            if(findDOMNode(refs[key]).className.indexOf("e-treenode") > -1) {
-                console.log(refs[key] === this)
+        let checked = true, newChildren = [];
+        for (const key in refs) {
+            if (findDOMNode(refs[key]).className.indexOf("e-treenode") > -1) {
+                if (refs[key] === this && !vNode.checked) {
+                    checked = false;
+                    break;
+                } else if (refs[key] !== this && !refs[key].state.checked) {
+                    checked = false;
+                    break;
+                }
             }
         }
-    } 
+        let childrenChekcedList = []
+        for (const key in refs) {
+            if (findDOMNode(refs[key]).className.indexOf("e-treenode") > -1) {
+                childrenChekcedList.push(
+                    refs[key] === this ?
+                        vNode.checked :
+                        refs[key].state.checked
+                );
+            }
+        }
+        this.props.parent.setState({
+            childrenChekcedList: childrenChekcedList,
+            checked: checked
+        }, () => {
+            this.setState({
+                childrenChekcedList: []
+            });
+        });
+    }
     componentWillReceiveProps(nextProps, nextState) {
         if (nextProps) {
             this.setState({
@@ -106,7 +132,10 @@ export class TreeNode extends Component {
                             {...item.props}
                             key={"treenode" + index}
                             setCheckedNode={this.setCheckedNode}
-                            checked={this.state.checked}
+                            checked={
+                                this.state.childrenChekcedList.length ?
+                                    this.state.childrenChekcedList[index - 1] : this.state.checked
+                            }
                             defaultChecked={props.disabled !== undefined ? props.defaultChecked : undefined}
                             title={_i_props.title}
                             level={props.level + 1}
