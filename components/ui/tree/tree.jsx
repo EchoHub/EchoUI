@@ -7,7 +7,8 @@ export default class Tree extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            checked: null
+            checked: null,
+            childrenChekcedList: []
         }
     }
     /**
@@ -24,6 +25,11 @@ export default class Tree extends Component {
         let node = [], index = 1;
         if (props.children && props.children.length) {
             for (const item of props.children) {
+                const checked = this.state.childrenChekcedList.length ?
+                    this.state.childrenChekcedList[index - 1] :
+                    this.state.checked !== null ?
+                        this.state.checked :
+                        props.checked
                 switch (item.type && item.type.name) {
                     case "TreeNode":
                         const _i_props = item.props;
@@ -32,7 +38,7 @@ export default class Tree extends Component {
                             {...item.props}
                             key={"treenode" + index}
                             setCheckedNode={this.setCheckedNode}
-                            checked={this.state.checked !== null ? this.state.checked : props.checked}
+                            checked={checked}
                             title={_i_props.title}
                             level={0}
                             showCheckBox={props.showCheckBox}
