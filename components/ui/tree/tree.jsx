@@ -67,7 +67,7 @@ export class TreeNode extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            show: false,
+            show: props.expand,
             nodeState: false, // 当前节点下的子集是否全部被选中
             childrenChekcedList: [],
             checked: props.checked
@@ -168,6 +168,7 @@ export class TreeNode extends Component {
             >
                 {children.length ? <i ref="arrow"
                     className="e-tree_node_arrow e-mr-4 icon echoicon e-icon-more"
+                    style={this.state.show ? {transform: "rotate(90deg)"} : null}
                     onClick={() => { this.toggleHandler(); }}
                 ></i> : null}
                 {props.showCheckBox ? <CheckBox

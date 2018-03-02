@@ -1,0 +1,21 @@
+@import "./../../common";
+.e-rate{
+    display: inline-block;
+    &icon:before{
+        cursor: pointer;
+    }
+    .e-rateicon {
+        width: 18px;
+        display: inline-block;
+        &.active{
+            color: #f7ba2a;
+            font-size: 1.1rem;
+        }
+    }
+    &-text{
+        display: inline;
+        font-size: 13px;
+        color: #555;
+        font-weight: 500;
+    }
+}
