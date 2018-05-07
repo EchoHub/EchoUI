@@ -1171,7 +1171,7 @@ class Container extends Component {
                                             <Steps
                                                 active={3}
                                                 type={"vertical"}
-                                            >
+                                                >
                                                 <Step icon={"icon-user"} title={"BaseInfo"} description={"ba la ba la ..."}></Step>
                                                 <Step icon={"icon-car"} title={"CarInfo"} description={"ba la ba la ..."}></Step>
                                                 <Step icon={"icon-home"} title={"HouseInfo"} description={"ba la ba la ..."}></Step>
