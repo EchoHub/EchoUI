@@ -1,0 +1,32 @@
+@import "./../../common";
+.e-tree{
+    font-size: 14px;
+    color: #606266;
+    &_node{
+        line-height: 2;
+        cursor: pointer;
+        user-select: none;
+        &_arrow {
+            transition: transform ease-in-out .3s;
+            display: inline-block;
+        }
+        &.e-selected{
+            background: #f0f7ff;
+        }
+        &:hover{
+            background: #f5f7fa;
+        }
+    }
+    &_group{
+        display: none;
+        &.collapsed{
+            display: block;
+        }
+        .e-tree_node.active .e-tree_node_arrow {
+            transform: rotate(90deg);
+        }
+    }
+    & > &_group{
+        display: block;
+    }
+}

@@ -12,7 +12,9 @@ import Card from "./../../components/ui/card/card.jsx";
 import Collapse, { CollapseItem } from "./../../components/ui/collapse/collapse.jsx";
 import Carousel, { CarouselItem } from "./../../components/ui/carousel/carousel.jsx";
 import DropDown, { DropDownItem } from "./../../components/ui/dropDown/dropDown.jsx";
+import Rate from "./../../components/ui/rate/rate.jsx";
 import Form, { FormItem } from "./../../components/ui/form/form.jsx";
+import Transfer from "./../../components/ui/transfer/transfer.jsx";
 import { ListItem } from "./../../components/ui/comboBox/comboBox.jsx";
 import Message from "./../../components/ui/message/message.jsx";
 import { MessageBox } from "./../../components/ui/modal/modal.jsx";
@@ -26,6 +28,7 @@ import Steps, { Step } from "./../../components/ui/steps/steps.jsx";
 import TextBox from "./../../components/ui/textBox/textBox.jsx";
 import TextArea from "./../../components/ui/textArea/textArea.jsx";
 import Tabs, { Tab } from "./../../components/ui/tabs/tabs.jsx";
+import Tree, { TreeNode } from "./../../components/ui/tree/tree.jsx";
 class Container extends Component {
     constructor(props) {
         super(props)
@@ -283,17 +286,17 @@ class Container extends Component {
                             <div className="e-main-aside-nav-subtitle">表单 <span className="e-aside-nav-title-tip">Form</span></div>
                             <ul className="e-main-aside">
                                 <li><a href="#e-checkbox">多选框 CheckBox</a></li>
-                                <li><a href="#e-checkbox">多选框组 CheckBoxGroup</a></li>
                                 <li><a href="#e-input">输入框 Input</a></li>
                                 <li><a href="#e-input">计数器 InputNumber</a></li>
                                 <li><a href="#e-radio">单选框 Radio</a></li>
-                                <li><a href="#e-radio">单选框组 RadioGroup</a></li>
                                 <li><a href="#e-switch">开关 Switch</a></li>
                                 <li><a href="#e-select">下拉框 Select</a></li>
                                 <li><a href="#e-select">带模糊查询的下拉框 Suggest</a></li>
                                 <li><a href="#e-select">多选下拉框 MultiSelect</a></li>
                                 <li><a href="#e-select">联级选择器 Cascader</a></li>
+                                <li><a href="#e-rate">评分 Rate</a></li>
                                 <li><a href="#e-form">表单 Form</a></li>
+                                <li><a href="#e-transfer">穿梭框 Transfer</a></li>
                                 <li><a href="#e-timerpicker">时间选择框 TimePicker</a></li>
                             </ul>
                             <div className="e-main-aside-nav-subtitle">导航 <span className="e-aside-nav-title-tip">Navigation</span></div>
@@ -319,7 +322,7 @@ class Container extends Component {
                                 <li><a href="#e-badge">徽章 Badge</a></li>
                                 <li><a href="#e-carousel">跑马灯 Carousel</a></li>
                                 {/* <li><a href="#e-timeline">时间轴 TimeLine</a></li> */}
-                                <li><a href="#e-tree">树形控件 Tree</a></li>
+                                <li><a href="#e-tree">树 Tree</a></li>
                             </ul>
                         </div>
                     </div>
@@ -455,6 +458,36 @@ class Container extends Component {
                                         </Select>
                                     </div>
                                 </div>
+                                <h4 className="e-section-container-title" id="e-rate">评分 Rate</h4>
+                                <p className="e-section-intro"><b>评分</b>：评分。</p>
+                                <div className="e-section-demo">
+                                    <div className="e-clear">
+                                        <section>
+                                            <h5 className="e-section-demo-title">1.基本用法，不区分颜色</h5>
+                                            <Rate></Rate>
+                                            <h5 className="e-section-demo-title">2.区分颜色 colors(Array)：为不同评分层级设置颜色，最多支持三种色变</h5>
+                                            <Rate
+                                                colors={["#dddddd", "#ffcc00", "#ff9900"]}
+                                            ></Rate>
+                                            <h5 className="e-section-demo-title">3.设置其他图标 icons(Array)：自定义评分图标，0位为默认图标，1位为激活状态图标</h5>
+                                            <Rate
+                                                colors={["#bbbbbb", "#ffcc00", "#ff9900"]}
+                                                icons={["e-icon-cry", "e-icon-smile"]}
+                                            ></Rate>
+                                            <h5 className="e-section-demo-title">3.设置辅助文字 texts(Array)：用辅助文字直接地表达对应分数,长度为5</h5>
+                                            <Rate
+                                                colors={["#bbbbbb", "#ffcc00", "#ff9900"]}
+                                                showText
+                                                texts={["极差", "失望", "一般", "满意", "惊喜"]}
+                                            ></Rate>
+                                            <h5 className="e-section-demo-title">4.只读 readOnly：只读的评分用来展示分数，暂不支持半星</h5>
+                                            <Rate
+                                                readOnly
+                                                value={3.7}
+                                            ></Rate>
+                                        </section>
+                                    </div>
+                                </div>
                                 <h4 className="e-section-container-title" id="e-form">表单 Form</h4>
                                 <p className="e-section-intro"><b>表单</b>：具有数据收集、校验和提交功能的表单。 PS：包含复选框、单选框、输入框、下拉选择框等元素。</p>
                                 <div className="e-section-demo">
@@ -503,6 +536,16 @@ class Container extends Component {
                                     </Form>
                                     <Button className="e-button-primary e-mt-10" onClick={this.setFormValue.bind(this)}>赋值</Button>
                                     <Button className="e-ml-1rem e-mt-10" onClick={this.formHandleSubmit.bind(this)}>提交</Button>
+                                </div>
+                                <h4 className="e-section-container-title" id="e-rate">穿梭框 Transfer</h4>
+                                <p className="e-section-intro"><b>穿梭框</b>：双栏穿梭选择框，用直观的方式在两栏中移动元素，完成选择行为。</p>
+                                <div className="e-section-demo">
+                                    <div className="e-clear">
+                                        <section>
+                                            <h5 className="e-section-demo-title">1.基本用法： 选择一个或以上的选项后，点击对应的方向键，可以把选中的选项移动到另一栏。 其中，左边一栏为 source，右边一栏为 target。</h5>
+                                            <Transfer></Transfer>
+                                        </section>
+                                    </div>
                                 </div>
                             </section>
                         </fieldset>
@@ -1128,7 +1171,7 @@ class Container extends Component {
                                             <Steps
                                                 active={3}
                                                 type={"vertical"}
-                                            >
+                                                >
                                                 <Step icon={"icon-user"} title={"BaseInfo"} description={"ba la ba la ..."}></Step>
                                                 <Step icon={"icon-car"} title={"CarInfo"} description={"ba la ba la ..."}></Step>
                                                 <Step icon={"icon-home"} title={"HouseInfo"} description={"ba la ba la ..."}></Step>
@@ -1421,7 +1464,7 @@ class Container extends Component {
                                         </section>
                                     </div>
                                 </div>
-                                <h4 className="e-section-container-title" id="e-collapse">微章 Badge</h4>
+                                <h4 className="e-section-container-title" id="e-badge">微章 Badge</h4>
                                 <p className="e-section-intro"><b>微章</b>：图标右上角的圆形徽标数字。</p>
                                 <div className="e-section-demo">
                                     <div className="e-clear">
@@ -1498,26 +1541,213 @@ class Container extends Component {
                                         </section>
                                     </div>
                                 </div>
-                                <h4 className="e-section-container-title" id="e-collapse">跑马灯 Carousel</h4>
+                                <h4 className="e-section-container-title" id="e-carousel">跑马灯 Carousel</h4>
                                 <p className="e-section-intro"><b>跑马灯</b>：在有限空间内，循环播放同一类型的图片、文字等内容</p>
                                 <div className="e-section-demo">
                                     <div className="e-clear">
                                         <section>
-                                            <h5 className="e-section-demo-title">1.基本用法：</h5>
-                                            <Carousel width={400}>
-                                                <CarouselItem>
-                                                    <h2 className="e-carousel_example">1</h2>
-                                                </CarouselItem>
-                                                <CarouselItem>
-                                                    <h2 className="e-carousel_example">2</h2>
-                                                </CarouselItem>
-                                                <CarouselItem>
-                                                    <h2 className="e-carousel_example">3</h2>
-                                                </CarouselItem>
-                                                <CarouselItem>
-                                                    <h2 className="e-carousel_example">4</h2>
-                                                </CarouselItem>
-                                            </Carousel>
+                                            <h5 className="e-section-demo-title">1.基本用法：通过theme设置主题（basic 基本、fade 渐显）</h5>
+                                            <div className="e-row">
+                                                <div className="e-col e-col-12">
+                                                    <Carousel width={400}>
+                                                        <CarouselItem>
+                                                            <h2 className="e-carousel_example">1</h2>
+                                                        </CarouselItem>
+                                                        <CarouselItem>
+                                                            <h2 className="e-carousel_example">2</h2>
+                                                        </CarouselItem>
+                                                        <CarouselItem>
+                                                            <h2 className="e-carousel_example">3</h2>
+                                                        </CarouselItem>
+                                                        <CarouselItem>
+                                                            <h2 className="e-carousel_example">4</h2>
+                                                        </CarouselItem>
+                                                    </Carousel>
+                                                </div>
+                                                <div className="e-col e-col-12">
+                                                    <Carousel
+                                                        width={400}
+                                                        theme={"fade"}
+                                                    >
+                                                        <CarouselItem>
+                                                            <h2 className="e-carousel_example">1</h2>
+                                                        </CarouselItem>
+                                                        <CarouselItem>
+                                                            <h2 className="e-carousel_example">2</h2>
+                                                        </CarouselItem>
+                                                        <CarouselItem>
+                                                            <h2 className="e-carousel_example">3</h2>
+                                                        </CarouselItem>
+                                                        <CarouselItem>
+                                                            <h2 className="e-carousel_example">4</h2>
+                                                        </CarouselItem>
+                                                    </Carousel>
+                                                </div>
+                                            </div>
+                                            <h5 className="e-section-demo-title">2.自动播放：通过auto设置自动播放，duration设置切换间隔时间</h5>
+                                            <div className="e-row">
+                                                <div className="e-mt-10 e-col e-col-12">
+                                                    <Carousel
+                                                        width={400}
+                                                        auto
+                                                        duration={3000}
+                                                    >
+                                                        <CarouselItem>
+                                                            <h2 className="e-carousel_example">1</h2>
+                                                        </CarouselItem>
+                                                        <CarouselItem>
+                                                            <h2 className="e-carousel_example">2</h2>
+                                                        </CarouselItem>
+                                                        <CarouselItem>
+                                                            <h2 className="e-carousel_example">3</h2>
+                                                        </CarouselItem>
+                                                        <CarouselItem>
+                                                            <h2 className="e-carousel_example">4</h2>
+                                                        </CarouselItem>
+                                                    </Carousel>
+                                                </div>
+                                                <div className="e-mt-10 e-col e-col-12">
+                                                    <Carousel
+                                                        width={400}
+                                                        auto
+                                                        duration={3000}
+                                                        theme={"fade"}
+                                                    >
+                                                        <CarouselItem>
+                                                            <h2 className="e-carousel_example">1</h2>
+                                                        </CarouselItem>
+                                                        <CarouselItem>
+                                                            <h2 className="e-carousel_example">2</h2>
+                                                        </CarouselItem>
+                                                        <CarouselItem>
+                                                            <h2 className="e-carousel_example">3</h2>
+                                                        </CarouselItem>
+                                                        <CarouselItem>
+                                                            <h2 className="e-carousel_example">4</h2>
+                                                        </CarouselItem>
+                                                    </Carousel>
+                                                </div>
+                                            </div>
+                                        </section>
+                                    </div>
+                                </div>
+                                <h4 className="e-section-container-title" id="e-tree">树 Tree</h4>
+                                <p className="e-section-intro"><b>树</b>：树形菜单</p>
+                                <div className="e-section-demo">
+                                    <div className="e-clear">
+                                        <section>
+                                            <h5 className="e-section-demo-title">1.基本用法：树形结构的菜单</h5>
+                                            <Tree>
+                                                <TreeNode title={"node 1st"}>
+                                                    <TreeNode title={"node 1-1st"}>
+                                                        <TreeNode title={"node 1-1-1st"}></TreeNode>
+                                                        <TreeNode title={"node 1-1-2nd"}></TreeNode>
+                                                        <TreeNode title={"node 1-1-3rd"}></TreeNode>
+                                                        <TreeNode title={"node 1-1-4th"}></TreeNode>
+                                                    </TreeNode>
+                                                    <TreeNode title={"node 1-2nd"}></TreeNode>
+                                                </TreeNode>
+                                                <TreeNode title={"node 2nd"}>
+                                                    <TreeNode title={"node 2-1st"}></TreeNode>
+                                                    <TreeNode title={"node 2-2nd"}></TreeNode>
+                                                    <TreeNode title={"node 2-3rd"}></TreeNode>
+                                                </TreeNode>
+                                                <TreeNode title={"node 3rd"}>
+                                                    <TreeNode title={"node 3-1st"}></TreeNode>
+                                                    <TreeNode title={"node 3-2nd"}></TreeNode>
+                                                </TreeNode>
+                                            </Tree>
+                                            <h5 className="e-section-demo-title">2.常用设置：可选择、禁用、默认展开等</h5>
+                                            <h6 className="e-mv-10">可选择 showCheckBox: (boolean)</h6>
+                                            <Tree showCheckBox={true}>
+                                                <TreeNode title={"node 1st"}>
+                                                    <TreeNode title={"node 1-1st"}></TreeNode>
+                                                    <TreeNode title={"node 1-2nd"}></TreeNode>
+                                                </TreeNode>
+                                                <TreeNode title={"node 2nd"}>
+                                                    <TreeNode title={"node 2-1st"}>
+                                                        <TreeNode title={"node 2-1-1st"}></TreeNode>
+                                                        <TreeNode title={"node 2-1-2nd"}></TreeNode>
+                                                        <TreeNode title={"node 2-1-3rd"}></TreeNode>
+                                                    </TreeNode>
+                                                    <TreeNode title={"node 2-2nd"}></TreeNode>
+                                                    <TreeNode title={"node 2-3rd"}></TreeNode>
+                                                </TreeNode>
+                                                <TreeNode title={"node 3rd"}>
+                                                    <TreeNode title={"node 3-1st"}></TreeNode>
+                                                </TreeNode>
+                                            </Tree>
+                                            <h6 className="e-mv-10">默认全选 checked: (boolean)</h6>
+                                            <Tree showCheckBox={true} checked>
+                                                <TreeNode title={"node 1st"}>
+                                                    <TreeNode title={"node 1-1st"}></TreeNode>
+                                                    <TreeNode title={"node 1-2nd"}></TreeNode>
+                                                </TreeNode>
+                                                <TreeNode title={"node 2nd"}>
+                                                    <TreeNode title={"node 2-1st"}>
+                                                        <TreeNode title={"node 2-1-1st"}></TreeNode>
+                                                        <TreeNode title={"node 2-1-2nd"}></TreeNode>
+                                                        <TreeNode title={"node 2-1-3rd"}></TreeNode>
+                                                    </TreeNode>
+                                                    <TreeNode title={"node 2-2nd"}></TreeNode>
+                                                    <TreeNode title={"node 2-3rd"}></TreeNode>
+                                                </TreeNode>
+                                                <TreeNode title={"node 3rd"}>
+                                                    <TreeNode title={"node 3-1st"}></TreeNode>
+                                                </TreeNode>
+                                            </Tree>
+                                            <h6 className="e-mv-10">禁用 disabled: (boolean)</h6>
+                                            <Tree showCheckBox={true}>
+                                                <TreeNode title={"node 1st"}>
+                                                    <TreeNode title={"node 1-1st"}></TreeNode>
+                                                    <TreeNode title={"node 1-2nd"}></TreeNode>
+                                                </TreeNode>
+                                                <TreeNode title={"node 2nd"} defaultChecked={true} disabled>
+                                                    <TreeNode title={"node 2-1st"}></TreeNode>
+                                                    <TreeNode title={"node 2-2nd"}></TreeNode>
+                                                    <TreeNode title={"node 2-3rd"}></TreeNode>
+                                                </TreeNode>
+                                                <TreeNode title={"node 2nd"} disabled>
+                                                    <TreeNode title={"node 2-1st"} defaultChecked={true}></TreeNode>
+                                                    <TreeNode title={"node 2-2nd"} checked={true}></TreeNode>
+                                                    <TreeNode title={"node 2-3rd"}></TreeNode>
+                                                </TreeNode>
+                                                <TreeNode title={"node 3rd"}>
+                                                    <TreeNode title={"node 3-1st"}></TreeNode>
+                                                </TreeNode>
+                                                <TreeNode title={"node 4th"}>
+                                                    <TreeNode title={"node 4-1st"}></TreeNode>
+                                                    <TreeNode title={"node 4-2nd"} defaultChecked={true} disabled></TreeNode>
+                                                    <TreeNode title={"node 4-3rd"}></TreeNode>
+                                                    <TreeNode title={"node 4-4th"} disabled></TreeNode>
+                                                    <TreeNode title={"node 4-5th"}></TreeNode>
+                                                    <TreeNode title={"node 4-6th"}></TreeNode>
+                                                </TreeNode>
+                                                <TreeNode title={"node 5th"}>
+                                                    <TreeNode title={"node 5-1st"} defaultChecked={true} disabled></TreeNode>
+                                                    <TreeNode title={"node 5-2nd"}></TreeNode>
+                                                </TreeNode>
+                                            </Tree>
+                                            <h6 className="e-mv-10">默认展开 expand: (boolean)</h6>
+                                            <Tree showCheckBox={true}>
+                                                <TreeNode title={"node 1st"}>
+                                                    <TreeNode title={"node 1-1st"}></TreeNode>
+                                                    <TreeNode title={"node 1-2nd"}></TreeNode>
+                                                </TreeNode>
+                                                <TreeNode title={"node 2nd"} expand defaultChecked={true} disabled>
+                                                    <TreeNode title={"node 2-1st"}></TreeNode>
+                                                    <TreeNode title={"node 2-2nd"}></TreeNode>
+                                                    <TreeNode title={"node 2-3rd"}></TreeNode>
+                                                </TreeNode>
+                                                <TreeNode title={"node 2nd"} expand disabled>
+                                                    <TreeNode title={"node 2-1st"} defaultChecked={true}></TreeNode>
+                                                    <TreeNode title={"node 2-2nd"} checked={true}></TreeNode>
+                                                    <TreeNode title={"node 2-3rd"}></TreeNode>
+                                                </TreeNode>
+                                                <TreeNode title={"node 3rd"}>
+                                                    <TreeNode title={"node 3-1st"}></TreeNode>
+                                                </TreeNode>
+                                            </Tree>
                                         </section>
                                     </div>
                                 </div>
@@ -1525,7 +1755,7 @@ class Container extends Component {
                         </fieldset>
                     </div>
                 </div>
-            </div>
+            </div >
         )
     }
 }

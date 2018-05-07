@@ -90,11 +90,15 @@ export default class Input extends Control {
     }
 
     get value() {
-        return this.refs[this.props["name"]].value
+        return this.refs[this.props["name"] || this.props.inputRef].value
     }
 
     set value(v) {
-        this.refs[this.props["name"]].value = v;
+        this.refs[this.props["name"] || this.props.inputRef].value = v;
+    }
+
+    get checked() {
+        return !this.refs[this.props["name"] || this.props.inputRef].checked
     }
     /**
      * @desc 输入验证

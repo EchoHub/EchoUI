@@ -1,0 +1,26 @@
+@import "./../../common";
+.e-tree{
+    font-size: 14px;
+    color: #606266;
+    &_node_title{
+        line-height: 2;
+        cursor: pointer;
+        user-select: none;
+        .e-tree_node_arrow {
+            transition: transform ease-in-out .3s;
+            display: inline-block;
+        }
+        &.e-selected{
+            background: #f0f7ff;
+        }
+        &:hover{
+            background: #f5f7fa;
+        }
+    }
+    &_node_children {
+        display: none;
+        &.open{
+            display: inherit;
+        }
+    }
+}

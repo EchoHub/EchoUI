@@ -1,4 +1,5 @@
 import React, { Component } from "react"
+import { findDOMNode } from "react-dom"
 import Input from "./../input/input.jsx"
 import "./checkBox.scss"
 /**
@@ -9,7 +10,8 @@ export default class CheckBox extends Component {
         super(props)
         this.state = {
             nodeOwnProperty: this.filterPropsHandle(props),
-            isCheck: false
+            isCheck: false,
+            ref: ""
         };
     }
     filterPropsHandle(props) {
@@ -26,55 +28,88 @@ export default class CheckBox extends Component {
         return params
     }
     componentWillReceiveProps(nextProps) {
-        if(nextProps) {
-            for(const v of nextProps.dataValue) {
-                v === nextProps.value && this.setState({
-                    isCheck: true
+        if (nextProps) {
+            if (nextProps.dataValue && nextProps.dataValue.length) {
+                for (const v of nextProps.dataValue) {
+                    if (v === nextProps.value) {
+                        this.setState({
+                            isCheck: true
+                        });
+                        return;
+                    }
+                    this.setState({
+                        isCheck: false
+                    });
+                }
+            }else {
+                this.setState({
+                    isCheck: nextProps.checked || false
                 });
             }
         }
+    }
+    componentDidMount() {
+        const props = this.props;
+        const ref = props["name"] || `e-checkbox-${new Date().getTime()}`;
+        this.setState({
+            ref: ref,
+            isCheck: props.checked !== undefined ? props.checked : this.state.isCheck
+        });
     }
     /**
      * @desc checkbox change事件
      * @param event event
      */
-    changeCheckBoxHandle(event) {
-        const nodeRef = this.refs[this.props["name"]].refs[this.props["name"]]
+    changeCheckBoxHandle(ref, event) {
+        if (this.state.nodeOwnProperty["disabled"]) return;
+        const nodeRef = this.refs[ref].refs[ref]
         const checked = nodeRef.checked
         this.setState({
             isCheck: !checked,
-        })
-        this.props.setCheckBoxValueHandle(!checked, nodeRef.value)
+        });
+        const props = this.props;
+        props.setCheckBoxValueHandle && props.setCheckBoxValueHandle(!checked, nodeRef.value);
+        props.onClick && props.onClick(event, this);
+        props.onChange && props.onChange(event, this);
     }
     render() {
-        return <div className={`e-checkbox ${this.props.className.replace(/e-checkbox/g, "")} 
+        const props = this.props;
+        return <div className={`e-checkbox ${props.className.replace(/e-checkbox/g, "")} 
+            ${this.state.nodeOwnProperty["disabled"] ? "disabled" : ""}
             ${this.state.isCheck ? "active" : ""}`}>
             <span
                 className="e-checkbox-inner"
-                onClick={this.changeCheckBoxHandle.bind(this)}></span>
+                onClick={this.changeCheckBoxHandle.bind(this, this.state.ref)}
+            ></span>
             <Input
-                ref={this.props["name"]}
+                ref={this.state.ref}
                 {...this.state.nodeOwnProperty}
                 checked={this.state.isCheck}
-                inputRef={this.props["name"]}
-                dataType={this.props.dataType}
-                // dataValue={this.props.dataValue}
+                inputRef={this.state.ref}
+                dataType={props.dataType}
+            // dataValue={this.props.dataValue}
             />
-            <span className="e-checkbox-content">{this.props.children}</span>
+            <span className="e-checkbox-content">{props.children}</span>
         </div>
     }
 
     /**
      * @desc 获取checkbox值
      */
-    // get value() {
-    //     return this.props.dataValue
-    // }
+    get value() {
+        return this.refs[this.state.ref].value
+    }
+    /**
+     * @desc 获取checkbox值
+     */
+    get checked() {
+        return this.refs[this.state.ref].checked
+    }
 
     set checked(v) {
-        v && this.setState({
-            isCheck: v
-        })
+        this.setState({
+            isCheck: v || false
+        });
     }
 }
 CheckBox.defaultProps = {

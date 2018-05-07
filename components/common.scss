@@ -1,5 +1,6 @@
 // 字体图标
 @import "./util/font/iconfont.scss";
+@import "./util/new_font/iconfont.scss";
 // 主题色
 $color-warning: #ffe58f;
 $color-error: #d63a29;
@@ -52,6 +53,15 @@ $input-radius: .1rem;
 }
 .error{
     color: $color-error;
+}
+.e-m-auto{
+    margin: auto;
+}
+.e-mh-auto{
+    margin: 0 auto;
+}
+.e-mv-auto{
+    margin: auto 0;
 }
 .e-mr-4{
     margin-right: 4px;
@@ -116,6 +126,18 @@ $input-radius: .1rem;
 .e-m-1rem{
     margin: 1rem;
 }
+.e-ph-10{
+    padding: 0 10px;
+}
+.e-pv-10{
+    padding: 10px 0;
+}
+.e-pl-10{
+    padding-left: 10px;
+}
+.e-pr-10{
+    padding-right: 10px;
+}
 .e-ph-1rem{
     padding: 0 1rem;
 }
@@ -138,6 +160,9 @@ $input-radius: .1rem;
 }
 .e-col-12{
     width: 50%;
+}
+.e-col-24{
+    width: 100%;
 }
 ::-webkit-scrollbar, ::-webkit-scrollbar-track {
     width: 6px;
