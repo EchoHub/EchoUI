@@ -44,7 +44,7 @@ EchoUI = UI组件 + 常用工具类
   - ui/collapse 折叠面板 ✅
   - ui/badge 微章 ✅
   - ui/carousel 跑马灯 ✅
-# - ui/timeline 时间轴
+- ui/timeline 时间轴
   - ui/tree 树形控件✅
 
 ## 运行
