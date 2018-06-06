@@ -4,10 +4,13 @@ const CleanWebpackPlugin = require("clean-webpack-plugin");
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
 module.exports = {
     devtool: 'eval-source-map',
-    entry: __dirname + "/assets/scripts/main.js",
+    entry: {
+        index: __dirname + "/assets/scripts/main.js",
+        // hapi: __dirname + "/assets/scripts/hapi.js"
+    },
     output: {
         path: __dirname + "/_build",
-        filename: "echoui.bundle-[hash].js"
+        filename: "[name].bundle-[hash].js"
     },
     devServer: {
         // contentBase: "./page",//本地服务器所加载的页面所在的目录
@@ -50,8 +53,11 @@ module.exports = {
     },
     plugins: [
         // new webpack.optimize.UglifyJsPlugin(),
+        // new HtmlWebpackPlugin({
+        //     template: __dirname + "/page/index.html"//new 一个这个插件的实例，并传入相关的参数
+        // }),
         new HtmlWebpackPlugin({
-            template: __dirname + "/page/index.html"//new 一个这个插件的实例，并传入相关的参数
+            template: __dirname + "/page/hapi.html"//new 一个这个插件的实例，并传入相关的参数
         }),
         new ExtractTextPlugin("[name].css"),
         new CleanWebpackPlugin('_build/*.*', {
