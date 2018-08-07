@@ -1,5 +1,5 @@
 #EchoUI
-基于React的轻量型组件库
+基于React的轻量型组件库 (https://echohub.github.io/EchoUI/)
 
 ## 特性
 EchoUI = UI组件 + 常用工具类
